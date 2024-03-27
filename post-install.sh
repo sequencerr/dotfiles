@@ -1,3 +1,9 @@
+'export HISTTIMEFORMAT="%F %T "\
+export HISTIGNORE="?:??:???:pwd:clear:reset:exit:forget*:history*:cd -:exit:date:* --help"\
+alias forget=""' >> ~/.bashrc
+source ~/.bashrc
+# todo: move to bash profile 
+
 #!/bin/sh
 # todo: grub
 
@@ -48,16 +54,11 @@ sudo apt install yt-dlp
 # # https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script
 # wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 # https://github.com/nvm-sh/nvm?tab=readme-ov-file#manual-install
-export NVM_DIR="$HOME/.nvm" && (
-  git clone --depth 1 https://github.com/nvm-sh/nvm.git "$NVM_DIR"
-  cd "$NVM_DIR"
-  git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
-) && \. "$NVM_DIR/nvm.sh"
-
+git clone --depth 1 https://github.com/nvm-sh/nvm.git "$HOME/.nvm"
+cd "$HOME/.nvm"
+git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
 echo "export NVM_DIR=\"$HOME/.nvm\"
-[ -s \"$NVM_DIR/nvm.sh\" ] && \. \"$NVM_DIR/nvm.sh\" \
-# [ -s \"$NVM_DIR/bash_completion\" ] && \. \"$NVM_DIR/bash_completion\"" >> ~/.bashrc
-
+[ -s \"$NVM_DIR/nvm.sh\" ] && \. \"$NVM_DIR/nvm.sh\"" >> ~/.bashrc
 source ~/.bashrc
 command -v nvm
 nvm -v
