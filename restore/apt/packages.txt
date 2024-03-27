@@ -1,0 +1,15 @@
+blktrace
+code
+curl
+ffmpeg
+git
+htop
+jq
+neofetch
+neovim
+pulseaudio-equalizer
+python3.8
+python-pip
+redshift
+sqlite3
+tree
