@@ -69,7 +69,9 @@ node_modules ""${NVM_DIR}"/versions/node/*"
 [ -d "$BACKUP_DIR"/restore/vscode ] || mkdir -p "$BACKUP_DIR"/restore/vscode
 (cat ~/.config/Code/CachedExtensions/user | jq -r '.result[] | (.id + "@" + .version)') \
     > "$BACKUP_DIR"/restore/vscode/extensions.txt
-# sqlite3 $HOME/.config/Code/User/globalStorage/state.vscdb "SELECT value FROM ItemTable WHERE key='extensionsIdentifiers/disabled';"  | jq -r .[].id 
+# sqlite3 $HOME/.config/Code/User/globalStorage/state.vscdb \
+# "SELECT value FROM ItemTable WHERE key='extensionsIdentifiers/disabled';" \
+# | jq -r .[].id 
 
 # https://askubuntu.com/a/492343
 [ -d "$BACKUP_DIR"/restore/apt ] || mkdir -p "$BACKUP_DIR"/restore/apt
