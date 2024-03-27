@@ -48,7 +48,8 @@ for dir in $1; do
 done
 }
 
-echo "$(cat "$HOME"/.bash_history | grep --color=none -v -P  '(([\da-f]+::?){4,5}[\da-f]+|([\d]+\.){3}[\d]+)')" \
+echo "$(cat "$HOME"/.bash_history | \
+grep --color=none -v -P  '(([\da-f]+::?){4,5}[\da-f]+|([\d]+\.){3}[\d]+)')" \
     > "$HOME"/.bash_history
 # dotfiles
 backup .bashrc
