@@ -1260,3 +1260,62 @@ sqlite3 /home/mane/.config/Code/User/globalStorage/state.vscdb "SELECT value FRO
 grep 'disabled' -r ~/.config/Code/
 sqlite3 /home/mane/.config/Code/User/workspaceStorage/d5cf71fb4883590fb74d52b077cbe3f2/state.vscdb  "SELECT key FROM ItemTable;" | 
 sqlite3 /home/mane/.config/Code/User/workspaceStorage/d5cf71fb4883590fb74d52b077cbe3f2/state.vscdb  "SELECT key FROM ItemTable;" 
+echo "$(cat "$HOME"/.bash_history | grep --color=none -v -P  '(([\da-f]+::?){4,5}[\da-f]+|([\d]+\.){3}[\d]+)')" \
+rm dotfiles/ restore/ -r ; bash backup-make.sh 
+git push git@github.com:sequencerr/dotfiles.git
+git push git@github.com:sequencerr/dotfiles.git -U
+git push git@github.com:sequencerr/dotfiles.git -u
+git push 
+git push --set-upstream  git@github.com:sequencerr/dotfiles.git 
+git push --set-upstream main git@github.com:sequencerr/dotfiles.git 
+git pull
+git pull git@github.com:sequencerr/dotfiles.git 
+git branch -a
+git push remote origin
+git push remote 
+git remove -v
+git remote  -v
+git remote add origin     git@github.com:sequencerr/dotfiles.git
+git push remote origin
+git pull
+git pull origin main
+git merge origin main
+git pull --allow-unrelated-histories 
+git pull --allow-unrelated-histories  remote origin
+git pull remote origin --allow-unrelated-histories 
+git pull  origin --allow-unrelated-histories 
+git pull  origin main --allow-unrelated-histories 
+branch -v
+git branch -v
+git push
+git push -u origin master 
+git push 
+git checkout main
+git merge main
+git merge master
+git pus
+git push
+git branch -d master 
+git push
+git branch -r
+git branch -a
+git push -d master
+git push -delete master
+git push --delete master
+git push origin  --delete master
+git branch -a
+#1711576674
+export HISTTIMEFORMAT="%F %T "
+#1711576679
+2024-03-27 17:24:49 alias yt="/usr/bin/python3.8 /home/mane/Downloads/yt-dlp"
+#1711576704
+alias yt="/usr/bin/python3.8 /home/mane/Downloads/yt-dlp"
+#1711576729
+ffplay -x 200 -y 70 -vn -noborder -volume 100 -showmode waves -autoexit $(yt --extract-audio --audio-format best --no-download --dump-json https://www.youtube.com/watch?v=-ez5xl6VoGM | jq .url -r)
+#1711580129
+ffplay -x 200 -y 70 -vn -noborder -volume 100 -showmode waves -autoexit $(yt --extract-audio --audio-format best --no-download --dump-json https://www.youtube.com/watch?v=lR7icNffxXE&pp=ygUEamF6eg%3D%3D | jq .url -r)
+#1711580136
+ffplay -x 200 -y 70 -vn -noborder -volume 100 -showmode waves -autoexit $(yt --extract-audio --audio-format best --no-download --dump-json https://www.youtube.com/watch?v=lR7icNffxXED | jq .url -r)
+#1711580140
+ffplay -x 200 -y 70 -vn -noborder -volume 100 -showmode waves -autoexit $(yt --extract-audio --audio-format best --no-download --dump-json https://www.youtube.com/watch?v=lR7icNffxXE | jq .url -r)
+htop
