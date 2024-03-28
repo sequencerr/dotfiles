@@ -40,7 +40,7 @@ for dir in $1; do
         pkg=$(echo "$(readlink -f "$bin")" | awk -F'/' "{print \$$n}")
         [ "$pkg" == npm ] && continue
 
-        if [ "${set[$pkg]}" ]; then continue; fi
+        [ "${set[$pkg]}" ] && continue
         set["$pkg"]=1
 
         echo "$pkg" >> "$save_file"
