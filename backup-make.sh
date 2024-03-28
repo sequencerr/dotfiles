@@ -66,8 +66,8 @@ backup .config/Code/User/snippets
 node_modules ""${NVM_DIR}"/*"
 node_modules ""${NVM_DIR}"/versions/node/*"
 
-# code --list-extensions --show-versions > $BACKUP_DIR/.config/Code/User/extensions.txt # slow
 [ -d "$BACKUP_DIR"/restore/vscode ] || mkdir -p "$BACKUP_DIR"/restore/vscode
+# code --list-extensions --show-versions # slow
 (cat ~/.config/Code/CachedExtensions/user | jq -r '.result[] | (.id + "@" + .version)') \
     > "$BACKUP_DIR"/restore/vscode/extensions.txt
 # sqlite3 $HOME/.config/Code/User/globalStorage/state.vscdb \
