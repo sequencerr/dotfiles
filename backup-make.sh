@@ -21,18 +21,15 @@ cp "$src" "$target" -rfvx # --recursive --force --verbose --one-file-system
 
 # nvm ls # <- stupid (no single responsibility), slow
 modules_backup_dir="$BACKUP_DIR"/restore/nvm-global-modules
-[ -d "$modules_backup_dir" ] || mkdir -p "$modules_backup_dir"
+[ -d "$modules_backup_dir" ] && rm "$modules_backup_dir"/* || mkdir -p "$modules_backup_dir"
 node_modules () {
 for dir in $1; do 
-    [ ! -d $dir ] && continue
-    
+    declare -A set
     ver=$(basename "$dir")
+
+    [ ! -d $dir ] && continue
     [[ $ver != v* ]] && continue
 
-    save_file="$modules_backup_dir/$ver.txt"
-    [ -e "$save_file" ] && rm "$save_file"
-
-    declare -A set
     for bin in "$dir"/bin/*; do 
         [ -L $bin ] || continue
 
@@ -43,7 +40,7 @@ for dir in $1; do
         [ "${set[$pkg]}" ] && continue
         set["$pkg"]=1
 
-        echo "$pkg" >> "$save_file"
+        echo "$pkg" >> "$modules_backup_dir/$ver.txt"
     done
 done
 }
