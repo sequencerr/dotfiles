@@ -75,7 +75,7 @@ node_modules ""${NVM_DIR}"/versions/node/*"
 # | jq -r .[].id 
 
 # https://askubuntu.com/a/492343
-[ -d "$BACKUP_DIR"/restore/apt ] || mkdir -p "$BACKUP_DIR"/restore/apt
+[ -d "$BACKUP_DIR"/restore/apt ] && rm "$BACKUP_DIR"/restore/apt/* || mkdir -p "$BACKUP_DIR"/restore/apt
 for l in $(comm -23 \
     <(apt-mark showmanual | sort -u) \
     <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u))
