@@ -125,3 +125,5 @@ source ~/.bashrc
 command -v bun
 bun -v
 SHELL=bash bun completions
+
+find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"accessibility.typeaheadfind.enablesound", true/"accessibility.typeaheadfind.enablesound", false/' {} \;
