@@ -13,3 +13,4 @@ python-pip
 redshift
 sqlite3
 tree
+telegram-desktop
