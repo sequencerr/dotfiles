@@ -11,10 +11,8 @@
         <value type="int" value="2"/>
         <value type="int" value="3"/>
         <value type="int" value="4"/>
-        <value type="int" value="5"/>
         <value type="int" value="6"/>
-        <value type="int" value="7"/>
-        <value type="int" value="9"/>
+        <value type="int" value="5"/>
         <value type="int" value="10"/>
         <value type="int" value="11"/>
       </property>
@@ -48,41 +46,27 @@
         <value type="string" value="blueman-applet"/>
         <value type="string" value="thunar"/>
       </property>
-    </property>
-    <property name="plugin-5" type="string" value="notification-plugin"/>
-    <property name="plugin-6" type="string" value="indicator">
-      <property name="blacklist" type="array">
-        <value type="string" value="libappmenu.so"/>
+      <property name="known-legacy-items" type="array">
+        <value type="string" value="ethernet network connection “wired connection 1” active"/>
+        <value type="string" value="networkmanager applet"/>
       </property>
-      <property name="known-indicators" type="array">
-        <value type="string" value="com.canonical.indicator.messages"/>
-      </property>
-    </property>
-    <property name="plugin-7" type="string" value="statusnotifier">
-      <property name="icon-size" type="uint" value="22"/>
-      <property name="menu-is-primary" type="bool" value="true"/>
-      <property name="mode-whitelist" type="bool" value="false"/>
-      <property name="single-row" type="bool" value="false"/>
-      <property name="square-icons" type="bool" value="false"/>
-      <property name="symbolic-icons" type="bool" value="true"/>
       <property name="known-items" type="array">
         <value type="string" value="blueman"/>
-        <value type="string" value="nm-applet"/>
       </property>
     </property>
-    <property name="plugin-9" type="string" value="pulseaudio">
-      <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="enable-mpris" type="bool" value="true"/>
-      <property name="mixer-command" type="string" value="pavucontrol"/>
-      <property name="mpris-players" type="string" value="firefox.instance1431;firefox.instance28456;firefox.instance3070;firefox.instance6376;parole"/>
-      <property name="show-notifications" type="bool" value="true"/>
-    </property>
+    <property name="plugin-5" type="string" value="notification-plugin"/>
     <property name="plugin-10" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
       <property name="expand" type="bool" value="false"/>
     </property>
     <property name="plugin-11" type="string" value="clock">
       <property name="digital-format" type="string" value="%d %b, %H:%M"/>
+      <property name="digital-time-format" type="string" value="%d %b, %H:%M"/>
+      <property name="digital-layout" type="uint" value="3"/>
+    </property>
+    <property name="plugin-6" type="string" value="pulseaudio">
+      <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
+      <property name="mpris-players" type="string" value="firefox.instance1046;firefox.instance1508;firefox.instance1978;firefox.instance4176;firefox.instance979"/>
     </property>
   </property>
   <property name="configver" type="int" value="2"/>

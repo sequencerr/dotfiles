@@ -3,5 +3,8 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "diffEditor.renderSideBySide": false
+  "diffEditor.renderSideBySide": false,
+  "diffEditor.maxComputationTime": 0,
+  "scm.showChangesSummary": false,
+  "scm.showOutgoingChanges": "never"
 }
