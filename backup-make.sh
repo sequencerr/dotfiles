@@ -2,8 +2,8 @@
 BACKUP_DIR=$(dirname $(readlink -f "$0"))
 
 backup () {
-local    src="$HOME/$1"
-local target="$BACKUP_DIR/dotfiles/$1"
+local    src="$1"
+local target=$(echo "$BACKUP_DIR$(echo $1 | sed 's/^\/home\/[^/]*/\/home/')")
 
 if   [ -d $src ]; then
     local back_dir="$target"
@@ -46,17 +46,15 @@ done
 }
 
 echo "$(cat "$HOME"/.bash_history | \
-grep --color=none -v -P '(([\da-f]+::?){4,5}[\da-f]+|([\d]+\.){3}[\d]+)')" \
-    > "$HOME"/.bash_history
-# dotfiles
-backup .bashrc
-backup .bash_history # bad idea (with filtering anyway), on other side it's bad to pass sensitive info to commands (in console). I must to remeber to use space before command to not save it. 
-backup .ssh/config
-backup .config/xfce4/terminal/terminalrc
-backup .config/xfce4/xfconf/xfce-perchannel-xml
-backup .config/Code/User/settings.json
-backup .config/Code/User/keybindings.json
-backup .config/Code/User/snippets
+grep --color=none -v -P '(([\da-f]+::?){4,5}[\da-f]+|([\d]+\.){3}[\d]+)')" > "$HOME"/.bash_history
+backup $HOME/.bashrc
+backup $HOME/.bash_history # bad idea (with filtering anyway), on other side it's bad to pass sensitive info to commands (in console). I must to remeber to use space before command to not save it. 
+backup $HOME/.ssh/config
+backup $HOME/.config/xfce4/terminal/terminalrc
+backup $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
+backup $HOME/.config/Code/User/settings.json
+backup $HOME/.config/Code/User/keybindings.json
+backup $HOME/.config/Code/User/snippets
 
 # restore
 
