@@ -1,11 +1,4 @@
-'export HISTTIMEFORMAT="%F %T "\
-export HISTIGNORE="?:??:???:pwd:clear:reset:exit:forget*:history*:cd -:exit:date:* --help"\
-alias forget=""' >> ~/.bashrc
-source ~/.bashrc
-# todo: move to bash profile 
-
 #!/bin/sh
-# todo: grub
 
 # https://docs.docker.com/engine/install/debian/#install-using-the-repository
 # for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt remove $pkg; done
