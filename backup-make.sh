@@ -30,6 +30,18 @@ backup $HOME/.config/Code/User/settings.json
 backup $HOME/.config/Code/User/keybindings.json
 backup $HOME/.config/Code/User/snippets
 
+# https://stackoverflow.com/a/53887437
+backup /etc/udev/rules.d
+backup /etc/fstab
+backup /etc/default/grub
+backup /etc/grub.d/40_custom
+backup /etc/lightdm/lightdm.conf
+backup /etc/pulse/default.pa
+
+backup /etc/motd
+backup /etc/issue
+backup /etc/update-motd.d
+
 # nvm ls # <- stupid (no single responsibility), slow
 modules_backup_dir="$BACKUP_DIR"/restore/nvm-global-modules
 [ -d "$modules_backup_dir" ] && rm "$modules_backup_dir"/* || mkdir -p "$modules_backup_dir"
