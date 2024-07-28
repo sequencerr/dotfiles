@@ -94,6 +94,8 @@ for l in $(comm -13 \
     <(sudo grep -oP "Unpacking \K[^: ]+" /var/log/installer/syslog | sort -u))
     do echo $l >> "$BACKUP_DIR"/restore/apt/packages.txt
 done
+cat "$BACKUP_DIR"/restore/apt/packages.txt | sort -u > "$BACKUP_DIR"/restore/apt/packages.txt
 
 [ -d "$BACKUP_DIR"/restore/snap ] || mkdir -p "$BACKUP_DIR"/restore/snap
 [ $(command -v snap) ] && (snap list 2>/dev/null > "$BACKUP_DIR"/restore/snap/packages.txt)
+cat "$BACKUP_DIR"/restore/apt/packages.txt | sort -u > "$BACKUP_DIR"/restore/apt/packages.txt
