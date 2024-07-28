@@ -19,6 +19,17 @@ fi
 cp "$src" "$target" -rfvx # --recursive --force --verbose --one-file-system 
 }
 
+echo "$(cat "$HOME"/.bash_history | \
+grep --color=none -v -P '(([\da-f]+::?){4,5}[\da-f]+|([\d]+\.){3}[\d]+)')" > "$HOME"/.bash_history
+backup $HOME/.bashrc
+backup $HOME/.bash_history # bad idea (with filtering anyway), on other side it's bad to pass sensitive info to commands (in console). I must to remeber to use space before command to not save it. 
+backup $HOME/.ssh/config
+backup $HOME/.config/xfce4/terminal/terminalrc
+backup $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
+backup $HOME/.config/Code/User/settings.json
+backup $HOME/.config/Code/User/keybindings.json
+backup $HOME/.config/Code/User/snippets
+
 # nvm ls # <- stupid (no single responsibility), slow
 modules_backup_dir="$BACKUP_DIR"/restore/nvm-global-modules
 [ -d "$modules_backup_dir" ] && rm "$modules_backup_dir"/* || mkdir -p "$modules_backup_dir"
@@ -44,19 +55,6 @@ for dir in $1; do
     done
 done
 }
-
-echo "$(cat "$HOME"/.bash_history | \
-grep --color=none -v -P '(([\da-f]+::?){4,5}[\da-f]+|([\d]+\.){3}[\d]+)')" > "$HOME"/.bash_history
-backup $HOME/.bashrc
-backup $HOME/.bash_history # bad idea (with filtering anyway), on other side it's bad to pass sensitive info to commands (in console). I must to remeber to use space before command to not save it. 
-backup $HOME/.ssh/config
-backup $HOME/.config/xfce4/terminal/terminalrc
-backup $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
-backup $HOME/.config/Code/User/settings.json
-backup $HOME/.config/Code/User/keybindings.json
-backup $HOME/.config/Code/User/snippets
-
-# restore
 
 node_modules ""${NVM_DIR}"/*"
 node_modules ""${NVM_DIR}"/versions/node/*"
