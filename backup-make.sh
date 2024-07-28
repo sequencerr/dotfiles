@@ -84,16 +84,14 @@ node_modules ""${NVM_DIR}"/versions/node/*"
 # https://itsfoss.community/t/listing-manually-post-installed-packages-in-debian/9342/4
 # apt-mark showmanual | sort -u
 # sudo grep -oP "Unpacking \K[^: ]+" /var/log/installer/syslog | sort -u | xargs 
-# for FN in `ls -1 /var/log/dpkg.log*` ; do       CMD="cat";       [ ${FN##*.} == "gz" ] && CMD="zcat" ;       $CMD $FN | egrep "[0-9] install" | awk '{print $4}'         | awk -F":" '{print $1}';     done | sort -u | xargs
 # cat /var/log/dpkg.log | egrep "[0-9] install" | awk '{print $4}' | awk -F":" '{print $1}' | sort -u | xargs
 # cat /var/log/apt/history.log | grep -E '^Commandline: apt.+install' | sed -E 's/^Commandline: apt.+install| --?\w+(-\w+)?//g' | xargs
-# apt-mark showmanual | sort -u
 # gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u
 # aptitude search '~i !~M' -F '%p' | sed "s/ *$//" | sort -u
 [ -d "$BACKUP_DIR"/restore/apt ] && rm "$BACKUP_DIR"/restore/apt/* || mkdir -p "$BACKUP_DIR"/restore/apt
-for l in $(comm -23 \
+for l in $(comm -13 \
     <(apt-mark showmanual | sort -u) \
-    <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u))
+    <(sudo grep -oP "Unpacking \K[^: ]+" /var/log/installer/syslog | sort -u))
     do echo $l >> "$BACKUP_DIR"/restore/apt/packages.txt
 done
 
