@@ -29,6 +29,7 @@ backup $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
 backup $HOME/.config/Code/User/settings.json
 backup $HOME/.config/Code/User/keybindings.json
 backup $HOME/.config/Code/User/snippets
+backup $HOME/.vscode/argv.json
 
 # https://stackoverflow.com/a/53887437
 backup /etc/udev/rules.d
