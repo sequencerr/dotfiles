@@ -1,29 +1,14 @@
 #!/bin/sh
 
 # https://docs.docker.com/engine/install/debian/#install-using-the-repository
-# for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt remove $pkg; done
-# Add Docker's official GPG key:
-# sudo apt update
-# sudo apt install ca-certificates
-# sudo install -m 0755 -d /etc/apt/keyrings
 sudo wget -q https://download.docker.com/linux/debian/gpg -O /etc/apt/keyrings/docker.asc
-# sudo chmod a+r /etc/apt/keyrings/docker.asc
-# Add the repository to Apt sources:
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 sudo docker run --user $RANDOM:$RANDOM hello-world
-# sudo systemctl status docker.service
-# sudo systemctl status containerd.service
 
-# https://operavps.com/docs/how-to-install-vs-code-on-ubuntu-using-snap-apt-gui#Installing_Visual_Studio_Code_with_apt
-# https://www.xda-developers.com/how-to-install-vs-code-on-ubuntu#How_to_install_VS_Code_with_apt 
-# https://phoenixnap.com/kb/install-vscode-ubuntu
-# https://medium.com/@GRajeevan/how-to-install-visual-studio-code-on-ubuntu-22-04-bfc87b52cc40
-# https://linuxhint.com/install-visual-studio-code-ubuntu22-04/
-# sudo apt install software-properties-common apt-transport-https wget
 sudo wget -q https://packages.microsoft.com/keys/microsoft.asc -O /etc/apt/keyrings/microsoft.asc
 sudo echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/microsoft.asc] https://packages.microsoft.com/repos/vscode stable main" | \
   sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
@@ -37,7 +22,6 @@ echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.asc ] https:/
     | sudo tee /etc/apt/sources.list.d/vscodium.list
 sudo apt update
 sudo apt install codium
-# sudo apt install codium-insiders -y
 
 #sudo wget -qO /etc/apt/keyrings/deadsnakes-archive-keyring.asc "$(wget -qO- https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa | grep -o -E 'https://keyserver.ubuntu.com/pks/lookup[^"]+' | head -n1 | sed 's/\?.*search/\?op=get\&search/')"
 #echo "deb [signed-by=/etc/apt/keyrings/deadsnakes-archive-keyring.asc] https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu noble main" | sudo tee /etc/apt/sources.list.d/deadsnakes-ppa.list
@@ -61,7 +45,6 @@ echo "export NVM_DIR=\"$HOME/.nvm\"
 source ~/.bashrc
 command -v nvm
 nvm -v
-nvm current
 nvm install -b --latest-npm stable
 nvm install -b --latest-npm --lts=iron               # 20.x
 nvm install -b --latest-npm --lts=hydrogen --default # 18.x
