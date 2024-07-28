@@ -46,12 +46,10 @@ sudo apt update
 sudo apt install codium
 # sudo apt install codium-insiders -y
 
-# https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa -> Technical details about this PPA -> Signing key
-sudo wget -qO - 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xf23c5a6cf475977595c89f51ba6932366a755776' \
--O /usr/share/keyrings/deadsnakes-archive-keyring.asc
-echo "deb [ signed-by=/usr/share/keyrings/deadsnakes-archive-keyring.asc ] http://ppa.launchpad.net/deadsnakes/ppa/ubuntu $(lsb_release -cs) main" \
-    | sudo tee /etc/apt/sources.list.d/deadsnakes-ppa.list
-sudo apt update
+#sudo wget -qO /etc/apt/keyrings/deadsnakes-archive-keyring.asc "$(wget -qO- https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa | grep -o -E 'https://keyserver.ubuntu.com/pks/lookup[^"]+' | head -n1 | sed 's/\?.*search/\?op=get\&search/')"
+#echo "deb [signed-by=/etc/apt/keyrings/deadsnakes-archive-keyring.asc] https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu noble main" | sudo tee /etc/apt/sources.list.d/deadsnakes-ppa.list
+#sudo apt update
+#https://wiki.debian.org/CreatePackageFromPPA
 
 # https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#release-files
 # https://github.com/yt-dlp/yt-dlp/wiki/Installation#apt
