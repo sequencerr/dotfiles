@@ -90,7 +90,7 @@ node_modules ""${NVM_DIR}"/versions/node/*"
 # gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u
 # aptitude search '~i !~M' -F '%p' | sed "s/ *$//" | sort -u
 [ -d "$BACKUP_DIR"/restore/apt ] && rm "$BACKUP_DIR"/restore/apt/* || mkdir -p "$BACKUP_DIR"/restore/apt
-for l in $(comm -13 \
+for l in $(comm -23 \
     <(apt-mark showmanual | sort -u) \
     <(sudo grep -oP "Unpacking \K[^: ]+" /var/log/installer/syslog | sort -u))
     do echo $l >> "$BACKUP_DIR"/restore/apt/packages.txt
