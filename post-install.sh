@@ -25,30 +25,24 @@ git clone --depth 1 https://github.com/nvm-sh/nvm.git "$HOME/.nvm"
 echo 'export NVM_DIR="$HOME/.nvm" \
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"' >> ~/.bashrc
 source ~/.bashrc
-command -v nvm
-nvm -v
 nvm install -b --latest-npm stable
 nvm install -b --latest-npm --lts=iron               # 20.x
 nvm install -b --latest-npm --lts=hydrogen --default # 18.x
 nvm install -b --latest-npm --lts=gallium            # 16.x
 nvm use default
-nvm current
-node -v
-npm -v
+nvm current && nvm -v && node -v && npm -v
 
-url=https://raw.githubusercontent.com/yarnpkg/berry/master/packages/yarnpkg-cli/bin/yarn.js
 bin_dir=$HOME/.yarn/releases
-if [[ ! -d $bin_dir ]]; then mkdir -p "$bin_dir"; fi
-curl --fail --location --progress-bar --output "$bin_dir/yarn-berry-latest.cjs" "$url"
+[ -d $bin_dir ] || mkdir -p "$bin_dir"
+wget -qO "$bin_dir/yarn-berry-latest.cjs" https://raw.githubusercontent.com/yarnpkg/berry/master/packages/yarnpkg-cli/bin/yarn.js
 ln -s "$bin_dir/yarn-berry-latest.cjs" "$bin_dir/yarn"
 chmod +x "$bin_dir/yarn"
 echo "export PATH=$bin_dir:\$PATH" >> ~/.bashrc
 source ~/.bashrc
 yarn --version
 
-tmp_dir="$(mktemp -d)"; trap 'rm -rf "$tmp_dir"' EXIT INT TERM HUP
-url=https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linux-x64
-wget -q $url -O "$tmp_dir/pnpm"
+tmp_dir="$(mktemp -d)"; trap "rm -rf \"$tmp_dir\"" EXIT INT TERM HUP
+wget -qO "$tmp_dir/pnpm" https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linux-x64
 chmod +x "$tmp_dir/pnpm"
 SHELL=bash "$tmp_dir/pnpm" setup --force || return 1
 
@@ -65,7 +59,6 @@ rm -r "$tmp_dir/bun-$target" "$tmp_dir/bun.zip"
 chmod +x "$bin_dir/bun"
 echo '[ -d "$HOME/.bun/bin" ] && export PATH="$HOME/.bun/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
-command -v bun
 bun -v
 SHELL=bash bun completions
 
