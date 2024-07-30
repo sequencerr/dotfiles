@@ -17,6 +17,11 @@ echo 'deb [ signed-by=/usr/share/keyrings/vscodium.asc ] https://paulcarroty.git
   | sudo tee /etc/apt/sources.list.d/vscodium.list > /dev/null
 sudo apt update && sudo apt install codium
 
+sudo wget -qO /etc/apt/keyrings/dbeaver.asc https://dbeaver.io/debs/dbeaver.gpg.key
+echo "deb [signed-by=/etc/apt/keyrings/dbeaver.asc] https://dbeaver.io/debs/dbeaver-ce /" \
+  | sudo tee /etc/apt/sources.list.d/dbeaver.list > /dev/null
+sudo apt update && sudo apt install dbeaver-ce
+
 [ -d "$HOME/.local/bin" ] || mkdir -p "$HOME/.local/bin"
 wget -qO ~/.local/bin/yt https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp 
 chmod a+rx ~/.local/bin/yt
