@@ -83,20 +83,24 @@ node_modules ""${NVM_DIR}"/versions/node/*"
 # https://askubuntu.com/a/492343
 # https://stackoverflow.com/a/46696164
 # https://itsfoss.community/t/listing-manually-post-installed-packages-in-debian/9342/4
-# apt-mark showmanual | sort -u
+# apt-mark showmanual | sort -u | xargs
 # sudo grep -oP "Unpacking \K[^: ]+" /var/log/installer/syslog | sort -u | xargs 
 # cat /var/log/dpkg.log | egrep "[0-9] install" | awk '{print $4}' | awk -F":" '{print $1}' | sort -u | xargs
-# cat /var/log/apt/history.log | grep -E '^Commandline: apt.+install' | sed -E 's/^Commandline: apt.+install| --?\w+(-\w+)?//g' | xargs
-# gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u
-# aptitude search '~i !~M' -F '%p' | sed "s/ *$//" | sort -u
-[ -d "$BACKUP_DIR"/restore/apt ] && rm "$BACKUP_DIR"/restore/apt/* || mkdir -p "$BACKUP_DIR"/restore/apt
-for l in $(comm -23 \
-    <(apt-mark showmanual | sort -u) \
-    <(sudo grep -oP "Unpacking \K[^: ]+" /var/log/installer/syslog | sort -u))
+# cat /var/log/apt/history.log | grep -E '^Commandline: apt.+install' | sed -E 's/^Commandline: apt.+install| --?\w+(-\w+)?//g' | sort -u | xargs
+# gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u | xargs
+# aptitude search '~i !~M' -F '%p' | sed "s/ *$//" | sort -u | xargs
+[ -d "$BACKUP_DIR"/restore/apt ] || mkdir -p "$BACKUP_DIR"/restore/apt
+echo -e '\n' >> "$BACKUP_DIR"/restore/apt/packages.txt
+sys_pkgs=$(sudo grep -oP "Unpacking \K[^: ]+" /var/log/installer/syslog | sort -u)
+for l in $(comm -12 \
+    <(echo $(comm -23 \
+        <(cat /var/log/apt/history.log | grep -E '^Commandline: apt.+install' | sed -E 's/^Commandline: apt.+install| --?\w+(-\w+)?//g' | sort -u | xargs) \
+        <(echo $sys_pkgs)) | tr ' ' '\n' | sort) \
+    <(apt-mark showmanual | sort -u | tr ' ' '\n' | sort))
     do echo $l >> "$BACKUP_DIR"/restore/apt/packages.txt
 done
-cat "$BACKUP_DIR"/restore/apt/packages.txt | sort -u > "$BACKUP_DIR"/restore/apt/packages.txt
+echo "$(cat "$BACKUP_DIR"/restore/apt/packages.txt | sort -u | tr ' ' '\n')" > "$BACKUP_DIR"/restore/apt/packages.txt
 
 [ -d "$BACKUP_DIR"/restore/snap ] || mkdir -p "$BACKUP_DIR"/restore/snap
 [ $(command -v snap) ] && (snap list 2>/dev/null > "$BACKUP_DIR"/restore/snap/packages.txt)
-cat "$BACKUP_DIR"/restore/apt/packages.txt | sort -u > "$BACKUP_DIR"/restore/apt/packages.txt
+echo "$(cat "$BACKUP_DIR"/restore/apt/packages.txt | sort -u | tr ' ' '\n')" > "$BACKUP_DIR"/restore/apt/packages.txt

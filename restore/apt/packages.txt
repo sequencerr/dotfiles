@@ -1,16 +1,29 @@
+adb
 blktrace
-code
-curl
+blueman
+bluetooth
+curl -t unstable
+ddcutil
+efibootmgr
 ffmpeg
 git
-htop
 jq
-neofetch
+keepassxc
+libvulkan-dev
+vulkan-validationlayers
+libxfce4ui-2-0 -t unstable
+magnus
+make
 neovim
+openjdk-17-jdk
+perl
 pulseaudio-equalizer
 python3.8
-python-pip
 redshift
+rustc -t unstable
+snapd
 sqlite3
+trash-cli
 tree
-telegram-desktop
+wget
+wmctrl
