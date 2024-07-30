@@ -27,7 +27,7 @@ wget -qO ~/.local/bin/yt https://github.com/yt-dlp/yt-dlp/releases/latest/downlo
 chmod a+rx ~/.local/bin/yt
 
 git clone --depth 1 https://github.com/nvm-sh/nvm.git "$HOME/.nvm"
-echo 'export NVM_DIR="$HOME/.nvm" \
+echo 'export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"' >> ~/.bashrc
 source ~/.bashrc
 nvm install -b --latest-npm stable
