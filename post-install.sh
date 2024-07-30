@@ -22,8 +22,8 @@ wget -qO ~/.local/bin/yt https://github.com/yt-dlp/yt-dlp/releases/latest/downlo
 chmod a+rx ~/.local/bin/yt
 
 git clone --depth 1 https://github.com/nvm-sh/nvm.git "$HOME/.nvm"
-echo "export NVM_DIR=\"$HOME/.nvm\"
-[ -s \"$HOME/.nvm/nvm.sh\" ] && \. \"$HOME/.nvm/nvm.sh\"" >> ~/.bashrc
+echo 'export NVM_DIR="$HOME/.nvm" \
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"' >> ~/.bashrc
 source ~/.bashrc
 command -v nvm
 nvm -v
@@ -63,7 +63,7 @@ if [[ ! -d $bin_dir ]]; then mkdir -p "$bin_dir"; fi
 mv "$tmp_dir/bun-$target/bun" "$bin_dir/bun"
 rm -r "$tmp_dir/bun-$target" "$tmp_dir/bun.zip"
 chmod +x "$bin_dir/bun"
-echo "export PATH=$bin_dir:\$PATH" >> ~/.bashrc
+echo '[ -d "$HOME/.bun/bin" ] && export PATH="$HOME/.bun/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 command -v bun
 bun -v
