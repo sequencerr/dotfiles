@@ -1,27 +1,21 @@
 #!/bin/sh
 
-# https://docs.docker.com/engine/install/debian/#install-using-the-repository
-sudo wget -q https://download.docker.com/linux/debian/gpg -O /etc/apt/keyrings/docker.asc
+sudo wget -qO /etc/apt/keyrings/docker.asc https://download.docker.com/linux/debian/gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update
-sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
+  | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update && sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 sudo docker run --user $RANDOM:$RANDOM hello-world
 
-sudo wget -q https://packages.microsoft.com/keys/microsoft.asc -O /etc/apt/keyrings/microsoft.asc
-sudo echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/microsoft.asc] https://packages.microsoft.com/repos/vscode stable main" | \
-  sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
-sudo apt update
-sudo apt install code
+sudo wget -qO /etc/apt/keyrings/microsoft.asc https://packages.microsoft.com/keys/microsoft.asc
+sudo echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/microsoft.asc] https://packages.microsoft.com/repos/vscode stable main" \
+  | sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
+sudo apt update && sudo apt install code
 
-# https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo#how-to-install-for-debianubuntulinux-mint
-sudo wget https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
--O /usr/share/keyrings/vscodium-archive-keyring.asc
-echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.asc ] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main' \
-    | sudo tee /etc/apt/sources.list.d/vscodium.list
-sudo apt update
-sudo apt install codium
+sudo wget -qO /usr/share/keyrings/vscodium.asc https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+echo 'deb [ signed-by=/usr/share/keyrings/vscodium.asc ] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main' \
+  | sudo tee /etc/apt/sources.list.d/vscodium.list > /dev/null
+sudo apt update && sudo apt install codium
 
 #sudo wget -qO /etc/apt/keyrings/deadsnakes-archive-keyring.asc "$(wget -qO- https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa | grep -o -E 'https://keyserver.ubuntu.com/pks/lookup[^"]+' | head -n1 | sed 's/\?.*search/\?op=get\&search/')"
 #echo "deb [signed-by=/etc/apt/keyrings/deadsnakes-archive-keyring.asc] https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu noble main" | sudo tee /etc/apt/sources.list.d/deadsnakes-ppa.list
