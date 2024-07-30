@@ -46,20 +46,14 @@ wget -qO "$tmp_dir/pnpm" https://github.com/pnpm/pnpm/releases/latest/download/p
 chmod +x "$tmp_dir/pnpm"
 SHELL=bash "$tmp_dir/pnpm" setup --force || return 1
 
-tmp_dir="$(mktemp -d)"; trap 'rm -rf "$tmp_dir"' EXIT INT TERM HUP
-target=linux-x64
-url=https://github.com/oven-sh/bun/releases/latest/download/bun-$target.zip
-wget "$url" -O "$tmp_dir/bun.zip"
-command -v unzip || sudo apt install unzip
-command -v bun > /dev/null || unzip -oqd "$tmp_dir" "$tmp_dir/bun.zip"
-bin_dir=$HOME/.bun/bin
-if [[ ! -d $bin_dir ]]; then mkdir -p "$bin_dir"; fi
-mv "$tmp_dir/bun-$target/bun" "$bin_dir/bun"
-rm -r "$tmp_dir/bun-$target" "$tmp_dir/bun.zip"
+bin_dir="$HOME/.bun/bin"
+[ -d $bin_dir ] || mkdir -p "$bin_dir"
+wget --show-progress -qO- https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip | busybox unzip -ojqd "$HOME/.bun/bin" -
 chmod +x "$bin_dir/bun"
+unset bin_dir
 echo '[ -d "$HOME/.bun/bin" ] && export PATH="$HOME/.bun/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
-bun -v
-SHELL=bash bun completions
+bun --revision 
+SHELL=bash bun completions &> /dev/null
 
 find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"accessibility.typeaheadfind.enablesound", true/"accessibility.typeaheadfind.enablesound", false/' {} \;
