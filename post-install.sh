@@ -62,3 +62,6 @@ bun --revision
 SHELL=bash bun completions &> /dev/null
 
 find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"accessibility.typeaheadfind.enablesound", true/"accessibility.typeaheadfind.enablesound", false/' {} \;
+
+echo '[ -d /snap/bin ] && export PATH="/snap/bin:$PATH"' >> ~/.bashrc
+sudo ln -s /var/lib/snapd/desktop/applications /usr/share/applications/snapd
