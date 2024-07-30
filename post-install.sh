@@ -17,9 +17,9 @@ echo 'deb [ signed-by=/usr/share/keyrings/vscodium.asc ] https://paulcarroty.git
   | sudo tee /etc/apt/sources.list.d/vscodium.list > /dev/null
 sudo apt update && sudo apt install codium
 
-sudo add-apt-repository ppa:tomtomtom/yt-dlp
-sudo apt update
-sudo apt install yt-dlp
+[ -d "$HOME/.local/bin" ] || mkdir -p "$HOME/.local/bin"
+wget -qO ~/.local/bin/yt https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp 
+chmod a+rx ~/.local/bin/yt
 
 git clone --depth 1 https://github.com/nvm-sh/nvm.git "$HOME/.nvm"
 echo "export NVM_DIR=\"$HOME/.nvm\"
