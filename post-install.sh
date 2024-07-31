@@ -37,12 +37,10 @@ nvm install -b --latest-npm --lts=gallium            # 16.x
 nvm use default
 nvm current && nvm -v && node -v && npm -v
 
-bin_dir=$HOME/.yarn/releases
-[ -d $bin_dir ] || mkdir -p "$bin_dir"
-wget -qO "$bin_dir/yarn-berry-latest.cjs" https://raw.githubusercontent.com/yarnpkg/berry/master/packages/yarnpkg-cli/bin/yarn.js
-ln -s "$bin_dir/yarn-berry-latest.cjs" "$bin_dir/yarn"
-chmod +x "$bin_dir/yarn"
-echo "export PATH=$bin_dir:\$PATH" >> ~/.bashrc
+[ -d $HOME/.yarn/releases ] || mkdir -p "$HOME/.yarn/releases"
+wget --show-progress -qO "$HOME/.yarn/releases/yarn" https://raw.githubusercontent.com/yarnpkg/berry/master/packages/yarnpkg-cli/bin/yarn.js
+chmod +x "$HOME/.yarn/releases/yarn"
+echo '[ -d "$HOME/.yarn/releases" ] && export PATH="$HOME/.yarn/releases:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 yarn --version
 
