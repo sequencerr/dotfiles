@@ -46,10 +46,14 @@ echo "export PATH=$bin_dir:\$PATH" >> ~/.bashrc
 source ~/.bashrc
 yarn --version
 
-tmp_dir="$(mktemp -d)"; trap "rm -rf \"$tmp_dir\"" EXIT INT TERM HUP
-wget -qO "$tmp_dir/pnpm" https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linux-x64
+# nvm exec 18 npm install -g pnpm
+# echo 'alias pnpm="nvm exec 18 pnpm"' >> ~/.bashrc
+tmp_dir="$(mktemp -d)"; trap '/usr/bin/rm -rf "$tmp_dir"' EXIT INT TERM HUP
+wget --show-progress -qO "$tmp_dir/pnpm" https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linux-x64
 chmod +x "$tmp_dir/pnpm"
-SHELL=bash "$tmp_dir/pnpm" setup --force || return 1
+SHELL=bash "$tmp_dir/pnpm" setup --force | grep -v WARN | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n\nNext[^^]*source[^$]*//g' || exit 1
+source ~/.bashrc
+pnpm --version
 
 [ -d "$HOME/.bun/bin" ] || mkdir -p "$HOME/.bun/bin"
 wget --show-progress -qO- https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip | busybox unzip -ojqd "$HOME/.bun/bin/bin" -
