@@ -1,0 +1,14 @@
+[user]
+	name = Sequencer
+	email = 45060278+sequencerr@users.noreply.github.com
+[core]
+	longpaths = true
+	editor = vi -u NONE
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
+[pull]
+	ff = only
+[advice]
+	diverging = false
