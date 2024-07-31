@@ -51,11 +51,9 @@ wget -qO "$tmp_dir/pnpm" https://github.com/pnpm/pnpm/releases/latest/download/p
 chmod +x "$tmp_dir/pnpm"
 SHELL=bash "$tmp_dir/pnpm" setup --force || return 1
 
-bin_dir="$HOME/.bun/bin"
-[ -d $bin_dir ] || mkdir -p "$bin_dir"
-wget --show-progress -qO- https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip | busybox unzip -ojqd "$HOME/.bun/bin" -
-chmod +x "$bin_dir/bun"
-unset bin_dir
+[ -d "$HOME/.bun/bin" ] || mkdir -p "$HOME/.bun/bin"
+wget --show-progress -qO- https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip | busybox unzip -ojqd "$HOME/.bun/bin/bin" -
+chmod +x "$HOME/.bun/bin/bun"
 echo '[ -d "$HOME/.bun/bin" ] && export PATH="$HOME/.bun/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 bun --revision 
