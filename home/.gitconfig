@@ -1,6 +1,7 @@
 [user]
 	name = Sequencer
 	email = 45060278+sequencerr@users.noreply.github.com
+	signingkey = F39DB3DCC46F8F41
 [core]
 	longpaths = true
 	editor = vi -u NONE
@@ -12,3 +13,7 @@
 	ff = only
 [advice]
 	diverging = false
+[tag]
+	gpgSign = true
+[commit]
+	gpgsign = true
