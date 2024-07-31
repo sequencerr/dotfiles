@@ -25,6 +25,7 @@ backup $HOME/.bashrc
 backup $HOME/.bash_history # bad idea (with filtering anyway), on other side it's bad to pass sensitive info to commands (in console). I must to remeber to use space before command to not save it. 
 backup $HOME/.gitconfig
 backup $HOME/.ssh/config
+backup $HOME/.gnupg/gpg.conf
 backup $HOME/.config/procps/toprc
 backup $HOME/.config/xfce4/terminal/terminalrc
 backup $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
