@@ -17,3 +17,5 @@
 	gpgSign = true
 [commit]
 	gpgsign = true
+[gpg]
+	program = /home/yrch/.gnupg/gpg-wrapper-passphrase.sh
