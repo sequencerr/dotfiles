@@ -49,13 +49,9 @@ echo 'alias pnpm="$(find "$NVM_DIR/versions/node" -maxdepth 1 -name "v18*" -prin
 source ~/.bashrc
 pnpm --version
 
-[ -d "$HOME/.bun/bin" ] || mkdir -p "$HOME/.bun/bin"
-wget --show-progress -qO- https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip | busybox unzip -ojqd "$HOME/.bun/bin/bin" -
-chmod +x "$HOME/.bun/bin/bun"
-echo '[ -d "$HOME/.bun/bin" ] && export PATH="$HOME/.bun/bin:$PATH"' >> ~/.bashrc
-source ~/.bashrc
-bun --revision 
-SHELL=bash bun completions &> /dev/null
+wget --show-progress -qO- https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip | busybox unzip -ojqd ~/.local/bin -
+chmod +x ~/.local/bin/bun
+bun --revision && SHELL=bash bun completions 2> /dev/null
 
 find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"accessibility.typeaheadfind.enablesound", true/"accessibility.typeaheadfind.enablesound", false/' {} \;
 

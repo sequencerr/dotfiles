@@ -28,6 +28,7 @@ backup $HOME/.ssh/config
 backup $HOME/.gnupg/gpg.conf
 backup $HOME/.gnupg/gpg-agent.conf
 backup $HOME/.gnupg/gpg-wrapper-passphrase.sh
+backup $HOME/.config/.bunfig.toml
 backup $HOME/.config/procps/toprc
 backup $HOME/.config/xfce4/terminal/terminalrc
 backup $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
