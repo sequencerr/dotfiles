@@ -44,12 +44,8 @@ echo '[ -d "$HOME/.yarn/releases" ] && export PATH="$HOME/.yarn/releases:$PATH"'
 source ~/.bashrc
 yarn --version
 
-# nvm exec 18 npm install -g pnpm
-# echo 'alias pnpm="nvm exec 18 pnpm"' >> ~/.bashrc
-tmp_dir="$(mktemp -d)"; trap '/usr/bin/rm -rf "$tmp_dir"' EXIT INT TERM HUP
-wget --show-progress -qO "$tmp_dir/pnpm" https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linux-x64
-chmod +x "$tmp_dir/pnpm"
-SHELL=bash "$tmp_dir/pnpm" setup --force | grep -v WARN | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n\nNext[^^]*source[^$]*//g' || exit 1
+nvm exec 18 npm install -g pnpm
+echo 'alias pnpm="$(find "$NVM_DIR/versions/node" -maxdepth 1 -name "v18*" -print -quit)/bin/pnpm"' >> ~/.bashrc
 source ~/.bashrc
 pnpm --version
 
