@@ -53,6 +53,14 @@ wget --show-progress -qO- https://github.com/oven-sh/bun/releases/latest/downloa
 chmod +x ~/.local/bin/bun
 bun --revision && SHELL=bash bun completions 2> /dev/null
 
+[ -d "$HOME/.local/share/maven" ] && /usr/bin/rm -rfv ~/.local/share/maven
+mkdir -pv ~/.local/share/maven
+maven_release=$(wget -qO- https://api.github.com/repos/apache/maven/releases/latest | grep -Po '"name":\s*"(maven-)?\K[^"]+')
+wget --show-progress -qO- "https://dlcdn.apache.org/maven/maven-$(echo $maven_release | cut -c1)/$maven_release/binaries/apache-maven-$maven_release-bin.tar.gz" | tar xzf - -C ~/.local/share/maven --strip-components=1
+unset maven_release
+ln -sfv ~/.local/share/maven/bin/mvn ~/.local/bin/mvn
+mvn --version
+
 wget --show-progress -qO ~/.local/bin/composer https://getcomposer.org/download/latest-stable/composer.phar
 if [ "$(wget -qO- https://getcomposer.org/download/latest-stable/composer.phar.sha256)" \
   != "$(sha256sum ~/.local/bin/composer | awk '{ print $1 }')" ]; then
