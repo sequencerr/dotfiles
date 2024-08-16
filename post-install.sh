@@ -13,7 +13,7 @@ sudo echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/microsoft.asc
 sudo apt update && sudo apt install code
 
 sudo wget -qO /usr/share/keyrings/vscodium.asc https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
-echo 'deb [ signed-by=/usr/share/keyrings/vscodium.asc ] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main' \
+echo 'deb [signed-by=/usr/share/keyrings/vscodium.asc] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main' \
   | sudo tee /etc/apt/sources.list.d/vscodium.list > /dev/null
 sudo apt update && sudo apt install codium
 
