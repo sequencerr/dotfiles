@@ -22,6 +22,11 @@ echo "deb [signed-by=/etc/apt/keyrings/dbeaver.asc] https://dbeaver.io/debs/dbea
   | sudo tee /etc/apt/sources.list.d/dbeaver.list > /dev/null
 sudo apt update && sudo apt install dbeaver-ce
 
+sudo wget -qO /etc/apt/keyrings/hardware_razer.asc https://download.opensuse.org/repositories/hardware:razer/Debian_12/Release.key
+echo 'deb [signed-by=/etc/apt/keyrings/hardware_razer.asc] http://download.opensuse.org/repositories/hardware:/razer/Debian_12/ /' \
+  | sudo tee /etc/apt/sources.list.d/hardware:razer.list > /dev/null
+sudo apt update && sudo apt install razergenie -y
+
 sudo wget -qO /etc/apt/keyrings/githubcli.gpg https://cli.github.com/packages/githubcli-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli.gpg] https://cli.github.com/packages stable main" \
   | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
