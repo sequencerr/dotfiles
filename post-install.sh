@@ -34,6 +34,15 @@ wget --show-progress -qO- "https://gitlab.com/gitlab-org/cli/-/releases/v$glab_r
 unset glab_release
 gl --version
 
+zoxide_release=$(wget -qO- https://api.github.com/repos/ajeetdsouza/zoxide/releases/latest | grep -Po '^\s\s"name":\s"\K[^"]+')
+wget --show-progress -qO- "https://github.com/ajeetdsouza/zoxide/releases/latest/download/zoxide-$zoxide_release-x86_64-unknown-linux-musl.tar.gz" | tar xzf - -C ~/.local/bin zoxide
+unset zoxide_release
+chmod +x ~/.local/bin/zoxide
+echo "alias cd='z'
+eval \"\$(zoxide init bash)\"" >> ~/.bashrc
+source ~/.bashrc
+zoxide --version
+
 wget --show-progress -qO ~/.local/bin/yt https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
 chmod +x ~/.local/bin/yt
 yt --version
