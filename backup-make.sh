@@ -16,13 +16,13 @@ else
 fi
 [ -d "$back_dir" ] || mkdir -p "$back_dir"
 
-cp "$src" "$target" -rfvx # --recursive --force --verbose --one-file-system 
+cp "$src" "$target" -rfvx # --recursive --force --verbose --one-file-system
 }
 
 echo "$(cat "$HOME"/.bash_history | \
 grep --color=none -v -P '(([\da-f]+::?){4,5}[\da-f]+|([\d]+\.){3}[\d]+)')" > "$HOME"/.bash_history
 backup $HOME/.bashrc
-backup $HOME/.bash_history # bad idea (with filtering anyway), on other side it's bad to pass sensitive info to commands (in console). I must to remeber to use space before command to not save it. 
+backup $HOME/.bash_history # bad idea (with filtering anyway), on other side it's bad to pass sensitive info to commands (in console). I must to remeber to use space before command to not save it.
 backup $HOME/.gitconfig
 backup $HOME/.ssh/config
 backup $HOME/.gnupg/gpg.conf
@@ -53,14 +53,14 @@ backup /etc/update-motd.d
 modules_backup_dir="$BACKUP_DIR"/restore/nvm-global-modules
 [ -d "$modules_backup_dir" ] && rm "$modules_backup_dir"/* || mkdir -p "$modules_backup_dir"
 node_modules () {
-for dir in $1; do 
+for dir in $1; do
     declare -A set
     ver=$(basename "$dir")
 
     [ ! -d $dir ] && continue
     [[ $ver != v* ]] && continue
 
-    for bin in "$dir"/bin/*; do 
+    for bin in "$dir"/bin/*; do
         [ -L $bin ] || continue
 
         n=$(echo "$dir"/lib/node_modules/name | awk -F'/' '{print NF}')
@@ -74,7 +74,6 @@ for dir in $1; do
     done
 done
 }
-
 node_modules ""${NVM_DIR}"/*"
 node_modules ""${NVM_DIR}"/versions/node/*"
 
@@ -90,7 +89,7 @@ node_modules ""${NVM_DIR}"/versions/node/*"
 # https://stackoverflow.com/a/46696164
 # https://itsfoss.community/t/listing-manually-post-installed-packages-in-debian/9342/4
 # apt-mark showmanual | sort -u | xargs
-# sudo grep -oP "Unpacking \K[^: ]+" /var/log/installer/syslog | sort -u | xargs 
+# sudo grep -oP "Unpacking \K[^: ]+" /var/log/installer/syslog | sort -u | xargs
 # cat /var/log/dpkg.log | egrep "[0-9] install" | awk '{print $4}' | awk -F":" '{print $1}' | sort -u | xargs
 # cat /var/log/apt/history.log | grep -E '^Commandline: apt.+install' | sed -E 's/^Commandline: apt.+install| --?\w+(-\w+)?//g' | sort -u | xargs
 # gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u | xargs
