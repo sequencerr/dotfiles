@@ -23,7 +23,7 @@ echo "deb [signed-by=/etc/apt/keyrings/dbeaver.asc] https://dbeaver.io/debs/dbea
 sudo apt update && sudo apt install dbeaver-ce
 
 [ -d "$HOME/.local/bin" ] || mkdir -p "$HOME/.local/bin"
-wget -qO ~/.local/bin/yt https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp 
+wget -qO ~/.local/bin/yt https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
 chmod a+rx ~/.local/bin/yt
 
 git clone --depth 1 https://github.com/nvm-sh/nvm.git "$HOME/.nvm"
@@ -53,18 +53,18 @@ wget --show-progress -qO- https://github.com/oven-sh/bun/releases/latest/downloa
 chmod +x ~/.local/bin/bun
 bun --revision && SHELL=bash bun completions 2> /dev/null
 
-find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"accessibility.typeaheadfind.enablesound", true/"accessibility.typeaheadfind.enablesound", false/' {} \;
-find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"extensions.screenshots.disabled", false/"extensions.screenshots.disabled", true/' {} \;
-find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"ui.key.menuAccessKeyFocuses", true/"ui.key.menuAccessKeyFocuses", false/' {} \;
-
-echo '[ -d /snap/bin ] && export PATH="/snap/bin:$PATH"' >> ~/.bashrc
-sudo ln -s /var/lib/snapd/desktop/applications /usr/share/applications/snapd
-
 wget --show-progress -qO ~/.local/bin/composer https://getcomposer.org/download/latest-stable/composer.phar
 if [ "$(wget -qO- https://getcomposer.org/download/latest-stable/composer.phar.sha256)" \
-  != "$(sha256sum ~/.local/bin/composer | awk '{ print $1 }')" ]; then 
+  != "$(sha256sum ~/.local/bin/composer | awk '{ print $1 }')" ]; then
   echo 'Installer currupt'
   exit 1
 fi
 chmod +x ~/.local/bin/composer
 composer --version
+
+echo '[ -d /snap/bin ] && export PATH="/snap/bin:$PATH"' >> ~/.bashrc
+sudo ln -s /var/lib/snapd/desktop/applications /usr/share/applications/snapd
+
+find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"accessibility.typeaheadfind.enablesound", true/"accessibility.typeaheadfind.enablesound", false/' {} \;
+find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"extensions.screenshots.disabled", false/"extensions.screenshots.disabled", true/' {} \;
+find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"ui.key.menuAccessKeyFocuses", true/"ui.key.menuAccessKeyFocuses", false/' {} \;
