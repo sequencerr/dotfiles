@@ -22,9 +22,21 @@ echo "deb [signed-by=/etc/apt/keyrings/dbeaver.asc] https://dbeaver.io/debs/dbea
   | sudo tee /etc/apt/sources.list.d/dbeaver.list > /dev/null
 sudo apt update && sudo apt install dbeaver-ce
 
+sudo wget -qO /etc/apt/keyrings/githubcli.gpg https://cli.github.com/packages/githubcli-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli.gpg] https://cli.github.com/packages stable main" \
+  | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+sudo apt update && sudo apt install gh -y
+
 [ -d "$HOME/.local/bin" ] || mkdir -p "$HOME/.local/bin"
-wget -qO ~/.local/bin/yt https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
-chmod a+rx ~/.local/bin/yt
+
+glab_release=$(wget -qO- https://gitlab.com/api/v4/projects/gitlab-org%2Fcli/releases | grep -oP 'tag_name":\s*"v?\K[^"]+' | head -n1)
+wget --show-progress -qO- "https://gitlab.com/gitlab-org/cli/-/releases/v$glab_release/downloads/glab_${glab_release}_Linux_x86_64.tar.gz" | tar -xzf - -C ~/.local/bin --strip-components=1 --transform s/glab/gl/
+unset glab_release
+gl --version
+
+wget --show-progress -qO ~/.local/bin/yt https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
+chmod +x ~/.local/bin/yt
+yt --version
 
 git clone --depth 1 https://github.com/nvm-sh/nvm.git "$HOME/.nvm"
 echo 'export NVM_DIR="$HOME/.nvm"
