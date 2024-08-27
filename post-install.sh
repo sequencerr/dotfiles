@@ -102,3 +102,4 @@ sudo ln -s /var/lib/snapd/desktop/applications /usr/share/applications/snapd
 find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"accessibility.typeaheadfind.enablesound", true/"accessibility.typeaheadfind.enablesound", false/' {} \;
 find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"extensions.screenshots.disabled", false/"extensions.screenshots.disabled", true/' {} \;
 find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"ui.key.menuAccessKeyFocuses", true/"ui.key.menuAccessKeyFocuses", false/' {} \;
+find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"browser.quitShortcut.disabled", false/"browser.quitShortcut.disabled", true/' {} \;
