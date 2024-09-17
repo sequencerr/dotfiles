@@ -19,10 +19,25 @@ echo 'deb [signed-by=/usr/share/keyrings/vscodium.asc] https://paulcarroty.gitla
   | sudo tee /etc/apt/sources.list.d/vscodium.list > /dev/null
 sudo apt update && sudo apt install codium
 
+sudo wget -qO /usr/share/keyrings/ngrok.asc https://ngrok-agent.s3.amazonaws.com/ngrok.asc
+echo "deb [signed-by=/usr/share/keyrings/ngrok.asc] https://ngrok-agent.s3.amazonaws.com buster main" \
+  | sudo tee /etc/apt/sources.list.d/ngrok.list > /dev/null
+sudo apt update && sudo apt install ngrok
+
 sudo wget -qO /etc/apt/keyrings/dbeaver.asc https://dbeaver.io/debs/dbeaver.gpg.key
 echo "deb [signed-by=/etc/apt/keyrings/dbeaver.asc] https://dbeaver.io/debs/dbeaver-ce /" \
   | sudo tee /etc/apt/sources.list.d/dbeaver.list > /dev/null
 sudo apt update && sudo apt install dbeaver-ce
+
+sudo wget -qO /etc/apt/keyrings/google.asc https://dl.google.com/linux/linux_signing_key.pub
+echo "deb [signed-by=/etc/apt/keyrings/google.asc] http://dl.google.com/linux/chrome/deb stable main" \
+  | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
+sudo apt update && sudo apt install google-chrome-stable -y
+
+sudo wget -qO /etc/apt/keyrings/waterfox.asc https://download.opensuse.org/repositories/home:hawkeye116477:waterfox/Debian_12/Release.key
+echo 'deb [signed-by=/etc/apt/keyrings/waterfox.asc] http://download.opensuse.org/repositories/home:/hawkeye116477:/waterfox/Debian_12/ /' \
+  | sudo tee /etc/apt/sources.list.d/home:hawkeye116477:waterfox.list
+sudo apt update && sudo apt install waterfox-kde
 
 sudo wget -qO /etc/apt/keyrings/hardware_razer.asc https://download.opensuse.org/repositories/hardware:razer/Debian_12/Release.key
 echo 'deb [signed-by=/etc/apt/keyrings/hardware_razer.asc] http://download.opensuse.org/repositories/hardware:/razer/Debian_12/ /' \
