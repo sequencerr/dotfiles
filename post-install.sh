@@ -93,7 +93,7 @@ wget --show-progress -qO ~/.local/bin/yt https://github.com/yt-dlp/yt-dlp/releas
 chmod +x ~/.local/bin/yt
 yt --version
 
-git clone --depth 1 https://github.com/nvm-sh/nvm.git "$HOME/.nvm" || git -C "$HOME/.nvm" pull || git -C "$HOME/.nvm" reset --hard @{u}
+git clone --depth 1 https://github.com/nvm-sh/nvm.git ~/.nvm || git -C ~/.nvm pull || git -C ~/.nvm reset --hard @{u}
 export NVM_DIR="$HOME/.nvm" && source "$NVM_DIR/nvm.sh"
 nvm install -b --latest-npm stable
 nvm install -b --latest-npm --lts=iron               # 20.x
@@ -102,9 +102,9 @@ nvm install -b --latest-npm --lts=gallium            # 16.x
 nvm use default
 nvm current && nvm -v && node -v && npm -v
 
-[ -d "$HOME/.yarn/releases" ] || mkdir -p "$HOME/.yarn/releases"
-wget --show-progress -qO "$HOME/.yarn/releases/yarn" https://raw.githubusercontent.com/yarnpkg/berry/master/packages/yarnpkg-cli/bin/yarn.js
-chmod +x "~/.yarn/releases/yarn"
+[ -d "$HOME/.yarn/releases" ] || mkdir -p ~/.yarn/releases
+wget --show-progress -qO ~/.yarn/releases/yarn https://raw.githubusercontent.com/yarnpkg/berry/master/packages/yarnpkg-cli/bin/yarn.js
+chmod +x ~/.yarn/releases/yarn
 ln -sfv ~/.yarn/releases/yarn ~/.local/bin/yarn
 yarn --version
 
