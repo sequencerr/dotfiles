@@ -114,7 +114,7 @@ pnpm --version
 
 wget --show-progress -qO- https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip | busybox unzip -ojqd ~/.local/bin -
 chmod +x ~/.local/bin/bun
-bun --revision && SHELL=bash bun completions 2> /dev/null
+bun --revision && SHELL=bash bun completions 2> /dev/null || true
 
 [ -d "$HOME/.local/share/maven" ] && /usr/bin/rm -rfv ~/.local/share/maven
 mkdir -pv ~/.local/share/maven
