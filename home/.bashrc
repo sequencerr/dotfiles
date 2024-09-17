@@ -77,5 +77,7 @@ alias ll='LC_ALL=C ls -lhA'
 alias tree="tree --dirsfirst -ACI '.git' -I node_modules"
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias src='time source ~/.bashrc'
-alias cd='z'
-eval "$(zoxide init bash)"
+if command -v zoxide > /dev/null; then
+    alias cd='z'
+    eval "$(zoxide init bash)"
+fi
