@@ -20,48 +20,59 @@ sudo wget -qO /etc/apt/keyrings/docker.asc https://download.docker.com/linux/deb
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
   | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update && sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
-sudo docker run --user $RANDOM:$RANDOM hello-world
 
 sudo wget -qO /etc/apt/keyrings/microsoft.asc https://packages.microsoft.com/keys/microsoft.asc
 echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/microsoft.asc] https://packages.microsoft.com/repos/vscode stable main" \
   | sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
-sudo apt update && sudo apt install code
 
 sudo wget -qO /etc/apt/keyrings/vscodium.asc https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
 echo 'deb [signed-by=/etc/apt/keyrings/vscodium.asc] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main' \
   | sudo tee /etc/apt/sources.list.d/vscodium.list > /dev/null
-sudo apt update && sudo apt install codium
 
 sudo wget -qO /etc/apt/keyrings/ngrok.asc https://ngrok-agent.s3.amazonaws.com/ngrok.asc
 echo "deb [signed-by=/etc/apt/keyrings/ngrok.asc] https://ngrok-agent.s3.amazonaws.com buster main" \
   | sudo tee /etc/apt/sources.list.d/ngrok.list > /dev/null
-sudo apt update && sudo apt install ngrok
 
 sudo wget -qO /etc/apt/keyrings/dbeaver.asc https://dbeaver.io/debs/dbeaver.gpg.key
 echo "deb [signed-by=/etc/apt/keyrings/dbeaver.asc] https://dbeaver.io/debs/dbeaver-ce /" \
   | sudo tee /etc/apt/sources.list.d/dbeaver.list > /dev/null
-sudo apt update && sudo apt install dbeaver-ce
 
 sudo wget -qO /etc/apt/keyrings/google.asc https://dl.google.com/linux/linux_signing_key.pub
 echo "deb [signed-by=/etc/apt/keyrings/google.asc] http://dl.google.com/linux/chrome/deb stable main" \
   | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
-sudo apt update && sudo apt install google-chrome-stable -y
 
 sudo wget -qO /etc/apt/keyrings/waterfox.asc https://download.opensuse.org/repositories/home:hawkeye116477:waterfox/Debian_12/Release.key
 echo 'deb [signed-by=/etc/apt/keyrings/waterfox.asc] http://download.opensuse.org/repositories/home:/hawkeye116477:/waterfox/Debian_12/ /' \
   | sudo tee /etc/apt/sources.list.d/home:hawkeye116477:waterfox.list
-sudo apt update && sudo apt install waterfox-kde
 
 sudo wget -qO /etc/apt/keyrings/hardware_razer.asc https://download.opensuse.org/repositories/hardware:razer/Debian_12/Release.key
 echo 'deb [signed-by=/etc/apt/keyrings/hardware_razer.asc] http://download.opensuse.org/repositories/hardware:/razer/Debian_12/ /' \
   | sudo tee /etc/apt/sources.list.d/hardware:razer.list > /dev/null
-sudo apt update && sudo apt install razergenie -y
 
 sudo wget -qO /etc/apt/keyrings/githubcli.gpg https://cli.github.com/packages/githubcli-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli.gpg] https://cli.github.com/packages stable main" \
   | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-sudo apt update && sudo apt install gh -y
+
+sudo apt upgrade
+sudo apt install --yes --no-install-recommends \
+    docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
+    code \
+    codium \
+    ngrok \
+    dbeaver-ce \
+    google-chrome-stable \
+    waterfox-kde \
+    razergenie \
+    gh
+sudo docker run --user $RANDOM:$RANDOM hello-world
+code --version
+codium --version
+ngrok --version
+dbeaver-ce --version
+google-chrome-stable --version
+waterfox --version
+razergenie --version
+gh --version
 
 [ -d "$HOME/.local/bin" ] || mkdir -p "$HOME/.local/bin"
 
