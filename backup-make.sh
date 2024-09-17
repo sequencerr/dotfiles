@@ -62,7 +62,7 @@ for dir in $1; do
 
         n=$(echo "$dir"/lib/node_modules/name | awk -F'/' '{print NF}')
         pkg=$(echo "$(readlink -f "$bin")" | awk -F'/' "{print \$$n}")
-        [ "$pkg" == npm ] && continue
+        [ "$pkg" == npm ] || [ "$pkg" == corepack ] && continue
 
         [ "${set[$pkg]}" ] && continue
         set["$pkg"]=1
