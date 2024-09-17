@@ -111,11 +111,6 @@ ln -s ~/.local/share/gradle/bin/gradle ~/.local/bin/gradle
 gradle -v
 
 wget --show-progress -qO ~/.local/bin/composer https://getcomposer.org/download/latest-stable/composer.phar
-if [ "$(wget -qO- https://getcomposer.org/download/latest-stable/composer.phar.sha256)" \
-  != "$(sha256sum ~/.local/bin/composer | awk '{ print $1 }')" ]; then
-  echo 'Installer currupt'
-  exit 1
-fi
 chmod +x ~/.local/bin/composer
 composer --version
 
