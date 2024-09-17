@@ -43,7 +43,7 @@ echo "deb [signed-by=/etc/apt/keyrings/google.asc] http://dl.google.com/linux/ch
 
 sudo wget -qO /etc/apt/keyrings/waterfox.asc https://download.opensuse.org/repositories/home:hawkeye116477:waterfox/Debian_12/Release.key
 echo 'deb [signed-by=/etc/apt/keyrings/waterfox.asc] http://download.opensuse.org/repositories/home:/hawkeye116477:/waterfox/Debian_12/ /' \
-  | sudo tee /etc/apt/sources.list.d/home:hawkeye116477:waterfox.list
+  | sudo tee /etc/apt/sources.list.d/home:hawkeye116477:waterfox.list > /dev/null
 
 sudo wget -qO /etc/apt/keyrings/hardware_razer.asc https://download.opensuse.org/repositories/hardware:razer/Debian_12/Release.key
 echo 'deb [signed-by=/etc/apt/keyrings/hardware_razer.asc] http://download.opensuse.org/repositories/hardware:/razer/Debian_12/ /' \
