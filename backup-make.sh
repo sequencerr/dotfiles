@@ -27,6 +27,9 @@ backup $HOME/.gnupg/gpg.conf
 backup $HOME/.gnupg/gpg-agent.conf
 backup $HOME/.gnupg/gpg-wrapper-passphrase.sh
 backup $HOME/.themes
+backup $HOME/.when/preferences
+backup $HOME/.config/synapse/config.json
+backup $HOME/.config/lazydocker/config.yml
 backup $HOME/.config/procps/toprc
 backup $HOME/.config/xfce4/terminal/terminalrc
 backup $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
