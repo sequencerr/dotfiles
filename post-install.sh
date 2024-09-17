@@ -102,6 +102,14 @@ unset maven_release
 ln -sfv ~/.local/share/maven/bin/mvn ~/.local/bin/mvn
 mvn --version
 
+gradle_release=$(wget -qO- https://api.github.com/repos/gradle/gradle/releases/latest | grep -Po '"name":\s*"\K[^"]+')
+wget --show-progress -qO- "https://services.gradle.org/distributions/gradle-$gradle_release-bin.zip" | busybox unzip -oqd ~/.local/share -
+unset gradle_release
+mv ~/.local/share/gradle* ~/.local/share/gradle
+chmod +x ~/.local/share/gradle/bin/gradle
+ln -s ~/.local/share/gradle/bin/gradle ~/.local/bin/gradle
+gradle -v
+
 wget --show-progress -qO ~/.local/bin/composer https://getcomposer.org/download/latest-stable/composer.phar
 if [ "$(wget -qO- https://getcomposer.org/download/latest-stable/composer.phar.sha256)" \
   != "$(sha256sum ~/.local/bin/composer | awk '{ print $1 }')" ]; then
