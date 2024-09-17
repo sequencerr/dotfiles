@@ -39,30 +39,43 @@ if ! shopt -oq posix; then
   fi
 fi
 
-HISTCONTROL=ignoreboth
-HISTSIZE=1000
-HISTFILESIZE=2000
-export HISTTIMEFORMAT="%F %T "
-export HISTIGNORE="?:??:???:pwd:clear:reset:exit:forget*:history*:cd -:exit:date:* --help"
-alias forget=""
-
 shopt -s checkwinsize
 shopt -s globstar
 shopt -s histappend
 
-alias rm='echo Consider using "trash"'
-alias trash='trash -v'
-export LC_ALL="C"
-alias ls='ls -CA --color=auto --group-directories-first'
-alias ll='ls -lA'
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-[ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
-
+export HISTCONTROL=ignoreboth
+export HISTSIZE=1000
+export HISTFILESIZE=100000
+export HISTTIMEFORMAT="%F %T "
+export HISTIGNORE="?:??:???:pwd:clear:reset:exit:forget*:history*:cd -:exit:date:* --help*"
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 export XDG_CONFIG_HOME="${XDG_CACHE_HOME:-$HOME/.config}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_STATE_HOME="${XDG_DATA_HOME:-$HOME/.local/state}"
+export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 export BUN_INSTALL_BIN="$HOME/.local/bin"
 export BUN_INSTALL_CACHE_DIR="$XDG_CACHE_HOME/bun"
 export BUN_INSTALL_GLOBAL_DIR="$XDG_DATA_HOME/bun"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
+[ -d "$XDG_CONFIG_HOME/composer/vendor/bin" ] && export PATH="$XDG_CONFIG_HOME/composer/vendor/bin:$PATH"
+[ -d /snap/bin ] && export PATH="/snap/bin:$PATH"
+[ -d "$(pwd)/node_modules/.bin" ] && \
+    for cmd in $(ls "$(pwd)/node_modules/.bin"); do
+        alias $cmd="echo -e \"Using local: \\\"$(pwd)/node_modules/.bin/$cmd\\\" -> \\\"\$(readlink -f $(pwd)/node_modules/.bin/$cmd)\\\" \n\" && command $(pwd)/node_modules/.bin/$cmd";
+    done
+
+alias forget=""
+alias rm='echo Consider using "trash"'
+alias trash='trash -v'
+alias trash-list="trash-list | awk '{print NR-1, \$0}' | sort -k2,3 | column -t | sed -E 's/\/home\/[^/]+/~/g'"
+alias ls='LC_ALL=C ls -CA --color=auto --group-directories-first'
+alias ll='LC_ALL=C ls -lhA'
+alias tree="tree --dirsfirst -ACI '.git' -I node_modules"
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias src='time source ~/.bashrc'
+alias cd='z'
+eval "$(zoxide init bash)"

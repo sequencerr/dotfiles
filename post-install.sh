@@ -60,9 +60,9 @@ zoxide_release=$(wget -qO- https://api.github.com/repos/ajeetdsouza/zoxide/relea
 wget --show-progress -qO- "https://github.com/ajeetdsouza/zoxide/releases/latest/download/zoxide-$zoxide_release-x86_64-unknown-linux-musl.tar.gz" | tar xzf - -C ~/.local/bin zoxide
 unset zoxide_release
 chmod +x ~/.local/bin/zoxide
-echo "alias cd='z'
-eval \"\$(zoxide init bash)\"" >> ~/.bashrc
-source ~/.bashrc
+# echo "alias cd='z'
+# eval \"\$(zoxide init bash)\"" >> ~/.bashrc
+# source ~/.bashrc
 zoxide --version
 
 wget --show-progress -qO ~/.local/bin/yt https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
@@ -70,9 +70,9 @@ chmod +x ~/.local/bin/yt
 yt --version
 
 git clone --depth 1 https://github.com/nvm-sh/nvm.git "$HOME/.nvm"
-echo 'export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"' >> ~/.bashrc
-source ~/.bashrc
+# echo 'export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"' >> ~/.bashrc
+# source ~/.bashrc
 nvm install -b --latest-npm stable
 nvm install -b --latest-npm --lts=iron               # 20.x
 nvm install -b --latest-npm --lts=hydrogen --default # 18.x
