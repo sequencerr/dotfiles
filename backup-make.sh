@@ -98,3 +98,5 @@ echo "$(cat "$BACKUP_DIR"/restore/apt/packages.txt | sort -u | tr ' ' '\n')" > "
 [ -d "$BACKUP_DIR"/restore/snap ] || mkdir -p "$BACKUP_DIR"/restore/snap
 [ $(command -v snap) ] && (snap list 2>/dev/null > "$BACKUP_DIR"/restore/snap/packages.txt)
 echo "$(cat "$BACKUP_DIR"/restore/apt/packages.txt | sort -u | tr ' ' '\n')" > "$BACKUP_DIR"/restore/apt/packages.txt
+
+ls ~/.local/share/fonts > "$BACKUP_DIR"/restore/fonts
