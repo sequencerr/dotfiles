@@ -14,7 +14,6 @@ cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config/
 cp -rfv ~/dotfiles/home/.config/procps ~/.config/
 cp -rfv ~/dotfiles/home/.themes ~/
 cp -rfv ~/dotfiles/home/.bashrc ~/.bashrc
-time source ~/.bashrc
 
 sudo wget -qO /etc/apt/keyrings/docker.asc https://download.docker.com/linux/debian/gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
@@ -86,9 +85,6 @@ zoxide_release=$(wget -qO- https://api.github.com/repos/ajeetdsouza/zoxide/relea
 wget --show-progress -qO- "https://github.com/ajeetdsouza/zoxide/releases/latest/download/zoxide-$zoxide_release-x86_64-unknown-linux-musl.tar.gz" | tar xzf - -C ~/.local/bin zoxide
 unset zoxide_release
 chmod +x ~/.local/bin/zoxide
-# echo "alias cd='z'
-# eval \"\$(zoxide init bash)\"" >> ~/.bashrc
-# source ~/.bashrc
 zoxide --version
 
 wget --show-progress -qO ~/.local/bin/yt https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
@@ -96,9 +92,7 @@ chmod +x ~/.local/bin/yt
 yt --version
 
 git clone --depth 1 https://github.com/nvm-sh/nvm.git "$HOME/.nvm" || git -C "$HOME/.nvm" pull
-# echo 'export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"' >> ~/.bashrc
-# source ~/.bashrc
+export NVM_DIR="$HOME/.nvm" && source "$NVM_DIR/nvm.sh"
 nvm install -b --latest-npm stable
 nvm install -b --latest-npm --lts=iron               # 20.x
 nvm install -b --latest-npm --lts=hydrogen --default # 18.x
