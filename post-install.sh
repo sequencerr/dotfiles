@@ -14,8 +14,7 @@ cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config/xfce4
 cp -rfv ~/dotfiles/home/.config/procps ~/.config/procps
 cp -rfv ~/dotfiles/home/.themes ~/.themes
 cp -rfv ~/dotfiles/home/.bashrc ~/.bashrc
-
-source ~/.bashrc
+time source ~/.bashrc
 
 sudo wget -qO /etc/apt/keyrings/docker.asc https://download.docker.com/linux/debian/gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
