@@ -10,7 +10,7 @@ sudo apt update && sudo apt install docker-ce docker-ce-cli containerd.io docker
 sudo docker run --user $RANDOM:$RANDOM hello-world
 
 sudo wget -qO /etc/apt/keyrings/microsoft.asc https://packages.microsoft.com/keys/microsoft.asc
-sudo echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/microsoft.asc] https://packages.microsoft.com/repos/vscode stable main" \
+echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/microsoft.asc] https://packages.microsoft.com/repos/vscode stable main" \
   | sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
 sudo apt update && sudo apt install code
 
