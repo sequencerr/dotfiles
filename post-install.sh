@@ -3,7 +3,7 @@ set -e
 set -u
 
 sudo wget -qO /etc/apt/sources.list https://raw.githubusercontent.com/sequencerr/dotfiles/main/etc/apt/sources.list
-sudo apt update
+sudo apt update && sudo apt upgrade --yes --no-install-recommends
 
 command -v git || sudo apt install git
 
