@@ -8,11 +8,11 @@ sudo apt update
 command -v git || sudo apt install git
 
 git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C ~/dotfiles pull
-sudo mv -fv ~/dotfiles/etc/default/grub /etc/default/grub
-mv -fv ~/dotfiles/home/.config/xfce4 ~/.config/xfce4
-mv -fv ~/dotfiles/home/.config/procps ~/.config/procps
-mv -fv ~/dotfiles/home/.themes ~/.themes
-mv -fv ~/dotfiles/home/.bashrc ~/.bashrc
+sudo cp -fv ~/dotfiles/etc/default/grub /etc/default/grub
+cp -fv ~/dotfiles/home/.config/xfce4 ~/.config/xfce4
+cp -fv ~/dotfiles/home/.config/procps ~/.config/procps
+cp -fv ~/dotfiles/home/.themes ~/.themes
+cp -fv ~/dotfiles/home/.bashrc ~/.bashrc
 
 source ~/.bashrc
 
