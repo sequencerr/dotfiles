@@ -95,7 +95,7 @@ wget --show-progress -qO ~/.local/bin/yt https://github.com/yt-dlp/yt-dlp/releas
 chmod +x ~/.local/bin/yt
 yt --version
 
-git clone --depth 1 https://github.com/nvm-sh/nvm.git "$HOME/.nvm"
+git clone --depth 1 https://github.com/nvm-sh/nvm.git "$HOME/.nvm" || git -C "$HOME/.nvm" pull
 # echo 'export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"' >> ~/.bashrc
 # source ~/.bashrc
