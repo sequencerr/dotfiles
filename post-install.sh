@@ -2,6 +2,16 @@
 set -e
 set -u
 
+command -v git || sudo apt install git
+
+git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C ~/dotfiles pull
+mv -fv ~/dotfiles/etc/apt/sources.list /etc/apt/sources.list
+mv -fv ~/dotfiles/etc/default/grub /etc/default/grub
+mv -fv ~/dotfiles/home/.config/xfce4 ~/.config/xfce4
+mv -fv ~/dotfiles/home/.config/procps ~/.config/procps
+mv -fv ~/dotfiles/home/.themes ~/.themes
+mv -fv ~/dotfiles/home/.bashrc ~/.bashrc
+
 sudo wget -qO /etc/apt/keyrings/docker.asc https://download.docker.com/linux/debian/gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
