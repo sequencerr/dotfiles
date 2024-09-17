@@ -48,7 +48,7 @@ backup /etc/issue
 backup /etc/update-motd.d
 
 modules_backup_dir="$BACKUP_DIR"/restore/nvm-global-modules
-[ -d "$modules_backup_dir" ] && rm "$modules_backup_dir"/* || mkdir -p "$modules_backup_dir"
+[ -d "$modules_backup_dir" ] || mkdir -p "$modules_backup_dir"
 node_modules () {
 for dir in $1; do
     declare -A set
