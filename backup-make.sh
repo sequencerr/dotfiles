@@ -42,6 +42,7 @@ backup /etc/default/grub
 backup /etc/grub.d/40_custom
 backup /etc/lightdm/lightdm.conf
 backup /etc/pulse/default.pa
+backup /etc/apt/sources.list
 
 backup /etc/motd
 backup /etc/issue
