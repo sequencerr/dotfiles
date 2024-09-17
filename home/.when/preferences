@@ -1,0 +1,6 @@
+calendar = /home/yrch/.when/calendar
+editor = vi
+future = 0 
+calendar_today_style = "fgblue,bgwhite,bold"
+neighboring_months = false
+ampm = false
