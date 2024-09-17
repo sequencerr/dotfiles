@@ -7,7 +7,7 @@ sudo apt update && sudo apt upgrade --yes --no-install-recommends
 
 command -v git || sudo apt install git
 
-git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C ~/dotfiles pull
+git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C ~/dotfiles pull || git -C ~/dotfiles reset --hard @{u}
 sudo cp -rfv ~/dotfiles/etc/default/grub /etc/default/grub
 sudo update-grub
 cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config/
@@ -93,7 +93,7 @@ wget --show-progress -qO ~/.local/bin/yt https://github.com/yt-dlp/yt-dlp/releas
 chmod +x ~/.local/bin/yt
 yt --version
 
-git clone --depth 1 https://github.com/nvm-sh/nvm.git "$HOME/.nvm" || git -C "$HOME/.nvm" pull
+git clone --depth 1 https://github.com/nvm-sh/nvm.git "$HOME/.nvm" || git -C "$HOME/.nvm" pull || git -C "$HOME/.nvm" reset --hard @{u}
 export NVM_DIR="$HOME/.nvm" && source "$NVM_DIR/nvm.sh"
 nvm install -b --latest-npm stable
 nvm install -b --latest-npm --lts=iron               # 20.x
