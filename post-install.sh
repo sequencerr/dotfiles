@@ -14,6 +14,7 @@ cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config/
 cp -rfv ~/dotfiles/home/.config/procps ~/.config/
 cp -rfv ~/dotfiles/home/.themes ~/
 cp -rfv ~/dotfiles/home/.bashrc ~/.bashrc
+time source ~/.bashrc
 
 sudo wget -qO /etc/apt/keyrings/docker.asc https://download.docker.com/linux/debian/gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
@@ -74,7 +75,7 @@ razergenie --version
 gh --version
 
 [ -d "$HOME/.local/bin" ] || mkdir -p "$HOME/.local/bin"
-time source ~/.bashrc
+export PATH="$HOME/.local/bin:$PATH"
 
 glab_release=$(wget -qO- https://gitlab.com/api/v4/projects/gitlab-org%2Fcli/releases | grep -Po 'tag_name":\s*"v?\K[^"]+' | head -n1)
 wget --show-progress -qO- "https://gitlab.com/gitlab-org/cli/-/releases/v$glab_release/downloads/glab_${glab_release}_Linux_x86_64.tar.gz" | tar -xzf - -C ~/.local/bin --strip-components=1 --transform s/glab/gl/
