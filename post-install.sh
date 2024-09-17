@@ -105,11 +105,11 @@ nvm current && nvm -v && node -v && npm -v
 [ -d "$HOME/.yarn/releases" ] || mkdir -p "$HOME/.yarn/releases"
 wget --show-progress -qO "$HOME/.yarn/releases/yarn" https://raw.githubusercontent.com/yarnpkg/berry/master/packages/yarnpkg-cli/bin/yarn.js
 chmod +x "~/.yarn/releases/yarn"
-ln -s ~/.yarn/releases/yarn ~/.local/bin/yarn
+ln -sfv ~/.yarn/releases/yarn ~/.local/bin/yarn
 yarn --version
 
 nvm exec 18 npm install -g pnpm
-ln -s "$(find "$NVM_DIR/versions/node" -maxdepth 1 -name "v18*" -print -quit)/bin/pnpm" ~/.local/bin/pnpm
+ln -sfv "$(find "$NVM_DIR/versions/node" -maxdepth 1 -name "v18*" -print -quit)/bin/pnpm" ~/.local/bin/pnpm
 pnpm --version
 
 wget --show-progress -qO- https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip | busybox unzip -ojqd ~/.local/bin -
@@ -129,7 +129,7 @@ wget --show-progress -qO- "https://services.gradle.org/distributions/gradle-$gra
 unset gradle_release
 mv ~/.local/share/gradle* ~/.local/share/gradle
 chmod +x ~/.local/share/gradle/bin/gradle
-ln -s ~/.local/share/gradle/bin/gradle ~/.local/bin/gradle
+ln -sfv ~/.local/share/gradle/bin/gradle ~/.local/bin/gradle
 gradle -v
 
 wget --show-progress -qO ~/.local/bin/composer https://getcomposer.org/download/latest-stable/composer.phar
@@ -137,7 +137,7 @@ chmod +x ~/.local/bin/composer
 composer --version
 
 # echo '[ -d /snap/bin ] && export PATH="/snap/bin:$PATH"' >> ~/.bashrc
-sudo ln -s /var/lib/snapd/desktop/applications /usr/share/applications/snapd
+sudo ln -sfv /var/lib/snapd/desktop/applications /usr/share/applications/snapd
 
 find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"accessibility.typeaheadfind.enablesound", true/"accessibility.typeaheadfind.enablesound", false/' {} \;
 find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"extensions.screenshots.disabled", false/"extensions.screenshots.disabled", true/' {} \;
