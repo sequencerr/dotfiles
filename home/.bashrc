@@ -59,4 +59,10 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
 
-alias bun="bun -c=\"${XDG_CONFIG_HOME:-$HOME/.config}/.bunfig.toml\""
+export XDG_CONFIG_HOME="${XDG_CACHE_HOME:-$HOME/.config}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_STATE_HOME="${XDG_DATA_HOME:-$HOME/.local/state}"
+export BUN_INSTALL_BIN="$HOME/.local/bin"
+export BUN_INSTALL_CACHE_DIR="$XDG_CACHE_HOME/bun"
+export BUN_INSTALL_GLOBAL_DIR="$XDG_DATA_HOME/bun"
