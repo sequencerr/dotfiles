@@ -119,7 +119,7 @@ fi
 chmod +x ~/.local/bin/composer
 composer --version
 
-echo '[ -d /snap/bin ] && export PATH="/snap/bin:$PATH"' >> ~/.bashrc
+# echo '[ -d /snap/bin ] && export PATH="/snap/bin:$PATH"' >> ~/.bashrc
 sudo ln -s /var/lib/snapd/desktop/applications /usr/share/applications/snapd
 
 find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"accessibility.typeaheadfind.enablesound", true/"accessibility.typeaheadfind.enablesound", false/' {} \;
