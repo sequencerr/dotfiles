@@ -65,14 +65,12 @@ nvm current && nvm -v && node -v && npm -v
 
 [ -d "$HOME/.yarn/releases" ] || mkdir -p "$HOME/.yarn/releases"
 wget --show-progress -qO "$HOME/.yarn/releases/yarn" https://raw.githubusercontent.com/yarnpkg/berry/master/packages/yarnpkg-cli/bin/yarn.js
-chmod +x "$HOME/.yarn/releases/yarn"
-echo '[ -d "$HOME/.yarn/releases" ] && export PATH="$HOME/.yarn/releases:$PATH"' >> ~/.bashrc
-source ~/.bashrc
+chmod +x "~/.yarn/releases/yarn"
+ln -s ~/.yarn/releases/yarn ~/.local/bin/yarn
 yarn --version
 
 nvm exec 18 npm install -g pnpm
-echo 'alias pnpm="$(find "$NVM_DIR/versions/node" -maxdepth 1 -name "v18*" -print -quit)/bin/pnpm"' >> ~/.bashrc
-source ~/.bashrc
+ln -s "$(find "$NVM_DIR/versions/node" -maxdepth 1 -name "v18*" -print -quit)/bin/pnpm" ~/.local/bin/pnpm
 pnpm --version
 
 wget --show-progress -qO- https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip | busybox unzip -ojqd ~/.local/bin -
