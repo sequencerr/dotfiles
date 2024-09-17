@@ -3,7 +3,7 @@
 <channel name="xfce4-appfinder" version="1.0">
   <property name="last" type="empty">
     <property name="window-height" type="int" value="400"/>
-    <property name="window-width" type="int" value="400"/>
+    <property name="window-width" type="int" value="472"/>
     <property name="pane-position" type="int" value="180"/>
   </property>
   <property name="actions" type="array">
@@ -45,4 +45,8 @@
   </property>
   <property name="always-center" type="bool" value="true"/>
   <property name="remember-category" type="bool" value="false"/>
+  <property name="sort-by-frecency" type="bool" value="true"/>
+  <property name="icon-view" type="bool" value="true"/>
+  <property name="text-beside-icons" type="bool" value="true"/>
+  <property name="enable-service" type="bool" value="true"/>
 </channel>
