@@ -126,7 +126,7 @@ bun --revision && SHELL=bash bun completions 2> /dev/null || true
 sudo apt install --yes --no-install-recommends \
     openjdk-17-jdk java-21-amazon-corretto-jdk
 sudo update-java-alternatives --set java-21-amazon-corretto
-echo $JAVA_HOME
+echo ${JAVA_HOME:-}
 jshell -q <<< 'System.out.println("\n\n" + System.getProperty("java.version"));'
 
 [ -d "$HOME/.local/share/maven" ] && /usr/bin/rm -rfv ~/.local/share/maven
