@@ -7,7 +7,7 @@
       <property name="Active" type="bool" value="true"/>
       <property name="EDID" type="string" value="f73c6523eebfd6e39448a052ec26ba4aa27e0c05"/>
       <property name="Resolution" type="string" value="2560x1440"/>
-      <property name="RefreshRate" type="double" value="59.950550105254798"/>
+      <property name="RefreshRate" type="double" value="143.91154496336333"/>
       <property name="Rotation" type="int" value="0"/>
       <property name="Reflection" type="string" value="0"/>
       <property name="Primary" type="bool" value="false"/>
@@ -43,7 +43,7 @@
       <property name="Active" type="bool" value="true"/>
       <property name="EDID" type="string" value="f73c6523eebfd6e39448a052ec26ba4aa27e0c05"/>
       <property name="Resolution" type="string" value="2560x1440"/>
-      <property name="RefreshRate" type="double" value="59.950550105254798"/>
+      <property name="RefreshRate" type="double" value="143.91154496336333"/>
       <property name="Rotation" type="int" value="0"/>
       <property name="Reflection" type="string" value="0"/>
       <property name="Primary" type="bool" value="false"/>
