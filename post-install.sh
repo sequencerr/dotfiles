@@ -149,6 +149,8 @@ fi
 unset gradle_release
 gradle --version
 
+sudo apt install --yes --no-install-recommends \
+    php php-curl php-dom php-xml
 wget --show-progress -qO ~/.local/bin/composer https://getcomposer.org/download/latest-stable/composer.phar
 chmod +x ~/.local/bin/composer
 composer --version
