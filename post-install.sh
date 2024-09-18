@@ -117,10 +117,10 @@ nvm exec 18 npm install -g pnpm
 ln -sfv "$(find "$NVM_DIR/versions/node" -maxdepth 1 -name "v18*" -print -quit)/bin/pnpm" ~/.local/bin/pnpm
 pnpm --version
 
-if ! command -v bun > /dev/null || ! bun --version 2> /dev/null | grep -q "$(wget -qO- https://api.github.com/repos/oven-sh/bun/releases/latest | grep -Po '^\s*"tag_name":\s"[^v]+v\K[^"]+')"; then
+if ! command -v bun > /dev/null || ! bun --version | grep -q "$(wget -qO- https://api.github.com/repos/oven-sh/bun/releases/latest | grep -Po '^\s*"tag_name":\s"[^v]+v\K[^"]+')"; then
     wget --show-progress -qO- https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip | busybox unzip -ojqd ~/.local/bin -
+    chmod +x ~/.local/bin/bun
 fi
-chmod +x ~/.local/bin/bun
 bun --revision && SHELL=bash bun completions 2> /dev/null || true
 
 sudo apt install --yes --no-install-recommends \
@@ -129,21 +129,25 @@ sudo update-java-alternatives --set java-21-amazon-corretto
 echo ${JAVA_HOME:-}
 jshell -q <<< 'System.out.println("\n\n" + System.getProperty("java.version"));'
 
-[ -d "$HOME/.local/share/maven" ] && /usr/bin/rm -rfv ~/.local/share/maven
-mkdir -pv ~/.local/share/maven
 maven_release=$(wget -qO- https://api.github.com/repos/apache/maven/releases/latest | grep -Po '"name":\s*"(maven-)?\K[^"]+')
-wget --show-progress -qO- "https://dlcdn.apache.org/maven/maven-$(echo $maven_release | cut -c1)/$maven_release/binaries/apache-maven-$maven_release-bin.tar.gz" | tar xzf - -C ~/.local/share/maven --strip-components=1
+if ! command -v mvn > /dev/null || ! mvn --version | head -1 | grep -q "$maven_release"; then
+    [ -d "$HOME/.local/share/maven" ] && /usr/bin/rm -rfv ~/.local/share/maven
+    mkdir -pv ~/.local/share/maven
+    wget --show-progress -qO- "https://dlcdn.apache.org/maven/maven-$(echo $maven_release | cut -c1)/$maven_release/binaries/apache-maven-$maven_release-bin.tar.gz" | tar xzf - -C ~/.local/share/maven --strip-components=1
+    ln -sfv ~/.local/share/maven/bin/mvn ~/.local/bin/mvn
+fi
 unset maven_release
-ln -sfv ~/.local/share/maven/bin/mvn ~/.local/bin/mvn
 mvn --version
 
 gradle_release=$(wget -qO- https://api.github.com/repos/gradle/gradle/releases/latest | grep -Po '"name":\s*"\K[^"]+')
-wget --show-progress -qO- "https://services.gradle.org/distributions/gradle-$gradle_release-bin.zip" | busybox unzip -oqd ~/.local/share -
+if ! command -v gradle > /dev/null || ! gradle --version | awk 'NR==3' | grep -q "$gradle_release"; then
+    wget --show-progress -qO- "https://services.gradle.org/distributions/gradle-$gradle_release-bin.zip" | busybox unzip -oqd ~/.local/share -
+    mv ~/.local/share/gradle* ~/.local/share/gradle
+    chmod +x ~/.local/share/gradle/bin/gradle
+    ln -sfv ~/.local/share/gradle/bin/gradle ~/.local/bin/gradle
+fi
 unset gradle_release
-mv ~/.local/share/gradle* ~/.local/share/gradle
-chmod +x ~/.local/share/gradle/bin/gradle
-ln -sfv ~/.local/share/gradle/bin/gradle ~/.local/bin/gradle
-gradle -v
+gradle --version
 
 wget --show-progress -qO ~/.local/bin/composer https://getcomposer.org/download/latest-stable/composer.phar
 chmod +x ~/.local/bin/composer
