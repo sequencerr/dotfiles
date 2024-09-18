@@ -144,6 +144,7 @@ find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"extensions.screenshots
 find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"ui.key.menuAccessKeyFocuses", true/"ui.key.menuAccessKeyFocuses", false/' {} \;
 find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"browser.quitShortcut.disabled", false/"browser.quitShortcut.disabled", true/' {} \;
 
+[ -d "$HOME/.local/share/fonts" ] || mkdir -p "$HOME/.local/share/fonts"
 wget --show-progress -qO- $(wget -qO- https://api.github.com/repos/microsoft/cascadia-code/releases/latest | grep -Po '^\s*"browser_download_url":\s*"\K[^"]+') | busybox unzip -oqd ~/.local/share/fonts/CascadiaCode -
 /usr/bin/rm -rv ~/.local/share/fonts/CascadiaCode/otf ~/.local/share/fonts/CascadiaCode/**/static ~/.local/share/fonts/CascadiaCode/**/*PL* ~/.local/share/fonts/CascadiaCode/**/*NF*
 fc-cache -v
