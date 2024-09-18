@@ -10,6 +10,7 @@ command -v git || sudo apt install git
 git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C ~/dotfiles pull || git -C ~/dotfiles reset --hard @{u}
 sudo cp -rfv ~/dotfiles/etc/default/grub /etc/default/grub
 sudo update-grub
+cp -rfv ~/dotfiles/home/.config/dconf/user ~/.config/user
 cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config/
 cp -rfv ~/dotfiles/home/.config/procps ~/.config/
 cp -rfv ~/dotfiles/home/.themes ~/
