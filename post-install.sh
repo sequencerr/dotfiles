@@ -117,7 +117,9 @@ nvm exec 18 npm install -g pnpm
 ln -sfv "$(find "$NVM_DIR/versions/node" -maxdepth 1 -name "v18*" -print -quit)/bin/pnpm" ~/.local/bin/pnpm
 pnpm --version
 
-wget --show-progress -qO- https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip | busybox unzip -ojqd ~/.local/bin -
+if ! command -v bun > /dev/null || ! bun --version 2> /dev/null | grep -q "$(wget -qO- https://api.github.com/repos/oven-sh/bun/releases/latest | grep -Po '^\s*"tag_name":\s"[^v]+v\K[^"]+')"; then
+    wget --show-progress -qO- https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip | busybox unzip -ojqd ~/.local/bin -
+fi
 chmod +x ~/.local/bin/bun
 bun --revision && SHELL=bash bun completions 2> /dev/null || true
 
