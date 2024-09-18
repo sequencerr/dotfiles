@@ -40,4 +40,27 @@
       <property name="Device_Enabled" type="int" value="1"/>
     </property>
   </property>
+  <property name="Razer_Razer_DeathAdder_Essential" type="empty">
+    <property name="RightHanded" type="bool" value="true"/>
+    <property name="Threshold" type="int" value="1"/>
+    <property name="Acceleration" type="double" value="0"/>
+    <property name="Properties" type="empty">
+      <property name="Device_Enabled" type="int" value="1"/>
+    </property>
+  </property>
+  <property name="SYNA32FB00_06CBCFC6_Mouse" type="empty">
+    <property name="Properties" type="empty">
+      <property name="Device_Enabled" type="int" value="0"/>
+    </property>
+  </property>
+  <property name="SYNA32FB00_06CBCFC6_Touchpad" type="empty">
+    <property name="Properties" type="empty">
+      <property name="Device_Enabled" type="int" value="1"/>
+      <property name="libinput_Tapping_Enabled" type="int" value="1"/>
+    </property>
+    <property name="RightHanded" type="bool" value="true"/>
+    <property name="Threshold" type="int" value="1"/>
+    <property name="Acceleration" type="double" value="4.2999999999999998"/>
+    <property name="ReverseScrolling" type="bool" value="true"/>
+  </property>
 </channel>
