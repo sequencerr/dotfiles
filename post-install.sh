@@ -49,6 +49,10 @@ sudo wget -qO /etc/apt/keyrings/hardware_razer.asc https://download.opensuse.org
 echo 'deb [signed-by=/etc/apt/keyrings/hardware_razer.asc] http://download.opensuse.org/repositories/hardware:/razer/Debian_12/ /' \
   | sudo tee /etc/apt/sources.list.d/hardware:razer.list > /dev/null
 
+sudo wget -qO /etc/apt/keyrings/corretto.asc https://apt.corretto.aws/corretto.key
+echo "deb [signed-by=/etc/apt/keyrings/corretto.asc] https://apt.corretto.aws stable main" \
+  | sudo tee /etc/apt/sources.list.d/corretto.list > /dev/null
+
 sudo wget -qO /etc/apt/keyrings/githubcli.gpg https://cli.github.com/packages/githubcli-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli.gpg] https://cli.github.com/packages stable main" \
   | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
@@ -116,6 +120,12 @@ pnpm --version
 wget --show-progress -qO- https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip | busybox unzip -ojqd ~/.local/bin -
 chmod +x ~/.local/bin/bun
 bun --revision && SHELL=bash bun completions 2> /dev/null || true
+
+sudo apt install --yes --no-install-recommends \
+    openjdk-17-jdk java-21-amazon-corretto-jdk
+sudo update-java-alternatives --set java-21-amazon-corretto
+echo $JAVA_HOME
+jshell -q <<< 'System.out.println("\n\n" + System.getProperty("java.version"));'
 
 [ -d "$HOME/.local/share/maven" ] && /usr/bin/rm -rfv ~/.local/share/maven
 mkdir -pv ~/.local/share/maven
