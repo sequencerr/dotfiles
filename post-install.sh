@@ -53,7 +53,7 @@ sudo wget -qO /etc/apt/keyrings/githubcli.gpg https://cli.github.com/packages/gi
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli.gpg] https://cli.github.com/packages stable main" \
   | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
 
-sudo apt upgrade
+sudo apt update
 sudo apt install --yes --no-install-recommends \
     docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
     code \
