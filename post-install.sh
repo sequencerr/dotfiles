@@ -39,8 +39,8 @@ sudo wget -qO /etc/apt/keyrings/corretto.asc https://apt.corretto.aws/corretto.k
 echo "deb [signed-by=/etc/apt/keyrings/corretto.asc] https://apt.corretto.aws stable main" \
   | sudo tee /etc/apt/sources.list.d/corretto.list > /dev/null
 
-sudo wget -qO /etc/apt/keyrings/githubcli.gpg https://cli.github.com/packages/githubcli-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli.gpg] https://cli.github.com/packages stable main" \
+sudo wget -qO /etc/apt/keyrings/githubcli.asc https://cli.github.com/packages/githubcli-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli.asc] https://cli.github.com/packages stable main" \
   | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
 
 sudo wget -qO /etc/apt/sources.list https://raw.githubusercontent.com/sequencerr/dotfiles/main/etc/apt/sources.list
