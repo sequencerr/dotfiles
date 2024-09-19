@@ -2,20 +2,6 @@
 set -e
 set -u
 
-sudo wget -qO /etc/apt/sources.list https://raw.githubusercontent.com/sequencerr/dotfiles/main/etc/apt/sources.list
-sudo apt update && sudo apt upgrade --yes --no-install-recommends
-
-command -v git || sudo apt install git
-
-git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C ~/dotfiles pull
-sudo cp -rfv ~/dotfiles/etc/default/grub /etc/default/grub
-sudo update-grub
-cp -rfv ~/dotfiles/home/.config/dconf/user ~/.config/user
-cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config/
-cp -rfv ~/dotfiles/home/.config/procps ~/.config/
-cp -rfv ~/dotfiles/home/.themes ~/
-cp -rfv ~/dotfiles/home/.bashrc ~/.bashrc
-
 sudo wget -qO /etc/apt/keyrings/docker.asc https://download.docker.com/linux/debian/gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
@@ -57,7 +43,10 @@ sudo wget -qO /etc/apt/keyrings/githubcli.gpg https://cli.github.com/packages/gi
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli.gpg] https://cli.github.com/packages stable main" \
   | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
 
+sudo wget -qO /etc/apt/sources.list https://raw.githubusercontent.com/sequencerr/dotfiles/main/etc/apt/sources.list
+
 sudo apt update
+sudo apt upgrade --yes --no-install-recommends
 sudo apt install --yes --no-install-recommends \
     docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
     code \
@@ -67,7 +56,9 @@ sudo apt install --yes --no-install-recommends \
     google-chrome-stable \
     waterfox-kde \
     razergenie \
-    gh
+    gh \
+    git
+
 sudo docker run --user $RANDOM:$RANDOM hello-world
 code --version
 codium --version
@@ -77,6 +68,15 @@ google-chrome-stable --version
 waterfox --version
 razergenie --version
 gh --version
+
+git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C ~/dotfiles pull
+sudo cp -rfv ~/dotfiles/etc/default/grub /etc/default/grub
+sudo update-grub
+cp -rfv ~/dotfiles/home/.config/dconf/user ~/.config/user
+cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config/
+cp -rfv ~/dotfiles/home/.config/procps ~/.config/
+cp -rfv ~/dotfiles/home/.themes ~/
+cp -rfv ~/dotfiles/home/.bashrc ~/.bashrc
 
 [ -d "$HOME/.local/bin" ] || mkdir -p "$HOME/.local/bin"
 export PATH="$HOME/.local/bin:$PATH"
