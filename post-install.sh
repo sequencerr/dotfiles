@@ -72,6 +72,7 @@ gh --version
 git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C ~/dotfiles pull
 sudo cp -rfv ~/dotfiles/etc/default/grub /etc/default/grub
 sudo update-grub
+cp -rfv ~/dotfiles/home/.mozilla/firefox/*/user.js ~/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini)
 cp -rfv ~/dotfiles/home/.config/dconf/user ~/.config/user
 cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config/
 cp -rfv ~/dotfiles/home/.config/procps ~/.config/
@@ -157,11 +158,6 @@ composer --version
 
 # echo '[ -d /snap/bin ] && export PATH="/snap/bin:$PATH"' >> ~/.bashrc
 sudo ln -sfv /var/lib/snapd/desktop/applications /usr/share/applications/snapd
-
-find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"accessibility.typeaheadfind.enablesound", true/"accessibility.typeaheadfind.enablesound", false/' {} \;
-find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"extensions.screenshots.disabled", false/"extensions.screenshots.disabled", true/' {} \;
-find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"ui.key.menuAccessKeyFocuses", true/"ui.key.menuAccessKeyFocuses", false/' {} \;
-find ~/.mozilla -type f -name 'prefs.js' -exec sed -i 's/"browser.quitShortcut.disabled", false/"browser.quitShortcut.disabled", true/' {} \;
 
 [ -d "$HOME/.local/share/fonts" ] || mkdir -p "$HOME/.local/share/fonts"
 wget --show-progress -qO- $(wget -qO- https://api.github.com/repos/microsoft/cascadia-code/releases/latest | grep -Po '^\s*"browser_download_url":\s*"\K[^"]+') | busybox unzip -oqd ~/.local/share/fonts/CascadiaCode -

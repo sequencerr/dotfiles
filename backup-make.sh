@@ -28,6 +28,7 @@ backup $HOME/.gnupg/gpg-agent.conf
 backup $HOME/.gnupg/gpg-wrapper-passphrase.sh
 backup $HOME/.themes
 backup $HOME/.when/preferences
+backup $HOME/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini)/user.js
 backup $HOME/.config/synapse/config.json
 backup $HOME/.config/lazydocker/config.yml
 backup $HOME/.config/procps/toprc
