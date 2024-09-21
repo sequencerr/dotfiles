@@ -69,7 +69,7 @@ export NVM_DIR="$HOME/.nvm"
     done
 
 alias forget=""
-alias rm='echo Consider using "trash"'
+alias rm='echo Consider using \"trash\"'
 alias trash='trash -v'
 alias trash-list="trash-list | awk '{print NR-1, \$0}' | sort -k2,3 | column -t | sed -E 's/\/home\/[^/]+/~/g'"
 alias ls='LC_ALL=C ls -CA --color=auto --group-directories-first'
