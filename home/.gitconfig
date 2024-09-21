@@ -12,7 +12,47 @@
 [pull]
 	ff = only
 [advice]
+	addEmbeddedRepo = false
+	addEmptyPathspec = false
+	addIgnoredFile = false
+	amWorkDir = false
+	ambiguousFetchRefspec = false
+	checkoutAmbiguousRemoteBranchName = false
+	commitBeforeMerge = false
+	detachedHead = false
 	diverging = false
+	fetchShowForcedUpdates = false
+	forceDeleteBranch = false
+	ignoredHook = false
+	implicitIdentity = false
+	mergeConflict = false
+	nestedTag = false
+	pushAlreadyExists = false
+	pushFetchFirst = false
+	pushNeedsForce = false
+	pushNonFFCurrent = false
+	pushNonFFMatching = false
+	pushRefNeedsUpdate = false
+	pushUnqualifiedRefname = false
+	pushUpdateRejected = false
+	rebaseTodoError = false
+	refSyntax = false
+	resetNoRefresh = false
+	resolveConflict = false
+	rmHints = false
+	sequencerInUse = false
+	skippedCherryPicks = false
+	sparseIndexExpanded = false
+	statusAheadBehind = false
+	statusHints = false
+	statusUoption = false
+	submoduleAlternateErrorStrategyDie = false
+	submoduleMergeConflict = false
+	submodulesNotUpdated = false
+	suggestDetachingHead = false
+	updateSparsePath = false
+	waitingForEditor = false
+	worktreeAddOrphan = false
 [tag]
 	gpgSign = true
 [commit]
