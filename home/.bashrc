@@ -65,7 +65,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -d /snap/bin ] && export PATH="/snap/bin:$PATH"
 [ -d "$(pwd)/node_modules/.bin" ] && \
     for cmd in $(ls "$(pwd)/node_modules/.bin"); do
-        alias $cmd="echo -e \"Using local: \\\"$(pwd)/node_modules/.bin/$cmd\\\" -> \\\"\$(readlink -f $(pwd)/node_modules/.bin/$cmd)\\\" \n\" && command $(pwd)/node_modules/.bin/$cmd";
+        alias $cmd="echo -e \"Using local: \\\"$(pwd)/node_modules/.bin/$cmd\\\" -> \\\"\$(readlink -f $(pwd)/node_modules/.bin/$cmd)\\\" \n\" && command $(readlink -f $(pwd)/node_modules/.bin/$cmd)";
     done
 
 alias forget=""
