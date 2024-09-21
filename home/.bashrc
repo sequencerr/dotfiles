@@ -61,7 +61,7 @@ export BUN_INSTALL_CACHE_DIR="$XDG_CACHE_HOME/bun"
 export BUN_INSTALL_GLOBAL_DIR="$XDG_DATA_HOME/bun"
 export DO_NOT_TRACK=1
 export NEXT_TELEMETRY_DISABLED=1
-export NVM_DIR="$HOME/.nvm"
+export NVM_DIR="$XDG_DATA_HOME/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
 [ -d "$XDG_CONFIG_HOME/composer/vendor/bin" ] && export PATH="$XDG_CONFIG_HOME/composer/vendor/bin:$PATH"

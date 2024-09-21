@@ -90,7 +90,7 @@ chmod +x ~/.local/bin/yt
 yt --version
 
 git clone --depth 1 https://github.com/nvm-sh/nvm.git ~/.nvm || git -C ~/.nvm pull
-export NVM_DIR="$HOME/.nvm" && source "$NVM_DIR/nvm.sh"
+export NVM_DIR="$HOME/.local/share/nvm" && source "$NVM_DIR/nvm.sh"
 nvm install -b --latest-npm stable
 nvm install -b --latest-npm --lts=iron               # 20.x
 nvm install -b --latest-npm --lts=hydrogen --default # 18.x
