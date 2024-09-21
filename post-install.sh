@@ -69,16 +69,6 @@ waterfox --version
 razergenie --version
 gh --version
 
-git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C ~/dotfiles pull
-sudo cp -rfv ~/dotfiles/etc/default/grub /etc/default/grub
-sudo update-grub
-cp -rfv ~/dotfiles/home/.mozilla/firefox/*/user.js ~/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini)
-cp -rfv ~/dotfiles/home/.config/dconf/user ~/.config/user
-cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config/
-cp -rfv ~/dotfiles/home/.config/procps ~/.config/
-cp -rfv ~/dotfiles/home/.themes ~/
-cp -rfv ~/dotfiles/home/.bashrc ~/.bashrc
-
 [ -d "$HOME/.local/bin" ] || mkdir -p "$HOME/.local/bin"
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -163,5 +153,15 @@ sudo ln -sfv /var/lib/snapd/desktop/applications /usr/share/applications/snapd
 wget --show-progress -qO- $(wget -qO- https://api.github.com/repos/microsoft/cascadia-code/releases/latest | grep -Po '^\s*"browser_download_url":\s*"\K[^"]+') | busybox unzip -oqd ~/.local/share/fonts/CascadiaCode -
 /usr/bin/rm -rv ~/.local/share/fonts/CascadiaCode/otf ~/.local/share/fonts/CascadiaCode/**/static ~/.local/share/fonts/CascadiaCode/**/*PL* ~/.local/share/fonts/CascadiaCode/**/*NF*
 fc-cache -v
+
+git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C ~/dotfiles pull
+cp -rfv ~/dotfiles/home/.mozilla/firefox/*/user.js ~/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini)
+cp -rfv ~/dotfiles/home/.config/dconf/user ~/.config/user
+cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config/
+cp -rfv ~/dotfiles/home/.config/procps ~/.config/
+cp -rfv ~/dotfiles/home/.themes ~/
+cp -rfv ~/dotfiles/home/.bashrc ~/.bashrc
+sudo cp -rfv ~/dotfiles/etc/default/grub /etc/default/grub
+sudo update-grub
 
 echo -e '\nExecute: "xfce4-session-logout -r"'
