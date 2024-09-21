@@ -34,6 +34,7 @@ backup $HOME/.config/procps/toprc
 backup $HOME/.config/dconf/user
 backup $HOME/.config/xfce4/terminal/terminalrc
 backup $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
+backup $HOME/.config/npm/npmrc
 backup $HOME/.config/Code/User/settings.json
 backup $HOME/.config/Code/User/keybindings.json
 backup $HOME/.config/Code/User/snippets
