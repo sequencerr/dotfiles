@@ -1,0 +1,190 @@
+{
+	"con": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "con",
+		"body": ["constructor ($2) {$1};"]
+	},
+	"importModule": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "imp",
+		// "body": ["import ${2:name} from '${1:${CLIPBOARD}}';"]
+		"body": ["import ${2:name} from '${1:module}';"]
+	},
+	"importNamedModule": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "imd",
+		// "body": ["import { ${2:name} } from '${1:${CLIPBOARD}}';"]
+		"body": ["import { ${2:name} } from '${1:module}';"]
+	},
+	"promise": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "pro",
+		"body": [
+			//
+			"${1:await }new Promise(${2:async }(resolve, reject) => {",
+			"\t$3",
+			"})"
+		]
+	},
+	"stop": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "st",
+		"body": ["await new Promise(() => {});"]
+		// "body": ["while (1);"]
+	},
+	// "constant": {
+	// 	"scope": "javascript,javascriptreact,typescript,typescriptreact",
+	// 	"prefix": "cnt",
+	// 	"body": ["const ${2:name} = ${1:${CLIPBOARD}};"]
+	// },
+	// "constantWithType": {
+	// 	"scope": "typescript,typescriptreact",
+	// 	"prefix": "cntt",
+	// 	"body": ["const ${3:name}: $2 = ${1:${CLIPBOARD}};"]
+	// },
+	// "let": {
+	// 	"scope": "javascript,javascriptreact,typescript,typescriptreact",
+	// 	"prefix": "lt",
+	// 	"body": ["let ${2:name} = ${1:${CLIPBOARD}};"]
+	// },
+	// "letWithType": {
+	// 	"scope": "typescript,typescriptreact",
+	// 	"prefix": "lett",
+	// 	"body": ["let ${3:name}: $2 = ${1:${CLIPBOARD}};"]
+	// },
+	"destructObject": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "dbo",
+		"body": ["const { $2 } = ${1:{\\}};"]
+	},
+	"destructArray": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "dba",
+		"body": ["const [$2] = ${1:{\\}};"]
+	},
+	// "keyInObject": {
+	// 	"scope": "javascript,javascriptreact,typescript,typescriptreact",
+	// 	"prefix": "kin",
+	// 	"body": ["'$2' in $1"]
+	// },
+	"asyncImmediatelyInvokedFunctionExpression": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "iifea",
+		"body": [";(async ($1) => {", "\t${2:$TM_SELECTED_TEXT}", "})();"]
+	},
+	// "immediatelyInvokedFunctionExpression": {
+	// 	"scope": "javascript,javascriptreact,typescript,typescriptreact",
+	// 	"prefix": "iifeb",
+	// 	"body": [";(($1) => {", "\t$2", "})();"]
+	// },
+	"typeofComparison": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "tpof",
+		"body": "typeof ${1:${CLIPBOARD}} == '$2'"
+	},
+	// "componetnt'sProps": {
+	// 	"scope": "javascriptreact,typescriptreact",
+	// 	"prefix": "cp",
+	// 	"body": ["const { $1 } = this.props;"]
+	// },
+	// "componetnt'sState": {
+	// 	"scope": "javascriptreact,typescriptreact",
+	// 	"prefix": "cs",
+	// 	"body": ["const { $1 } = this.state;"]
+	// },
+	"deb": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "cld",
+		"body": "console.debug(${1:$TM_SELECTED_TEXT})"
+	},
+	"log": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "clg",
+		"body": "console.log(${1:$TM_SELECTED_TEXT})"
+	},
+	"err": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "err",
+		"body": "console.error(${1:$TM_SELECTED_TEXT})"
+	},
+	"function": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "fu",
+		"body": [
+			//
+			"function ${1:name}() {",
+			"\t$TM_SELECTED_TEXT$2",
+			"}"
+		]
+		// "body": ["function ${1:name}() {", "\t${3://}", "}"]
+		// "body": ["function ${3:name}($2) {", "\t${1:$TM_SELECTED_TEXT};", "}"]
+	},
+	"async function": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "af",
+		"body": [
+			//
+			"async function ${3:name}($2) {",
+			"\t${1:$TM_SELECTED_TEXT};",
+			"\treturn $4;",
+			"}"
+		]
+	},
+	"arrow () => {}": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "arr",
+		"body": ["() => {", "\t$1", "}"]
+	},
+	"try-catch": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "tr",
+		"body": [
+			//
+			"try {",
+			"\t${2:$TM_SELECTED_TEXT}",
+			"} catch (e) {",
+			"\t${1:console.error(e)}",
+			"}"
+		]
+	},
+	"measure": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "ms",
+		"body": [
+			//
+			"console.time('${1:measure}')",
+			"$TM_SELECTED_TEXT",
+			"console.timeEnd('${1:measure}')"
+		]
+	},
+	"for loop": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "frr",
+		"body": ["for (let i = 0; i != ${1:list}.length; ++i)", "\t${2:$TM_SELECTED_TEXT}"]
+	},
+	"for..of": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "fof",
+		"body": ["for (const ${3:element} of ${1:list})", "\t${2:$TM_SELECTED_TEXT}"]
+	},
+	// "for..in": {
+	// 	"scope": "javascript,javascriptreact,typescript,typescriptreact",
+	// 	"prefix": "fin",
+	// 	"body": ["for (const ${3:key} in ${2:list}) {", "\t${1:$TM_SELECTED_TEXT}", "}"]
+	// },
+	"currentFileFilename": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "fn",
+		"body": "$TM_FILENAME_BASE"
+	},
+	"currentFileDirectory": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "fnd",
+		"body": "./${RELATIVE_FILEPATH/[\\/\\\\]/\\//g}"
+	},
+	"currentFileFilenameWithExtension": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "fne",
+		"body": "$TM_FILENAME"
+	}
+}
