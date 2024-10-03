@@ -38,7 +38,7 @@ backup $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
 backup $HOME/.config/npm/npmrc
 backup $HOME/.config/Code/User/settings.json
 backup $HOME/.config/Code/User/keybindings.json
-backup $HOME/.config/Code/User/snippets
+backup $HOME/.config/Code/User/snippets/global-snippets.code-snippets
 backup $HOME/.vscode/argv.json
 
 backup /etc/udev/rules.d/51-android.rules
