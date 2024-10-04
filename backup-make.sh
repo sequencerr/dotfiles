@@ -49,6 +49,8 @@ backup /etc/default/grub
 backup /etc/grub.d/40_custom
 backup /etc/lightdm/lightdm.conf
 backup /etc/pulse/default.pa
+backup /etc/systemd/logind.conf
+backup /etc/UPower/UPower.conf
 backup /etc/apt/sources.list
 
 backup /etc/motd
