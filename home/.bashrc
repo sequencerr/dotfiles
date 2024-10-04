@@ -87,3 +87,46 @@ if command -v zoxide > /dev/null; then
     alias cd='z'
     eval "$(zoxide init bash)"
 fi
+
+apt() {
+    if [[ $1 == 'install' ]]; then
+        sudo apt install --yes --no-install-recommends --auto-remove "${@:2}"
+    else
+        sudo apt "$@"
+    fi
+}
+
+docker() {
+  if [[ $1 == "dive" ]]; then
+    if [ -z "$2" ]; then
+      if command -v fzf &> /dev/null; then
+        IMAGES=$(sudo docker images --format "{{.Repository}}:{{.Tag}} {{.ID}} {{.CreatedSince}} {{.Size}}")
+        IMAGE=$(echo "$IMAGES" | fzf --prompt="Select an image (repository:tag): " --height=15 --ansi)
+        if [ -n "$IMAGE" ]; then
+          IMAGE_ID=$(echo "$IMAGE" | awk '{print $2}')
+          sudo docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive "$IMAGE_ID"
+        else
+          echo "No image selected."
+        fi
+      else
+        echo "Available Docker images:"
+        IMAGES=$(sudo docker images --format '{{.Repository}}:{{.Tag}}')
+        select IMAGE in $IMAGES; do
+          if [ -n "$IMAGE" ]; then
+            IMAGE_ID=$(echo "$IMAGE" | awk '{print $2}')
+            sudo docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive "$IMAGE_ID"
+            break
+          else
+            echo "Invalid selection. Please try again."
+          fi
+        done
+      fi
+    else
+      sudo docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive "$2"
+    fi
+  elif [[ $1 == "monitor" ]]; then
+    sudo docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock -v ~/.config/lazydocker:/.config/jesseduffield/lazydocker lazyteam/lazydocker
+  else
+    sudo docker "$@"
+  fi
+}
