@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Redshift
+Comment=Start Redshift at login
+Exec=sh -c 'sleep 2 && redshift -O 3400'
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+RunHook=0
+
