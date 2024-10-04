@@ -48,6 +48,7 @@ sudo wget -qO /etc/apt/sources.list https://raw.githubusercontent.com/sequencerr
 sudo apt update
 sudo apt upgrade --yes --no-install-recommends
 sudo apt install --yes --no-install-recommends \
+    nvidia-driver firmware-misc-nonfree \
     docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
     code \
     codium \
