@@ -34,6 +34,7 @@ backup $HOME/.config/lazydocker/config.yml
 backup $HOME/.config/procps/toprc
 backup $HOME/.config/dconf/user
 backup $HOME/.config/autostart
+backup $HOME/.config/Thunar/uca.xml
 backup $HOME/.config/xfce4/terminal/terminalrc
 backup $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
 backup $HOME/.config/npm/npmrc
