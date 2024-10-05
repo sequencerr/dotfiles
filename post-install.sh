@@ -34,6 +34,10 @@ sudo wget -qO /etc/apt/keyrings/hardware_razer.asc https://download.opensuse.org
 echo 'deb [signed-by=/etc/apt/keyrings/hardware_razer.asc] http://download.opensuse.org/repositories/hardware:/razer/Debian_12/ /' \
   | sudo tee /etc/apt/sources.list.d/hardware:razer.list > /dev/null
 
+sudo wget -qO /etc/apt/keyrings/coolercontrol.asc https://dl.cloudsmith.io/public/coolercontrol/coolercontrol/gpg.668189E5007F5A8D.key &
+echo 'deb [signed-by=/etc/apt/keyrings/coolercontrol.asc] https://dl.cloudsmith.io/public/coolercontrol/coolercontrol/deb/debian bookworm main' \
+  | sudo tee /etc/apt/sources.list.d/coolercontrol.list > /dev/null
+
 sudo wget -qO /etc/apt/keyrings/corretto.asc https://apt.corretto.aws/corretto.key &
 echo "deb [signed-by=/etc/apt/keyrings/corretto.asc] https://apt.corretto.aws stable main" \
   | sudo tee /etc/apt/sources.list.d/corretto.list > /dev/null
@@ -58,10 +62,13 @@ sudo apt install --yes --no-install-recommends \
     google-chrome-stable \
     waterfox-kde \
     razergenie \
+    coolercontrol \
     gh \
     git
 
 sudo dpkg-reconfigure nvidia-kernel-dkms
+
+sudo systemctl enable --now coolercontrold
 
 sudo docker run --user $RANDOM:$RANDOM hello-world
 code --version
@@ -71,6 +78,7 @@ dbeaver-ce --version
 google-chrome-stable --version
 waterfox --version
 razergenie --version
+coolercontrol --version
 gh --version
 
 [ -d "$HOME/.local/bin" ] || mkdir -p "$HOME/.local/bin"
