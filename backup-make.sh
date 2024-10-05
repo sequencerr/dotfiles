@@ -46,6 +46,7 @@ backup $XDG_DATA_HOME/themes
 cp -rfvxL $HOME/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini)/user.js $BACKUP_DIR/home/.mozilla/firefox/profile
 
 backup /etc/fstab
+backup /etc/default/console-setup
 backup /etc/default/grub
 backup /etc/grub.d/40_custom
 backup /etc/lightdm/lightdm.conf
