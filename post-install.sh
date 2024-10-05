@@ -54,6 +54,7 @@ sudo apt update
 sudo apt upgrade --yes --no-install-recommends
 sudo apt install --yes --no-install-recommends \
     nvidia-driver firmware-misc-nonfree linux-headers-$(uname -r) \
+    flatpak \
     docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
     code \
     codium \
@@ -67,9 +68,10 @@ sudo apt install --yes --no-install-recommends \
     git
 
 sudo dpkg-reconfigure nvidia-kernel-dkms
-
+flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 sudo systemctl enable --now coolercontrold
 
+flatpak --version
 sudo docker run --user $RANDOM:$RANDOM hello-world
 code --version
 codium --version
