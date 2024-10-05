@@ -26,7 +26,7 @@ backup $HOME/.ssh/config
 backup $HOME/.gnupg/gpg.conf
 backup $HOME/.gnupg/gpg-agent.conf
 backup $HOME/.gnupg/gpg-wrapper-passphrase.sh
-backup $HOME/.themes
+backup $HOME/.local/share/themes
 backup $HOME/.when/preferences
 backup $HOME/.config/synapse/config.json
 backup $HOME/.config/lazydocker/config.yml
