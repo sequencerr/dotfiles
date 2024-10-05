@@ -26,21 +26,21 @@ backup $HOME/.ssh/config
 backup $HOME/.gnupg/gpg.conf
 backup $HOME/.gnupg/gpg-agent.conf
 backup $HOME/.gnupg/gpg-wrapper-passphrase.sh
-backup $HOME/.local/share/themes
 backup $HOME/.when/preferences
-backup $HOME/.config/synapse/config.json
-backup $HOME/.config/lazydocker/config.yml
-backup $HOME/.config/procps/toprc
-backup $HOME/.config/dconf/user
-backup $HOME/.config/autostart
-backup $HOME/.config/Thunar/uca.xml
-backup $HOME/.config/xfce4/terminal/terminalrc
-backup $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
-backup $HOME/.config/npm/npmrc
-backup $HOME/.config/Code/User/settings.json
-backup $HOME/.config/Code/User/keybindings.json
-backup $HOME/.config/Code/User/snippets
 backup $HOME/.vscode/argv.json
+backup $XDG_CONFIG_HOME/Code/User/settings.json
+backup $XDG_CONFIG_HOME/Code/User/keybindings.json
+backup $XDG_CONFIG_HOME/Code/User/snippets
+backup $XDG_CONFIG_HOME/synapse/config.json
+backup $XDG_CONFIG_HOME/lazydocker/config.yml
+backup $XDG_CONFIG_HOME/procps/toprc
+backup $XDG_CONFIG_HOME/dconf/user
+backup $XDG_CONFIG_HOME/autostart
+backup $XDG_CONFIG_HOME/npm/npmrc
+backup $XDG_CONFIG_HOME/Thunar/uca.xml
+backup $XDG_CONFIG_HOME/xfce4/terminal/terminalrc
+backup $XDG_CONFIG_HOME/xfce4/xfconf/xfce-perchannel-xml
+backup $XDG_DATA_HOME/themes
 
 [ -d $BACKUP_DIR/home/.mozilla/firefox/profile ] || mkdir -p $BACKUP_DIR/home/.mozilla/firefox/profile
 cp -rfvxL $HOME/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini)/user.js $BACKUP_DIR/home/.mozilla/firefox/profile
