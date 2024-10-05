@@ -169,6 +169,8 @@ cp -rfv ~/dotfiles/home/.config/autostart ~/.config/
 cp -rfv ~/dotfiles/home/.config/procps ~/.config/
 cp -rfv ~/dotfiles/home/.local/share/themes/ ~/.local/share/
 cp -rfv ~/dotfiles/home/.bashrc ~/.bashrc
+sudo cp -rfv ~/dotfiles/etc/default/console-setup /etc/default/console-setup
+sudo update-initramfs -u
 sudo cp -rfv ~/dotfiles/etc/default/grub /etc/default/grub
 sudo update-grub
 
