@@ -91,6 +91,26 @@ fi
 unset glab_release
 gl --version
 
+wget --show-progress -qO- https://github.com/mgdm/htmlq/releases/latest/download/htmlq-x86_64-linux.tar.gz | tar xzf - -C ~/.local/bin --transform s/htmlq/qh/
+chmod +x ~/.local/bin/qh
+qh --version
+
+vmwarews_version=$(wget -qO- https://softwareupdate.vmware.com/cds/vmw-desktop/ws | qh --text a | tail +2 | sort -h | tail -1)
+vmwarews_release=$(wget -qO- "https://softwareupdate.vmware.com/cds/vmw-desktop/ws/$vmwarews_version" | qh --text a | tail -1)
+vmwarews_url=$(wget -qO- "https://softwareupdate.vmware.com/cds/vmw-desktop/ws/$vmwarews_version/$vmwarews_release/linux/core/" | qh --text a | tail -2 | head -1)
+wget --show-progress -qO- "https://softwareupdate.vmware.com/cds/vmw-desktop/ws/$vmwarews_version/$vmwarews_release/linux/core/$vmwarews_url" | tar -xf - -C ~/Downloads
+unset vmwarews_*
+chmod +x ~/Downloads/VMware-Workstation-*.bundle
+sudo ~/Downloads/VMware-Workstation-*.bundle
+/usr/bin/rm ~/Downloads/descriptor.xml ~/Downloads/VMware-Workstation-*.bundle
+vmware --version
+
+git clone --depth 1 -b 17.6 https://github.com/bytium/vm-host-modules.git ~/Downloads/vm-host-modules
+(cd ~/Downloads/vm-host-modules
+make
+sudo make install)
+/usr/bin/rm -rf ~/Downloads/vm-host-modules
+
 zoxide_release=$(wget -qO- https://api.github.com/repos/ajeetdsouza/zoxide/releases/latest | grep -Po '^\s\s"name":\s"\K[^"]+')
 wget --show-progress -qO- "https://github.com/ajeetdsouza/zoxide/releases/latest/download/zoxide-$zoxide_release-x86_64-unknown-linux-musl.tar.gz" | tar xzf - -C ~/.local/bin zoxide
 unset zoxide_release
