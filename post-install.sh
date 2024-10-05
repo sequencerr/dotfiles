@@ -168,7 +168,7 @@ cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config/
 cp -rfv ~/dotfiles/home/.config/Thunar/uca.xml ~/.config/Thunar/uca.xml
 cp -rfv ~/dotfiles/home/.config/autostart ~/.config/
 cp -rfv ~/dotfiles/home/.config/procps ~/.config/
-cp -rfv ~/dotfiles/home/.themes ~/
+cp -rfv ~/dotfiles/home/.local/share/themes/ ~/.local/share/
 cp -rfv ~/dotfiles/home/.bashrc ~/.bashrc
 sudo cp -rfv ~/dotfiles/etc/default/grub /etc/default/grub
 sudo update-grub
