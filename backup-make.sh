@@ -28,7 +28,6 @@ backup $HOME/.gnupg/gpg-agent.conf
 backup $HOME/.gnupg/gpg-wrapper-passphrase.sh
 backup $HOME/.themes
 backup $HOME/.when/preferences
-backup $HOME/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini)/user.js
 backup $HOME/.config/synapse/config.json
 backup $HOME/.config/lazydocker/config.yml
 backup $HOME/.config/procps/toprc
@@ -42,6 +41,9 @@ backup $HOME/.config/Code/User/settings.json
 backup $HOME/.config/Code/User/keybindings.json
 backup $HOME/.config/Code/User/snippets
 backup $HOME/.vscode/argv.json
+
+[ -d $BACKUP_DIR/home/.mozilla/firefox/profile ] || mkdir -p $BACKUP_DIR/home/.mozilla/firefox/profile
+cp -rfvxL $HOME/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini)/user.js $BACKUP_DIR/home/.mozilla/firefox/profile
 
 backup /etc/fstab
 backup /etc/default/grub
