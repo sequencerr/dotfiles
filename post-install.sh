@@ -63,6 +63,7 @@ sudo apt install --yes --no-install-recommends \
 
 sudo dpkg-reconfigure nvidia-kernel-dkms
 
+nvidia-smi
 sudo docker run --user $RANDOM:$RANDOM hello-world
 code --version
 codium --version
