@@ -71,6 +71,7 @@ sudo dpkg-reconfigure nvidia-kernel-dkms
 flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 sudo systemctl enable --now coolercontrold
 
+nvidia-smi
 flatpak --version
 sudo docker run --user $RANDOM:$RANDOM hello-world
 code --version
