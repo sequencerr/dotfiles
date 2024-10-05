@@ -155,7 +155,7 @@ composer --version
 sudo ln -sfv /var/lib/snapd/desktop/applications /usr/share/applications/snapd
 
 [ -d "$HOME/.local/share/fonts" ] || mkdir -p "$HOME/.local/share/fonts"
-if ! [ -d "$HOME/.local/share/fonts/CascadiaCode" ]; then
+if ! fc-list | grep -q CascadiaCode; then
     wget --show-progress -qO- $(wget -qO- https://api.github.com/repos/microsoft/cascadia-code/releases/latest | grep -Po '^\s*"browser_download_url":\s*"\K[^"]+') | busybox unzip -oqd ~/.local/share/fonts/CascadiaCode -
     /usr/bin/rm -rv ~/.local/share/fonts/CascadiaCode/otf ~/.local/share/fonts/CascadiaCode/**/static ~/.local/share/fonts/CascadiaCode/**/*PL* ~/.local/share/fonts/CascadiaCode/**/*NF*
 fi
