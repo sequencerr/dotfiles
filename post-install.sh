@@ -49,7 +49,7 @@ wait
 sudo apt update
 sudo apt upgrade --yes --no-install-recommends
 sudo apt install --yes --no-install-recommends \
-    nvidia-driver firmware-misc-nonfree \
+    nvidia-driver firmware-misc-nonfree linux-headers-$(uname -r) \
     docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
     code \
     codium \
@@ -60,6 +60,8 @@ sudo apt install --yes --no-install-recommends \
     razergenie \
     gh \
     git
+
+sudo dpkg-reconfigure nvidia-kernel-dkms
 
 sudo docker run --user $RANDOM:$RANDOM hello-world
 code --version
