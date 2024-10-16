@@ -168,10 +168,10 @@ git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C 
 cp -rfv ~/dotfiles/home/.mozilla/firefox/*/user.js ~/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini)
 cp -rfv ~/dotfiles/home/.config/dconf/user ~/.config/user
 cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config/
-cp -rfv ~/dotfiles/home/.config/Thunar/uca.xml ~/.config/Thunar/uca.xml
+cp -rfv ~/dotfiles/home/.config/Thunar ~/.config/
 cp -rfv ~/dotfiles/home/.config/autostart ~/.config/
 cp -rfv ~/dotfiles/home/.config/procps ~/.config/
-cp -rfv ~/dotfiles/home/.local/share/themes/ ~/.local/share/
+cp -rfv ~/dotfiles/home/.local/share/themes ~/.local/share/
 cp -rfv ~/dotfiles/home/.bashrc ~/.bashrc
 sudo cp -rfv ~/dotfiles/etc/default/console-setup /etc/default/console-setup
 sudo update-initramfs -u

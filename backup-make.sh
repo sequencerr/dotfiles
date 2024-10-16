@@ -37,7 +37,7 @@ backup $XDG_CONFIG_HOME/procps/toprc
 backup $XDG_CONFIG_HOME/dconf/user
 backup $XDG_CONFIG_HOME/autostart
 backup $XDG_CONFIG_HOME/npm/npmrc
-backup $XDG_CONFIG_HOME/Thunar/uca.xml
+backup $XDG_CONFIG_HOME/Thunar
 backup $XDG_CONFIG_HOME/xfce4/terminal/terminalrc
 backup $XDG_CONFIG_HOME/xfce4/xfconf/xfce-perchannel-xml
 backup $XDG_DATA_HOME/themes
