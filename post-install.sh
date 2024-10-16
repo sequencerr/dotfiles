@@ -74,6 +74,21 @@ waterfox --version
 razergenie --version
 gh --version
 
+git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C ~/dotfiles pull
+cp -rfv ~/dotfiles/home/.mozilla/firefox/*/user.js ~/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini)
+cp -rfv ~/dotfiles/home/.config/dconf/user ~/.config/user
+cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config/
+cp -rfv ~/dotfiles/home/.config/Thunar ~/.config/
+cp -rfv ~/dotfiles/home/.config/autostart ~/.config/
+cp -rfv ~/dotfiles/home/.config/procps ~/.config/
+cp -rfv ~/dotfiles/home/.config/npm ~/.config/
+cp -rfv ~/dotfiles/home/.local/share/themes ~/.local/share/
+cp -rfv ~/dotfiles/home/.bashrc ~/.bashrc
+sudo cp -rfv ~/dotfiles/etc/default/console-setup /etc/default/console-setup
+sudo update-initramfs -u
+sudo cp -rfv ~/dotfiles/etc/default/grub /etc/default/grub
+sudo update-grub
+
 [ -d "$HOME/.local/bin" ] || mkdir -p "$HOME/.local/bin"
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -94,6 +109,7 @@ wget --show-progress -qO ~/.local/bin/yt https://github.com/yt-dlp/yt-dlp/releas
 chmod +x ~/.local/bin/yt
 yt --version
 
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 git clone --depth 1 https://github.com/nvm-sh/nvm.git ~/.local/share/nvm || git -C ~/.local/share/nvm pull
 export NVM_DIR="$HOME/.local/share/nvm" && source "$NVM_DIR/nvm.sh"
 nvm install -b --latest-npm stable
@@ -123,12 +139,14 @@ if ! command -v bun > /dev/null || ! bun --version | grep -q "$(wget -qO- https:
 fi
 bun --revision && SHELL=bash bun completions 2> /dev/null || true
 
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME/java"
 sudo apt install --yes --no-install-recommends \
     openjdk-17-jdk java-21-amazon-corretto-jdk
 sudo update-java-alternatives --set java-21-amazon-corretto
 echo ${JAVA_HOME:-}
 jshell -q <<< 'System.out.println("\n\n" + System.getProperty("java.version"));'
 
+export MAVEN_OPTS=-Dmaven.repo.local="$XDG_CACHE_HOME/maven/repository"
 maven_release=$(wget -qO- https://api.github.com/repos/apache/maven/releases/latest | grep -Po '"name":\s*"(maven-)?\K[^"]+')
 if ! command -v mvn > /dev/null || ! mvn --version | head -1 | grep -q "$maven_release"; then
     [ -d "$HOME/.local/share/maven" ] && /usr/bin/rm -rfv ~/.local/share/maven
@@ -139,6 +157,7 @@ fi
 unset maven_release
 mvn --version
 
+export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 gradle_release=$(wget -qO- https://api.github.com/repos/gradle/gradle/releases/latest | grep -Po '"name":\s*"\K[^"]+')
 if ! command -v gradle > /dev/null || ! gradle --version | awk 'NR==3' | grep -q "$gradle_release"; then
     wget --show-progress -qO- "https://services.gradle.org/distributions/gradle-$gradle_release-bin.zip" | busybox unzip -oqd ~/.local/share -
@@ -164,19 +183,5 @@ if ! fc-list | grep -q CascadiaCode; then
     /usr/bin/rm -rv ~/.local/share/fonts/CascadiaCode/otf ~/.local/share/fonts/CascadiaCode/**/static ~/.local/share/fonts/CascadiaCode/**/*PL* ~/.local/share/fonts/CascadiaCode/**/*NF*
 fi
 fc-cache -v
-
-git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C ~/dotfiles pull
-cp -rfv ~/dotfiles/home/.mozilla/firefox/*/user.js ~/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini)
-cp -rfv ~/dotfiles/home/.config/dconf/user ~/.config/user
-cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config/
-cp -rfv ~/dotfiles/home/.config/Thunar ~/.config/
-cp -rfv ~/dotfiles/home/.config/autostart ~/.config/
-cp -rfv ~/dotfiles/home/.config/procps ~/.config/
-cp -rfv ~/dotfiles/home/.local/share/themes ~/.local/share/
-cp -rfv ~/dotfiles/home/.bashrc ~/.bashrc
-sudo cp -rfv ~/dotfiles/etc/default/console-setup /etc/default/console-setup
-sudo update-initramfs -u
-sudo cp -rfv ~/dotfiles/etc/default/grub /etc/default/grub
-sudo update-grub
 
 echo -e '\nExecute: "xfce4-session-logout -r"'
