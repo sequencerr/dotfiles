@@ -49,7 +49,7 @@ wait
 sudo apt update
 sudo apt upgrade --yes --no-install-recommends
 sudo apt install --yes --no-install-recommends \
-    nvidia-driver firmware-misc-nonfree linux-headers-$(uname -r) \
+    nvidia-driver nvidia-smi firmware-misc-nonfree linux-headers-$(uname -r) \
     docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
     code \
     codium \
