@@ -491,5 +491,17 @@
 	{
 		"key": "ctrl+t",
 		"command": "-workbench.action.showAllSymbols"
+	},
+	{
+		"key": "ctrl+=",
+		"command": "-workbench.action.zoomIn"
+	},
+	{
+		"key": "ctrl+-",
+		"command": "-workbench.action.zoomOut"
+	},
+	{
+		"key": "alt+t",
+		"command": "workbench.action.createTerminalEditor"
 	}
 ]
