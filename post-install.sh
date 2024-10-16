@@ -92,6 +92,13 @@ sudo update-grub
 [ -d "$HOME/.local/bin" ] || mkdir -p "$HOME/.local/bin"
 export PATH="$HOME/.local/bin:$PATH"
 
+git clone --depth 1 https://github.com/sequencerr/XMousePasteBlock.git ~/XMousePasteBlock || :
+(cd ~/XMousePasteBlock
+sudo docker build --progress=plain -t xmousepasteblock --target export --output type=local,dest=. .
+sudo mv -fv ./xmousepasteblock /usr/bin)
+/usr/bin/rm -rf ~/XMousePasteBlock
+sudo apt install libev-dev
+
 glab_release=$(wget -qO- https://gitlab.com/api/v4/projects/gitlab-org%2Fcli/releases | grep -Po 'tag_name":\s*"v?\K[^"]+' | head -n1)
 if ! command -v gl > /dev/null || ! gl --version 2> /dev/null | grep -q "$glab_release"; then
     wget --show-progress -qO- "https://gitlab.com/gitlab-org/cli/-/releases/v$glab_release/downloads/glab_${glab_release}_linux_amd64.tar.gz" | tar -xzf - -C ~/.local/bin --strip-components=1 --transform s/glab/gl/
