@@ -16,13 +16,13 @@
         <value type="int" value="10"/>
         <value type="int" value="11"/>
       </property>
-      <property name="background-style" type="uint" value="0"/>
+      <property name="background-style" type="uint" value="1"/>
       <property name="background-alpha" type="uint" value="80"/>
       <property name="size" type="uint" value="36"/>
       <property name="length-adjust" type="bool" value="true"/>
       <property name="span-monitors" type="bool" value="false"/>
       <property name="enter-opacity" type="uint" value="100"/>
-      <property name="leave-opacity" type="uint" value="100"/>
+      <property name="leave-opacity" type="uint" value="60"/>
       <property name="mode" type="uint" value="2"/>
       <property name="autohide-behavior" type="uint" value="2"/>
       <property name="nrows" type="uint" value="1"/>
