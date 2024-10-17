@@ -75,17 +75,29 @@ razergenie --version
 gh --version
 
 git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C ~/dotfiles pull
-cp -rfv ~/dotfiles/home/.mozilla/firefox/*/user.js ~/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini)
-cp -rfv ~/dotfiles/home/.config/dconf/user ~/.config/user
-cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config/
-cp -rfv ~/dotfiles/home/.config/Thunar ~/.config/
-cp -rfv ~/dotfiles/home/.config/autostart ~/.config/
-cp -rfv ~/dotfiles/home/.config/procps ~/.config/
-cp -rfv ~/dotfiles/home/.config/npm ~/.config/
-cp -rfv ~/dotfiles/home/.local/share/themes ~/.local/share/
+cp -rfv ~/dotfiles/home/.config/autostart ~/.config
+cp -rfv ~/dotfiles/home/.config/Code ~/.config
+cp -rfv ~/dotfiles/home/.config/dconf ~/.config
+cp -rfv ~/dotfiles/home/.config/lazydocker ~/.config
+cp -rfv ~/dotfiles/home/.config/npm ~/.config
+cp -rfv ~/dotfiles/home/.config/procps ~/.config
+cp -rfv ~/dotfiles/home/.config/synapse ~/.config
+cp -rfv ~/dotfiles/home/.config/Thunar ~/.config
+cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config
+cp -rfv ~/dotfiles/home/.gnupg ~
+cp -rfv ~/dotfiles/home/.local/share/themes ~/.local/share
+cp -rfv ~/dotfiles/home/.mozilla/firefox/profile/user.js ~/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini)
+cp -rfv ~/dotfiles/home/.vscode ~
 cp -rfv ~/dotfiles/home/.bashrc ~/.bashrc
+cp -rfv ~/dotfiles/home/.gitconfig ~/.gitconfig
+
+sudo cp -rfv ~/dotfiles/etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf
+sudo cp -rfv ~/dotfiles/etc/pulse/default.pa /etc/pulse/default.pa
+sudo cp -rfv ~/dotfiles/etc/systemd/logind.conf /etc/systemd/logind.conf
+sudo cp -rfv ~/dotfiles/etc/UPower/UPower.conf /etc/UPower/UPower.conf
 sudo cp -rfv ~/dotfiles/etc/default/console-setup /etc/default/console-setup
 sudo update-initramfs -u
+sudo cp -rfv ~/dotfiles/etc/grub.d/40_custom /etc/grub.d/40_custom
 sudo cp -rfv ~/dotfiles/etc/default/grub /etc/default/grub
 sudo update-grub
 
@@ -116,8 +128,8 @@ wget --show-progress -qO ~/.local/bin/yt https://github.com/yt-dlp/yt-dlp/releas
 chmod +x ~/.local/bin/yt
 yt --version
 
-export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 git clone --depth 1 https://github.com/nvm-sh/nvm.git ~/.local/share/nvm || git -C ~/.local/share/nvm pull
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export NVM_DIR="$HOME/.local/share/nvm" && source "$NVM_DIR/nvm.sh"
 nvm install -b --latest-npm stable
 nvm install -b --latest-npm --lts=iron               # 20.x
