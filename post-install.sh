@@ -81,6 +81,7 @@ cp -rfv ~/dotfiles/home/.config/dconf ~/.config
 cp -rfv ~/dotfiles/home/.config/lazydocker ~/.config
 cp -rfv ~/dotfiles/home/.config/npm ~/.config
 cp -rfv ~/dotfiles/home/.config/procps ~/.config
+cp -rfv ~/dotfiles/home/.config/pulse/default.pa ~/.config/pulse/default.pa
 cp -rfv ~/dotfiles/home/.config/synapse ~/.config
 cp -rfv ~/dotfiles/home/.config/Thunar ~/.config
 cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config

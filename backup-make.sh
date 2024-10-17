@@ -34,6 +34,7 @@ backup $XDG_CONFIG_HOME/Code/User/snippets
 backup $XDG_CONFIG_HOME/synapse/config.json
 backup $XDG_CONFIG_HOME/lazydocker/config.yml
 backup $XDG_CONFIG_HOME/procps/toprc
+backup $XDG_CONFIG_HOME/pulse/default.pa
 backup $XDG_CONFIG_HOME/dconf/user
 backup $XDG_CONFIG_HOME/autostart
 backup $XDG_CONFIG_HOME/npm/npmrc
@@ -50,7 +51,6 @@ backup /etc/default/console-setup
 backup /etc/default/grub
 backup /etc/grub.d/40_custom
 backup /etc/lightdm/lightdm.conf
-backup /etc/pulse/default.pa
 backup /etc/systemd/logind.conf
 backup /etc/UPower/UPower.conf
 backup /etc/apt/sources.list
