@@ -120,13 +120,17 @@ unset glab_release
 gl --version
 
 zoxide_release=$(wget -qO- https://api.github.com/repos/ajeetdsouza/zoxide/releases/latest | grep -Po '^\s\s"name":\s"\K[^"]+')
-wget --show-progress -qO- "https://github.com/ajeetdsouza/zoxide/releases/latest/download/zoxide-$zoxide_release-x86_64-unknown-linux-musl.tar.gz" | tar xzf - -C ~/.local/bin zoxide
+if ! command -v zoxide > /dev/null || ! zoxide --version 2> /dev/null | grep -q "$zoxide_release"; then
+    wget --show-progress -qO- "https://github.com/ajeetdsouza/zoxide/releases/latest/download/zoxide-$zoxide_release-x86_64-unknown-linux-musl.tar.gz" | tar xzf - -C ~/.local/bin zoxide
+    chmod +x ~/.local/bin/zoxide
+fi
 unset zoxide_release
-chmod +x ~/.local/bin/zoxide
 zoxide --version
 
-wget --show-progress -qO ~/.local/bin/yt https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
-chmod +x ~/.local/bin/yt
+if ! command -v yt > /dev/null || ! yt --version 2> /dev/null | grep -q "$(wget -qO- https://api.github.com/repos/yt-dlp/yt-dlp/releases/latest | grep -Po 'tag_name":\s*"\K[^"]+')"; then
+    wget --show-progress -qO ~/.local/bin/yt https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
+    chmod +x ~/.local/bin/yt
+fi
 yt --version
 
 git clone --depth 1 https://github.com/nvm-sh/nvm.git ~/.local/share/nvm || git -C ~/.local/share/nvm pull
@@ -139,10 +143,14 @@ nvm install -b --latest-npm --lts=gallium            # 16.x
 nvm use default
 nvm current && nvm -v && node -v && npm -v
 
-[ -d "$HOME/.yarn/releases" ] || mkdir -p ~/.yarn/releases
-wget --show-progress -qO ~/.yarn/releases/yarn https://raw.githubusercontent.com/yarnpkg/berry/master/packages/yarnpkg-cli/bin/yarn.js
-chmod +x ~/.yarn/releases/yarn
-ln -sfv ~/.yarn/releases/yarn ~/.local/bin/yarn
+yarn_release=$(wget -qO- https://api.github.com/repos/yarnpkg/berry/releases/latest | grep -Po 'tag_name":\s*"\K[^"]+')
+if ! command -v yarn > /dev/null || ! echo $yarn_release | grep -q "$(yarn --version)"; then
+    [ -d "$HOME/.yarn/releases" ] || mkdir -p ~/.yarn/releases
+    wget --show-progress -qO ~/.yarn/releases/yarn "https://raw.githubusercontent.com/yarnpkg/berry/refs/tags/$yarn_release/packages/yarnpkg-cli/bin/yarn.js"
+    chmod +x ~/.yarn/releases/yarn
+    ln -sfv ~/.yarn/releases/yarn ~/.local/bin/yarn
+fi
+unset yarn_release
 yarn --version
 
 nvm exec 18 npm install -g pnpm
@@ -188,11 +196,14 @@ fi
 unset gradle_release
 gradle --version
 
-sudo apt install --yes --no-install-recommends \
-    php php-curl php-dom php-xml
-wget --show-progress -qO ~/.local/bin/composer https://getcomposer.org/download/latest-stable/composer.phar
-chmod +x ~/.local/bin/composer
-composer --version
+composer_release=$(wget -qO- https://api.github.com/repos/composer/composer/releases/latest | grep -Pom1 'name":\s*"\K[^"]+')
+if ! command -v composer > /dev/null || ! composer --version 2> /dev/null | awk '{ print $3 }' | grep -q "$composer_release"; then
+    sudo apt install --yes --no-install-recommends \
+        php php-curl php-dom php-xml
+    wget --show-progress -qO ~/.local/bin/composer "https://getcomposer.org/download/$composer_release/composer.phar"
+    chmod +x ~/.local/bin/composer
+fi
+composer --version 2> /dev/null
 
 # echo '[ -d /snap/bin ] && export PATH="/snap/bin:$PATH"' >> ~/.bashrc
 sudo ln -sfv /var/lib/snapd/desktop/applications /usr/share/applications/snapd
