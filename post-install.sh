@@ -93,7 +93,6 @@ cp -rfv ~/dotfiles/home/.bashrc ~/.bashrc
 cp -rfv ~/dotfiles/home/.gitconfig ~/.gitconfig
 
 sudo cp -rfv ~/dotfiles/etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf
-sudo cp -rfv ~/dotfiles/etc/pulse/default.pa /etc/pulse/default.pa
 sudo cp -rfv ~/dotfiles/etc/systemd/logind.conf /etc/systemd/logind.conf
 sudo cp -rfv ~/dotfiles/etc/UPower/UPower.conf /etc/UPower/UPower.conf
 sudo cp -rfv ~/dotfiles/etc/default/console-setup /etc/default/console-setup
