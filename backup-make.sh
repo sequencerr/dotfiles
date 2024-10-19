@@ -33,6 +33,7 @@ backup $XDG_CONFIG_HOME/Code/User/keybindings.json
 backup $XDG_CONFIG_HOME/Code/User/snippets
 backup $XDG_CONFIG_HOME/synapse/config.json
 backup $XDG_CONFIG_HOME/lazydocker/config.yml
+backup $XDG_CONFIG_HOME/flameshot/flameshot.ini
 backup $XDG_CONFIG_HOME/procps/toprc
 backup $XDG_CONFIG_HOME/pulse/default.pa
 backup $XDG_CONFIG_HOME/dconf/user
@@ -41,6 +42,7 @@ backup $XDG_CONFIG_HOME/npm/npmrc
 backup $XDG_CONFIG_HOME/Thunar
 backup $XDG_CONFIG_HOME/xfce4/terminal/terminalrc
 backup $XDG_CONFIG_HOME/xfce4/xfconf/xfce-perchannel-xml
+backup $XDG_CONFIG_HOME/mimeapps.list
 backup $XDG_DATA_HOME/themes
 
 [ -d $BACKUP_DIR/home/.mozilla/firefox/profile ] || mkdir -p $BACKUP_DIR/home/.mozilla/firefox/profile

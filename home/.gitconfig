@@ -5,8 +5,19 @@
 [core]
 	longpaths = true
 	editor = vi -u NONE
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red
+	new = green
 [init]
 	defaultBranch = main
+[help]
+	autocorrect = 1
 [push]
 	autoSetupRemote = true
 [pull]
@@ -59,3 +70,12 @@
 	gpgsign = true
 [gpg]
 	program = /home/yrch/.gnupg/gpg-wrapper-passphrase.sh
+[alias]
+	st = !git -c color.ui=always status --short --branch | head -n1 | cut -c4- && \
+            git diff --shortstat --cached
+    go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+    reb = "!r() { git rebase -i HEAD~$1; }; r"
+    lg = log --graph --pretty=format:'%Cred%h%Creset %C(dim white)-%Creset%C(yellow)%d %C(dim white)%s%Creset %Cgreen%ad %C(bold blue)<%an>%Creset' --date=format:'%d %b %Y %H:%M' --abbrev-commit
+[status]
+	short = true
+	branch = true
