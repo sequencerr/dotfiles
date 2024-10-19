@@ -1,0 +1,9 @@
+[Default Applications]
+application/x-shellscript=org.xfce.mousepad.desktop;
+x-scheme-handler/http=xfce4-web-browser.desktop
+x-scheme-handler/https=xfce4-web-browser.desktop
+image/webp=xfce4-web-browser.desktop;
+image/jpeg=org.xfce.ristretto.desktop;
+image/gif=org.xfce.ristretto.desktop;
+image/avif=xfce4-web-browser.desktop;
+image/png=org.xfce.ristretto.desktop;

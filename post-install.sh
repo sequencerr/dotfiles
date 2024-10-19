@@ -74,6 +74,7 @@ git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C 
 cp -rfv ~/dotfiles/home/.config/autostart ~/.config
 cp -rfv ~/dotfiles/home/.config/Code ~/.config
 cp -rfv ~/dotfiles/home/.config/dconf ~/.config
+cp -rfv ~/dotfiles/home/.config/flameshot ~/.config
 cp -rfv ~/dotfiles/home/.config/lazydocker ~/.config
 cp -rfv ~/dotfiles/home/.config/npm ~/.config
 cp -rfv ~/dotfiles/home/.config/procps ~/.config
@@ -81,6 +82,7 @@ cp -rfv ~/dotfiles/home/.config/pulse/default.pa ~/.config/pulse/default.pa
 cp -rfv ~/dotfiles/home/.config/synapse ~/.config
 cp -rfv ~/dotfiles/home/.config/Thunar ~/.config
 cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config
+cp -rfv ~/dotfiles/home/.config/mimeapps.list ~/.config/mimeapps.list
 cp -rfv ~/dotfiles/home/.gnupg ~
 cp -rfv ~/dotfiles/home/.local/share/themes ~/.local/share
 cp -rfv ~/dotfiles/home/.mozilla/firefox/profile/user.js ~/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini)
