@@ -104,7 +104,7 @@ git clone --depth 1 https://github.com/sequencerr/XMousePasteBlock.git ~/XMouseP
 (cd ~/XMousePasteBlock
 sudo docker build --progress=plain -t xmousepasteblock --target export --output type=local,dest=. .
 sudo mv -fv ./xmousepasteblock /usr/bin)
-/usr/bin/rm -rf ~/XMousePasteBlock
+\rm -rf ~/XMousePasteBlock
 sudo apt install libev-dev
 
 glab_release=$(wget -qO- https://gitlab.com/api/v4/projects/gitlab-org%2Fcli/releases | grep -Po 'tag_name":\s*"v?\K[^"]+' | head -n1)
@@ -153,10 +153,10 @@ ln -sfv "$(find "$NVM_DIR/versions/node" -maxdepth 1 -name "v18*" -print -quit)/
 pnpm --version
 
 if ! command -v bun > /dev/null || ! bun --version | grep -q "$(wget -qO- https://api.github.com/repos/oven-sh/bun/releases/latest | grep -Po '^\s*"tag_name":\s"[^v]+v\K[^"]+')"; then
-    tmp_dir="$(mktemp -d)"; trap "/usr/bin/rm -rf \"$tmp_dir\"" EXIT INT TERM HUP
+    tmp_dir="$(mktemp -d)"; trap "\rm -rf \"$tmp_dir\"" EXIT INT TERM HUP
     wget --show-progress -qO $tmp_dir/bun.zip https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip
     busybox unzip -ojqd ~/.local/bin $tmp_dir/bun.zip
-    /usr/bin/rm -r $tmp_dir
+    \rm -r $tmp_dir
     unset tmp_dir
     chmod +x ~/.local/bin/bun
 fi
@@ -172,7 +172,7 @@ jshell -q <<< 'System.out.println("\n\n" + System.getProperty("java.version"));'
 export MAVEN_OPTS=-Dmaven.repo.local="$XDG_CACHE_HOME/maven/repository"
 maven_release=$(wget -qO- https://api.github.com/repos/apache/maven/releases/latest | grep -Po '"name":\s*"(maven-)?\K[^"]+')
 if ! command -v mvn > /dev/null || ! mvn --version | head -1 | grep -q "$maven_release"; then
-    [ -d "$HOME/.local/share/maven" ] && /usr/bin/rm -rfv ~/.local/share/maven
+    [ -d "$HOME/.local/share/maven" ] && \rm -rfv ~/.local/share/maven
     mkdir -pv ~/.local/share/maven
     wget --show-progress -qO- "https://dlcdn.apache.org/maven/maven-$(echo $maven_release | cut -c1)/$maven_release/binaries/apache-maven-$maven_release-bin.tar.gz" | tar xzf - -C ~/.local/share/maven --strip-components=1
     ln -sfv ~/.local/share/maven/bin/mvn ~/.local/bin/mvn
@@ -206,7 +206,7 @@ sudo ln -sfv /var/lib/snapd/desktop/applications /usr/share/applications/snapd
 [ -d "$HOME/.local/share/fonts" ] || mkdir -p "$HOME/.local/share/fonts"
 if ! fc-list | grep -q CascadiaCode; then
     wget --show-progress -qO- $(wget -qO- https://api.github.com/repos/microsoft/cascadia-code/releases/latest | grep -Po '^\s*"browser_download_url":\s*"\K[^"]+') | busybox unzip -oqd ~/.local/share/fonts/CascadiaCode -
-    /usr/bin/rm -rv ~/.local/share/fonts/CascadiaCode/otf ~/.local/share/fonts/CascadiaCode/**/static ~/.local/share/fonts/CascadiaCode/**/*PL* ~/.local/share/fonts/CascadiaCode/**/*NF*
+    \rm -rv ~/.local/share/fonts/CascadiaCode/otf ~/.local/share/fonts/CascadiaCode/**/static ~/.local/share/fonts/CascadiaCode/**/*PL* ~/.local/share/fonts/CascadiaCode/**/*NF*
 fi
 fc-cache -v
 
