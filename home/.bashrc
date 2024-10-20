@@ -90,6 +90,8 @@ psk() { psg "$@" | tee >(tail -n+2 | awk '{print $2}' | xargs -r kill -9) | tee 
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias src='time source ~/.bashrc'
 
+keygen() { ssh-keygen -t ed25519 -C "$(git config user.email)" -P '' -f "$HOME/.ssh/$1" && echo -e "\n~/.ssh/$1.pub:" && cat "$HOME/.ssh/$1.pub"; }
+
 apt() {
     if [[ $1 == 'install' ]]; then
         sudo apt install --yes --no-install-recommends --auto-remove "${@:2}"
