@@ -75,6 +75,7 @@
             git diff --shortstat --cached
     go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
     reb = "!r() { git rebase -i HEAD~$1; }; r"
+    fd = "!f() { git rev-list --all --abbrev-commit | xargs git grep $1; }; f"
     lg = log --graph --pretty=format:'%Cred%h%Creset %C(dim white)-%Creset%C(yellow)%d %C(dim white)%s%Creset %Cgreen%ad %C(bold blue)<%an>%Creset' --date=format:'%d %b %Y %H:%M' --abbrev-commit
 [status]
 	short = true
