@@ -44,11 +44,15 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubc
 
 sudo wget -qO /etc/apt/sources.list https://raw.githubusercontent.com/sequencerr/dotfiles/main/etc/apt/sources.list &
 
+echo "deb http://deb.debian.org/debian bookworm-backports main" \
+  | sudo tee /etc/apt/sources.list.d/bookworm-backports.list > /dev/null
+
 wait
 
 sudo apt update
 sudo apt upgrade --yes --no-install-recommends
 sudo apt install --yes --no-install-recommends \
+    linux-image-amd64/bookworm-backports linux-headers-amd64/bookworm-backports \
     docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
     code \
     codium \
