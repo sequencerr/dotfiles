@@ -209,4 +209,5 @@ if ! fc-list | grep -q CascadiaCode; then
 fi
 fc-cache -v
 
-echo -e '\nExecute: "xfce4-session-logout -r"'
+echo && read -p 'Do you want to reboot now? [Y/^C]: '
+xfce4-session-logout -r
