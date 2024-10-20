@@ -202,9 +202,6 @@ if ! command -v composer > /dev/null || ! composer --version 2> /dev/null | awk 
 fi
 composer --version 2> /dev/null
 
-# echo '[ -d /snap/bin ] && export PATH="/snap/bin:$PATH"' >> ~/.bashrc
-sudo ln -sfv /var/lib/snapd/desktop/applications /usr/share/applications/snapd
-
 [ -d "$HOME/.local/share/fonts" ] || mkdir -p "$HOME/.local/share/fonts"
 if ! fc-list | grep -q CascadiaCode; then
     wget --show-progress -qO- $(wget -qO- https://api.github.com/repos/microsoft/cascadia-code/releases/latest | grep -Po '^\s*"browser_download_url":\s*"\K[^"]+') | busybox unzip -oqd ~/.local/share/fonts/CascadiaCode -
