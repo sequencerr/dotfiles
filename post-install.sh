@@ -91,6 +91,13 @@ waterfox --version
 razergenie --version
 gh --version
 
+[ -d "$HOME/.local/share/fonts" ] || mkdir -p "$HOME/.local/share/fonts"
+if ! fc-list | grep -q CascadiaCode; then
+    wget --show-progress -qO- $(wget -qO- https://api.github.com/repos/microsoft/cascadia-code/releases/latest | grep -Po '^\s*"browser_download_url":\s*"\K[^"]+') | busybox unzip -oqd ~/.local/share/fonts/CascadiaCode -
+    \rm -rv ~/.local/share/fonts/CascadiaCode/otf ~/.local/share/fonts/CascadiaCode/**/static ~/.local/share/fonts/CascadiaCode/**/*PL* ~/.local/share/fonts/CascadiaCode/**/*NF*
+fi
+fc-cache -v
+
 [ -d "$HOME/dotfiles" ] && [ -d "$HOME/dotfiles/.git" ] || \rm -r ~/dotfiles
 git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C ~/dotfiles pull
 git -C ~/dotfiles remote set-url --push origin git@github.com:sequencerr/dotfiles.git
@@ -214,13 +221,6 @@ if ! command -v composer > /dev/null || ! composer --version 2> /dev/null | awk 
     chmod +x ~/.local/bin/composer
 fi
 composer --version 2> /dev/null
-
-[ -d "$HOME/.local/share/fonts" ] || mkdir -p "$HOME/.local/share/fonts"
-if ! fc-list | grep -q CascadiaCode; then
-    wget --show-progress -qO- $(wget -qO- https://api.github.com/repos/microsoft/cascadia-code/releases/latest | grep -Po '^\s*"browser_download_url":\s*"\K[^"]+') | busybox unzip -oqd ~/.local/share/fonts/CascadiaCode -
-    \rm -rv ~/.local/share/fonts/CascadiaCode/otf ~/.local/share/fonts/CascadiaCode/**/static ~/.local/share/fonts/CascadiaCode/**/*PL* ~/.local/share/fonts/CascadiaCode/**/*NF*
-fi
-fc-cache -v
 
 echo && read -p 'Do you want to reboot now? [Y/^C]: '
 xfce4-session-logout -r
