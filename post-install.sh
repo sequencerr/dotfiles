@@ -1,6 +1,22 @@
 #!/bin/sh
 set -eu
 
+[ -d "$HOME/dotfiles" ] || mkdir -v ~/dotfiles
+! [ -d "$HOME/dotfiles/.git" ] || wget --show-progress -qO- https://github.com/sequencerr/dotfiles/archive/refs/heads/main.tar.gz | tar xzf - -C ~/dotfiles --strip-components=1
+
+if ! groups | grep -q sudo; then
+	su -c "sudo usermod -aG sudo $USER"
+	newgrp sudo <<< 'bash ~/dotfiles/post-install.sh'
+    exit
+fi
+
+if [ -z "$NVM_DIR" ]; then
+    [ -d "$HOME/.local/bin" ] || mkdir -p "$HOME/.local/bin"
+    source ~/dotfiles/home/.bashrc
+    bash ~/dotfiles/post-install.sh
+    exit
+fi
+
 sudo wget -qO /etc/apt/keyrings/docker.asc https://download.docker.com/linux/debian/gpg &
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
@@ -74,6 +90,7 @@ waterfox --version
 razergenie --version
 gh --version
 
+[ -d "$HOME/dotfiles" ] && [ -d "$HOME/dotfiles/.git" ] || \rm -r ~/dotfiles
 git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C ~/dotfiles pull
 cp -rfv ~/dotfiles/home/.config/autostart ~/.config
 cp -rfv ~/dotfiles/home/.config/Code ~/.config
@@ -102,9 +119,6 @@ sudo setupcon
 sudo cp -rfv ~/dotfiles/etc/grub.d/40_custom /etc/grub.d/40_custom
 sudo cp -rfv ~/dotfiles/etc/default/grub /etc/default/grub
 sudo update-grub
-
-[ -d "$HOME/.local/bin" ] || mkdir -p "$HOME/.local/bin"
-export PATH="$HOME/.local/bin:$PATH"
 
 git clone --depth 1 https://github.com/sequencerr/XMousePasteBlock.git ~/XMousePasteBlock || :
 (cd ~/XMousePasteBlock
@@ -135,8 +149,6 @@ fi
 yt --version
 
 git clone --depth 1 https://github.com/nvm-sh/nvm.git ~/.local/share/nvm || git -C ~/.local/share/nvm pull
-export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
-export NVM_DIR="$HOME/.local/share/nvm" && source "$NVM_DIR/nvm.sh"
 nvm install -b --latest-npm stable
 nvm install -b --latest-npm --lts=iron               # 20.x
 nvm install -b --latest-npm --lts=hydrogen --default # 18.x
@@ -168,14 +180,12 @@ if ! command -v bun > /dev/null || ! bun --version | grep -q "$(wget -qO- https:
 fi
 bun --revision && SHELL=bash bun completions 2> /dev/null || true
 
-export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME/java"
 sudo apt install --yes --no-install-recommends \
     openjdk-17-jdk java-21-amazon-corretto-jdk
 sudo update-java-alternatives --set java-21-amazon-corretto
 echo ${JAVA_HOME:-}
 jshell -q <<< 'System.out.println("\n\n" + System.getProperty("java.version"));'
 
-export MAVEN_OPTS=-Dmaven.repo.local="$XDG_CACHE_HOME/maven/repository"
 maven_release=$(wget -qO- https://api.github.com/repos/apache/maven/releases/latest | grep -Po '"name":\s*"(maven-)?\K[^"]+')
 if ! command -v mvn > /dev/null || ! mvn --version | head -1 | grep -q "$maven_release"; then
     [ -d "$HOME/.local/share/maven" ] && \rm -rfv ~/.local/share/maven
@@ -186,7 +196,6 @@ fi
 unset maven_release
 mvn --version
 
-export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 gradle_release=$(wget -qO- https://api.github.com/repos/gradle/gradle/releases/latest | grep -Po '"name":\s*"\K[^"]+')
 if ! command -v gradle > /dev/null || ! gradle --version | awk 'NR==3' | grep -q "$gradle_release"; then
     wget --show-progress -qO- "https://services.gradle.org/distributions/gradle-$gradle_release-bin.zip" | busybox unzip -oqd ~/.local/share -
