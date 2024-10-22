@@ -70,6 +70,7 @@ sudo apt upgrade --yes --no-install-recommends
 sudo apt install --yes --no-install-recommends \
     linux-image-amd64/bookworm-backports linux-headers-amd64/bookworm-backports \
     docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
+    virt-manager gir1.2-spiceclientgtk-3.0 qemu-system libvirt-clients libvirt-daemon-system \
     code \
     codium \
     ngrok \
