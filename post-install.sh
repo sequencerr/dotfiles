@@ -123,9 +123,9 @@ sudo update-grub
 git clone --depth 1 https://github.com/sequencerr/XMousePasteBlock.git ~/XMousePasteBlock || :
 (cd ~/XMousePasteBlock
 sudo docker build --progress=plain -t xmousepasteblock --target export --output type=local,dest=. .
+sudo apt install libev-dev
 sudo mv -fv ./xmousepasteblock /usr/bin)
 \rm -rf ~/XMousePasteBlock
-sudo apt install libev-dev
 
 glab_release=$(wget -qO- https://gitlab.com/api/v4/projects/gitlab-org%2Fcli/releases | grep -Po 'tag_name":\s*"v?\K[^"]+' | head -n1)
 if ! command -v gl > /dev/null || ! gl --version 2> /dev/null | grep -q "$glab_release"; then
