@@ -160,10 +160,8 @@ nvm current && nvm -v && node -v && npm -v
 
 yarn_release=$(wget -qO- https://api.github.com/repos/yarnpkg/berry/releases/latest | grep -Po 'tag_name":\s*"\K[^"]+')
 if ! command -v yarn > /dev/null || ! echo $yarn_release | grep -q "$(yarn --version)"; then
-    [ -d "$HOME/.yarn/releases" ] || mkdir -p ~/.yarn/releases
-    wget --show-progress -qO ~/.yarn/releases/yarn "https://raw.githubusercontent.com/yarnpkg/berry/refs/tags/$yarn_release/packages/yarnpkg-cli/bin/yarn.js"
-    chmod +x ~/.yarn/releases/yarn
-    ln -sfv ~/.yarn/releases/yarn ~/.local/bin/yarn
+    wget --show-progress -qO ~/.local/bin/yarn "https://raw.githubusercontent.com/yarnpkg/berry/refs/tags/$yarn_release/packages/yarnpkg-cli/bin/yarn.js"
+    chmod +x ~/.local/bin/yarn
 fi
 unset yarn_release
 yarn --version
