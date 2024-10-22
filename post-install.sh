@@ -131,7 +131,7 @@ sudo update-grub
 git clone --depth 1 https://github.com/sequencerr/XMousePasteBlock.git ~/XMousePasteBlock || :
 (cd ~/XMousePasteBlock
 sudo docker build --progress=plain -t xmousepasteblock --target export --output type=local,dest=. .
-sudo apt install libev-dev
+sudo apt install --yes libev-dev
 sudo mv -fv ./xmousepasteblock /usr/bin)
 \rm -rf ~/XMousePasteBlock
 
