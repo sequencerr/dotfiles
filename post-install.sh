@@ -2,19 +2,17 @@
 set -eu
 
 [ -d "$HOME/dotfiles" ] || mkdir -v ~/dotfiles
-! [ -d "$HOME/dotfiles/.git" ] || wget --show-progress -qO- https://github.com/sequencerr/dotfiles/archive/refs/heads/main.tar.gz | tar xzf - -C ~/dotfiles --strip-components=1
+[ $(find ~/dotfiles -maxdepth 1 -not -path ~/dotfiles -printf . | wc -c) -eq 0 ] && wget --show-progress -qO- https://github.com/sequencerr/dotfiles/archive/refs/heads/main.tar.gz | tar xzf - -C ~/dotfiles --strip-components=1
 
 if ! groups | grep -q sudo; then
-	su -c "sudo usermod -aG sudo $USER"
-	newgrp sudo <<< 'bash ~/dotfiles/post-install.sh'
+    su -c "sudo usermod -aG sudo $USER"
+    newgrp sudo <<< 'bash ~/dotfiles/post-install.sh'
     exit
 fi
 
-if [ -z "$NVM_DIR" ]; then
+if [ -z "${NVM_DIR:-}" ]; then
     [ -d "$HOME/.local/bin" ] || mkdir -p "$HOME/.local/bin"
     source ~/dotfiles/home/.bashrc
-    bash ~/dotfiles/post-install.sh
-    exit
 fi
 
 sudo wget -qO /etc/apt/keyrings/docker.asc https://download.docker.com/linux/debian/gpg &
@@ -58,10 +56,11 @@ sudo wget -qO /etc/apt/keyrings/githubcli.gpg https://cli.github.com/packages/gi
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli.gpg] https://cli.github.com/packages stable main" \
   | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
 
-sudo wget -qO /etc/apt/sources.list https://raw.githubusercontent.com/sequencerr/dotfiles/main/etc/apt/sources.list &
-
 echo "deb http://deb.debian.org/debian bookworm-backports main" \
   | sudo tee /etc/apt/sources.list.d/bookworm-backports.list > /dev/null
+
+cat ~/dotfiles/etc/apt/sources.list \
+  | sudo tee /etc/apt/sources.list > /dev/null
 
 wait
 
@@ -115,7 +114,7 @@ cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config
 cp -rfv ~/dotfiles/home/.config/mimeapps.list ~/.config/mimeapps.list
 cp -rfv ~/dotfiles/home/.gnupg ~
 cp -rfv ~/dotfiles/home/.local/share/themes ~/.local/share
-cp -rfv ~/dotfiles/home/.mozilla/firefox/profile/user.js ~/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini)
+cp -rfv ~/dotfiles/home/.mozilla/firefox/profile/user.js ~/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini) || :
 cp -rfv ~/dotfiles/home/.vscode ~
 cp -rfv ~/dotfiles/home/.bashrc ~/.bashrc
 cp -rfv ~/dotfiles/home/.gitconfig ~/.gitconfig
