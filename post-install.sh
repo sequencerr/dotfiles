@@ -92,6 +92,7 @@ gh --version
 
 [ -d "$HOME/dotfiles" ] && [ -d "$HOME/dotfiles/.git" ] || \rm -r ~/dotfiles
 git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C ~/dotfiles pull
+git -C ~/dotfiles remote set-url --push origin git@github.com:sequencerr/dotfiles.git
 cp -rfv ~/dotfiles/home/.config/autostart ~/.config
 cp -rfv ~/dotfiles/home/.config/Code ~/.config
 cp -rfv ~/dotfiles/home/.config/dconf ~/.config
