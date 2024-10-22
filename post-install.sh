@@ -123,7 +123,7 @@ sudo cp -rfv ~/dotfiles/etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf
 sudo cp -rfv ~/dotfiles/etc/systemd/logind.conf /etc/systemd/logind.conf
 sudo cp -rfv ~/dotfiles/etc/UPower/UPower.conf /etc/UPower/UPower.conf
 sudo cp -rfv ~/dotfiles/etc/default/console-setup /etc/default/console-setup
-sudo dpkg-reconfigure console-setup -u
+sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure console-setup -u
 sudo cp -rfv ~/dotfiles/etc/grub.d/40_custom /etc/grub.d/40_custom
 sudo cp -rfv ~/dotfiles/etc/default/grub /etc/default/grub
 sudo update-grub
