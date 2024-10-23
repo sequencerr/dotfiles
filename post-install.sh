@@ -156,7 +156,8 @@ if ! command -v yt > /dev/null || ! yt --version 2> /dev/null | grep -q "$(wget 
 fi
 yt --version
 
-git clone --depth 1 https://github.com/nvm-sh/nvm.git ~/.local/share/nvm || git -C ~/.local/share/nvm pull
+git clone --depth 1 https://github.com/nvm-sh/nvm.git "$NVM_DIR" || git -C "$NVM_DIR" pull
+. "$NVM_DIR/nvm.sh"
 nvm install -b --latest-npm stable
 nvm install -b --latest-npm --lts=iron               # 20.x
 nvm install -b --latest-npm --lts=hydrogen --default # 18.x
