@@ -1,12 +1,15 @@
 #!/bin/sh
 set -eu
 
+finish() { echo && read -p 'Do you want to reboot now? [Y/^C]: '; xfce4-session-logout -r; }
+
 [ -d "$HOME/dotfiles" ] || mkdir -v ~/dotfiles
 [ $(find ~/dotfiles -maxdepth 1 -not -path ~/dotfiles -printf . | wc -c) -eq 0 ] && wget --show-progress -qO- https://github.com/sequencerr/dotfiles/archive/refs/heads/main.tar.gz | tar xzf - -C ~/dotfiles --strip-components=1
 
 if ! groups | grep -q sudo; then
     su -c "sudo usermod -aG sudo $USER"
-    newgrp sudo <<< 'bash ~/dotfiles/post-install.sh'
+    newgrp sudo <<< 'IS_SUDOED=1 bash ~/dotfiles/post-install.sh'
+    finish
     exit
 fi
 
@@ -222,5 +225,4 @@ if ! command -v composer > /dev/null || ! composer --version 2> /dev/null | awk 
 fi
 composer --version 2> /dev/null
 
-echo && read -p 'Do you want to reboot now? [Y/^C]: '
-xfce4-session-logout -r
+IS_SUDOED=${IS_SUDOED:-}; [ $IS_SUDOED ] || finish
