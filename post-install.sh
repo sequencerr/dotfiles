@@ -15,6 +15,7 @@ fi
 
 [ "${XDG_BINARY_HOME:-}" ] || source ~/dotfiles/home/.bashrc
 [ -d "$XDG_BINARY_HOME"  ] || mkdir -p "$XDG_BINARY_HOME"
+[ -d "$XDG_DATA_HOME/bash-completion/completions" ] || mkdir -p "$XDG_DATA_HOME/bash-completion/completions"
 
 sudo wget -qO /etc/apt/keyrings/docker.asc https://download.docker.com/linux/debian/gpg &
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
@@ -185,8 +186,9 @@ if ! command -v bun > /dev/null || ! bun --version | grep -q "$(wget -qO- https:
     \rm -r $tmp_dir
     unset tmp_dir
     chmod +x $BUN_INSTALL_BIN/bun
+    SHELL=bash bun completions > "$XDG_DATA_HOME/bash-completion/completions/bun.bash"
 fi
-bun --revision && SHELL=bash bun completions 2> /dev/null || true
+bun --revision
 
 sudo apt install --yes --no-install-recommends \
     openjdk-17-jdk java-21-amazon-corretto-jdk
