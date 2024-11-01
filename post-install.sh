@@ -190,6 +190,14 @@ if ! command -v bun > /dev/null || ! bun --version | grep -q "$(wget -qO- https:
 fi
 bun --revision
 
+deno_release="$(wget -qO- https://dl.deno.land/release-latest.txt)"
+if ! command -v deno > /dev/null || ! deno --version | grep -q "$deno_release"; then
+    wget --show-progress -qO- "https://dl.deno.land/release/$deno_release/deno-x86_64-unknown-linux-gnu.zip" | busybox unzip -ojqd $XDG_BINARY_HOME -
+    chmod +x "$XDG_BINARY_HOME/deno"
+    deno completions bash > "$XDG_DATA_HOME/bash-completion/completions/deno.bash"
+fi
+deno -v
+
 sudo apt install --yes --no-install-recommends \
     openjdk-17-jdk java-21-amazon-corretto-jdk
 sudo update-java-alternatives --set java-21-amazon-corretto
