@@ -58,6 +58,10 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export BUN_INSTALL_BIN="$XDG_BINARY_HOME"
 export BUN_INSTALL_CACHE_DIR="$XDG_CACHE_HOME/bun"
 export BUN_INSTALL_GLOBAL_DIR="$XDG_DATA_HOME/bun"
+export DENO_INSTALL_ROOT="$XDG_BINARY_HOME"
+export DENO_DIR="$XDG_CACHE_HOME/deno"
+export DENO_REPL_HISTORY="$XDG_DATA_HOME/deno/deno_history.txt"
+export DENO_NO_UPDATE_CHECK=1
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
