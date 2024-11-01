@@ -165,7 +165,8 @@ nvm install -b --latest-npm --lts=iron               # 20.x
 nvm install -b --latest-npm --lts=hydrogen --default # 18.x
 nvm install -b --latest-npm --lts=gallium            # 16.x
 nvm use default
-nvm current && nvm -v && node -v && npm -v
+nvm current && nvm -v && npm -v
+node --eval 'console.log(process.version, `(${process.release.lts})`)'
 
 yarn_release=$(wget -qO- https://api.github.com/repos/yarnpkg/berry/releases/latest | grep -Po 'tag_name":\s*"\K[^"]+')
 if ! command -v yarn > /dev/null || ! echo $yarn_release | grep -q "$(yarn --version)"; then
@@ -188,7 +189,7 @@ if ! command -v bun > /dev/null || ! bun --version | grep -q "$(wget -qO- https:
     chmod +x $BUN_INSTALL_BIN/bun
     SHELL=bash bun completions > "$XDG_DATA_HOME/bash-completion/completions/bun.bash"
 fi
-bun --revision
+bun --eval 'console.log(Bun.version_with_sha)'
 
 deno_release="$(wget -qO- https://dl.deno.land/release-latest.txt)"
 if ! command -v deno > /dev/null || ! deno --version | grep -q "$deno_release"; then
@@ -196,7 +197,7 @@ if ! command -v deno > /dev/null || ! deno --version | grep -q "$deno_release"; 
     chmod +x "$XDG_BINARY_HOME/deno"
     deno completions bash > "$XDG_DATA_HOME/bash-completion/completions/deno.bash"
 fi
-deno -v
+deno eval 'console.log(Deno.version.deno)'
 
 sudo apt install --yes --no-install-recommends \
     openjdk-17-jdk java-21-amazon-corretto-jdk
