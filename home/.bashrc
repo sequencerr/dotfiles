@@ -49,12 +49,13 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
+export XDG_BINARY_HOME=$HOME/.local/bin
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME/java"
 export MAVEN_OPTS=-Dmaven.repo.local="$XDG_CACHE_HOME/maven/repository"
 export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
-export BUN_INSTALL_BIN="$HOME/.local/bin"
+export BUN_INSTALL_BIN="$XDG_BINARY_HOME"
 export BUN_INSTALL_CACHE_DIR="$XDG_CACHE_HOME/bun"
 export BUN_INSTALL_GLOBAL_DIR="$XDG_DATA_HOME/bun"
 export NVM_DIR="$XDG_DATA_HOME/nvm"
@@ -62,7 +63,7 @@ export NVM_DIR="$XDG_DATA_HOME/nvm"
 
 export DO_NOT_TRACK=1
 export NEXT_TELEMETRY_DISABLED=1
-export PATH="$HOME/.local/bin:$XDG_CONFIG_HOME/composer/vendor/bin:/snap/bin:$PATH"
+export PATH="$XDG_CONFIG_HOME/composer/vendor/bin:$XDG_BINARY_HOME:$PATH"
 
 for cmd in $(ls "$(pwd)/node_modules/.bin" 2> /dev/null); do
     bin="$(pwd)/node_modules/.bin/$cmd"
@@ -129,7 +130,7 @@ docker() {
       sudo docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive "$2"
     fi
   elif [[ $1 == "monitor" ]]; then
-    sudo docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock -v ~/.config/lazydocker:/.config/jesseduffield/lazydocker lazyteam/lazydocker
+    sudo docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock -v $XDG_CONFIG_HOME/lazydocker:/.config/jesseduffield/lazydocker lazyteam/lazydocker
   else
     sudo docker "$@"
   fi
