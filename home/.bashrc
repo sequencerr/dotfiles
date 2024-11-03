@@ -62,6 +62,9 @@ export DENO_INSTALL_ROOT="$XDG_BINARY_HOME"
 export DENO_DIR="$XDG_CACHE_HOME/deno"
 export DENO_REPL_HISTORY="$XDG_DATA_HOME/deno/deno_history.txt"
 export DENO_NO_UPDATE_CHECK=1
+export YARN_CACHE_FOLDER="$XDG_CACHE_HOME/yarn"
+export YARN_ENABLE_GLOBAL_CACHE=false
+export YARN_ENABLE_MIRROR=false
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
