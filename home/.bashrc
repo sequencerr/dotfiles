@@ -122,8 +122,7 @@ docker() {
         IMAGES=$(sudo docker images --format '{{.Repository}}:{{.Tag}}')
         select IMAGE in $IMAGES; do
           if [ -n "$IMAGE" ]; then
-            IMAGE_ID=$(echo "$IMAGE" | awk '{print $2}')
-            sudo docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive "$IMAGE_ID"
+            sudo docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive "$IMAGE"
             break
           else
             echo "Invalid selection. Please try again."
@@ -134,7 +133,7 @@ docker() {
       sudo docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive "$2"
     fi
   elif [[ $1 == "monitor" ]]; then
-    sudo docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock -v $XDG_CONFIG_HOME/lazydocker:/.config/jesseduffield/lazydocker lazyteam/lazydocker
+    sudo -E $XDG_BINARY_HOME/lazydocker "${@:2}"
   else
     sudo docker "$@"
   fi
