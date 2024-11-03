@@ -92,6 +92,7 @@ alias ipa='ip -f inet -4 -c -p -br a'
 alias jcu='sudo journalctl --utc -b -r -u'
 alias sc='sudo systemctl'
 alias df="df -Th --total | grep -vP 'tmp|sys'"
+alias du="du -hs .* * 2> /dev/null | sort -h"
 alias mnts="mount | grep ^/dev | awk '{print \$1\"\\t\"\$3\"\\t\"\$5}' | column -t"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 psk() { psg "$@" | tee >(tail -n+2 | awk '{print $2}' | xargs -r kill -9) | tee >(tail -n+2 | awk '{print $2}' | xargs -r echo -e "\nKilled PIDs:"); }
