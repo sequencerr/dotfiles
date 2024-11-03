@@ -147,4 +147,4 @@ if command -v zoxide > /dev/null; then
     cd='z'
     eval "$(zoxide init bash)"
 fi
-cd() { ${cd:-cd} "$@" && ls && echo && pwd; }
+cd() { ${cd:-cd} "$@" && ls && echo; }
