@@ -114,12 +114,12 @@ cp -rfv ~/dotfiles/home/.config/synapse ~/.config
 cp -rfv ~/dotfiles/home/.config/Thunar ~/.config
 cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config
 cp -rfv ~/dotfiles/home/.config/mimeapps.list ~/.config/mimeapps.list
+cp -rfv ~/dotfiles/home/.config/git ~/.config/git
 cp -rfv ~/dotfiles/home/.gnupg ~
 cp -rfv ~/dotfiles/home/.local/share/themes $XDG_DATA_HOME
 cp -rfv ~/dotfiles/home/.mozilla/firefox/profile/user.js ~/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini) || :
 cp -rfv ~/dotfiles/home/.vscode ~
 cp -rfv ~/dotfiles/home/.bashrc ~/.bashrc
-cp -rfv ~/dotfiles/home/.gitconfig ~/.gitconfig
 
 sudo cp -rfv ~/dotfiles/etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf
 sudo cp -rfv ~/dotfiles/etc/systemd/logind.conf /etc/systemd/logind.conf

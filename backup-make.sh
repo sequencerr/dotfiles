@@ -20,7 +20,6 @@ cp "$src" "$target" -rfvxL
 }
 
 backup $HOME/.bashrc
-backup $HOME/.gitconfig
 backup $HOME/.ssh/config
 backup $HOME/.gnupg/gpg.conf
 backup $HOME/.gnupg/gpg-agent.conf
@@ -42,6 +41,7 @@ backup $XDG_CONFIG_HOME/Thunar
 backup $XDG_CONFIG_HOME/xfce4/terminal/terminalrc
 backup $XDG_CONFIG_HOME/xfce4/xfconf/xfce-perchannel-xml
 backup $XDG_CONFIG_HOME/mimeapps.list
+backup $XDG_CONFIG_HOME/git/config
 backup $XDG_DATA_HOME/themes
 
 [ -d $BACKUP_DIR/home/.mozilla/firefox/profile ] || mkdir -p $BACKUP_DIR/home/.mozilla/firefox/profile
