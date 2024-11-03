@@ -137,7 +137,14 @@ sudo apt install --yes libev-dev
 sudo mv -fv ./xmousepasteblock /usr/bin)
 \rm -rf ~/XMousePasteBlock
 
-glab_release=$(wget -qO- https://gitlab.com/api/v4/projects/gitlab-org%2Fcli/releases | grep -Po 'tag_name":\s*"v?\K[^"]+' | head -n1)
+lazydocker_release=$(wget --header 'Accept: application/json' -qO- https://github.com/jesseduffield/lazydocker/releases/latest | sed -e 's/.*"tag_name":"v\{0,1\}\([^"]*\)".*/\1/')
+if ! command -v lazydocker > /dev/null || ! lazydocker --version | head -1 2> /dev/null | grep -q "$lazydocker_release"; then
+    wget --show-progress -qO- "https://github.com/jesseduffield/lazydocker/releases/download/v${lazydocker_release}/lazydocker_${lazydocker_release}_Linux_x86_64.tar.gz" | tar -xzf - -C $XDG_BINARY_HOME lazydocker
+fi
+unset lazydocker_release
+lazydocker --version
+
+glab_release=$(wget -qO- https://gitlab.com/api/v4/projects/gitlab-org%2Fcli/releases | grep -Po 'tag_name":\s*"v?\K[^"]+' | head -1)
 if ! command -v gl > /dev/null || ! gl --version 2> /dev/null | grep -q "$glab_release"; then
     wget --show-progress -qO- "https://gitlab.com/gitlab-org/cli/-/releases/v$glab_release/downloads/glab_${glab_release}_linux_amd64.tar.gz" | tar -xzf - -C $XDG_BINARY_HOME --strip-components=1 --transform s/glab/gl/
 fi
