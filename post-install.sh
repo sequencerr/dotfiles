@@ -130,12 +130,12 @@ sudo cp -rfv ~/dotfiles/etc/grub.d/40_custom /etc/grub.d/40_custom
 sudo cp -rfv ~/dotfiles/etc/default/grub /etc/default/grub
 sudo update-grub
 
-git clone --depth 1 https://github.com/sequencerr/XMousePasteBlock.git ~/XMousePasteBlock || :
-(cd ~/XMousePasteBlock
+tmp_dir="$(mktemp -d)"; trap "\rm -rf \"$tmp_dir\"" EXIT INT TERM HUP
+git clone --depth 1 https://github.com/sequencerr/XMousePasteBlock.git $tmp_dir || :
+(cd $tmp_dir
 sudo docker build --progress=plain -t xmousepasteblock --target export --output type=local,dest=. .
 sudo apt install --yes libev-dev
 sudo mv -fv ./xmousepasteblock /usr/bin)
-\rm -rf ~/XMousePasteBlock
 
 lazydocker_release=$(wget --header 'Accept: application/json' -qO- https://github.com/jesseduffield/lazydocker/releases/latest | sed -e 's/.*"tag_name":"v\{0,1\}\([^"]*\)".*/\1/')
 if ! command -v lazydocker > /dev/null || ! lazydocker --version | head -1 2> /dev/null | grep -q "$lazydocker_release"; then
@@ -192,7 +192,6 @@ if ! command -v bun > /dev/null || ! bun --version | grep -q "$(wget -qO- https:
     tmp_dir="$(mktemp -d)"; trap "\rm -rf \"$tmp_dir\"" EXIT INT TERM HUP
     wget --show-progress -qO $tmp_dir/bun.zip https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip
     busybox unzip -ojqd $BUN_INSTALL_BIN $tmp_dir/bun.zip
-    \rm -r $tmp_dir
     unset tmp_dir
     chmod +x $BUN_INSTALL_BIN/bun
     SHELL=bash bun completions > "$XDG_DATA_HOME/bash-completion/completions/bun.bash"
