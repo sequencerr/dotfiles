@@ -15,7 +15,29 @@ xterm*|rxvt*)
 esac
 [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ] && debian_chroot=$(cat /etc/debian_chroot)
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;34m\]\w\[\033[00m\]\$ '
+    git_info() {
+        git rev-parse --is-inside-work-tree &>/dev/null || return
+        branch=$(git rev-parse --abbrev-ref HEAD)
+        upstream=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
+        status=""
+        if [ $upstream ]; then
+            ahead=$(git rev-list --count ${upstream}..${branch} 2>/dev/null)
+            behind=$(git rev-list --count ${branch}..${upstream} 2>/dev/null)
+            [ $1 == "colon" ] && ([ "$ahead" -gt 0 ] || [ "$behind" -gt 0 ]) && echo ": " && return
+            [ $1 == "ahead" ] && [ "$ahead" -gt 0 ] && echo "↑$ahead" && return
+            [ $1 == "behind" ] && [ "$behind" -gt 0 ] && echo "↓$behind" && return
+        fi
+    }
+    # idk why echoed in function ansi color escape sequences break rendering
+    PS1='${debian_chroot:+($debian_chroot)}'
+    PS1+='\[\033[01;34m\]\w\[\033[00m\]'
+    PS1+='\[\033[0;33m\]$(git rev-parse --is-inside-work-tree &>/dev/null && echo " (")'
+    PS1+='$(git rev-parse --abbrev-ref HEAD 2>/dev/null)'
+    PS1+='$(git_info "colon")'
+    PS1+='\[\033[0;32m\]$(git_info "ahead")\[\033[00m\]'
+    PS1+='\[\033[0;31m\]$(git_info "behind")\[\033[00m\]'
+    PS1+='\[\033[0;33m\]$(git rev-parse --is-inside-work-tree &>/dev/null && echo ") ")\[\033[00m\]'
+    PS1+='\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\w\$ '
 fi
