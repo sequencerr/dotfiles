@@ -503,5 +503,13 @@
 	{
 		"key": "alt+t",
 		"command": "workbench.action.createTerminalEditor"
+	},
+	{
+		"key": "ctrl+m",
+		"command": "-editor.action.toggleTabFocusMode"
+	},
+	{
+		"key": "ctrl+\\",
+		"command": "-workbench.action.splitEditor"
 	}
 ]
