@@ -108,13 +108,8 @@
 	"editor.guides.highlightActiveIndentation": false,
 	"editor.dragAndDrop": false,
 	"editor.copyWithSyntaxHighlighting": false,
-	// "editor.fontFamily": "consolas, monospace",
-	// "editor.fontFamily": "JetBrains Mono, monospace",
-	// "editor.fontFamily": "Monaspace Neon, sans",
 	"editor.fontFamily": "Cascadia Code, monospace",
-	// 0 3 => != !== == === ~= >>= --> -> /\ \/ g @ $ i && f 4679 Fl {. .}
-	// "editor.fontLigatures": "'ss01', 'ss02', 'ss03', 'ss04', 'ss06', 'ss07', 'ss08', 'calt'", // these sets only for Monaspace Neon.
-	"editor.fontLigatures": "'ss01', 'zero', 'ss20'", // these sets only for Cascadia Code.
+	"editor.fontLigatures": "'ss01', 'zero', 'ss20'",
 	"editor.fontWeight": "400",
 	"editor.fontSize": 18,
 	"editor.lineHeight": 1.3,
