@@ -74,6 +74,7 @@ export XDG_STATE_HOME=$HOME/.local/state
 export XDG_BINARY_HOME=$HOME/.local/bin
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME/java"
 export MAVEN_OPTS=-Dmaven.repo.local="$XDG_CACHE_HOME/maven/repository"
+export MAVEN_USER_HOME="$XDG_CACHE_HOME/maven"
 export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
