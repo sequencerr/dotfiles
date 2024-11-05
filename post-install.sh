@@ -222,6 +222,8 @@ if ! command -v mvn > /dev/null || ! mvn --version | head -1 | grep -q "$maven_r
     mkdir -pv $XDG_DATA_HOME/maven
     wget --show-progress -qO- "https://dlcdn.apache.org/maven/maven-$(echo $maven_release | cut -c1)/$maven_release/binaries/apache-maven-$maven_release-bin.tar.gz" | tar xzf - -C $XDG_DATA_HOME/maven --strip-components=1
     ln -sfv $XDG_DATA_HOME/maven/bin/mvn $XDG_BINARY_HOME/mvn
+    # https://maven.apache.org/guides/mini/guide-bash-m2-completion.html
+    wget https://raw.github.com/juven/maven-bash-completion/master/bash_completion.bash -qO "$XDG_DATA_HOME/bash-completion/completions/maven.bash"
 fi
 unset maven_release
 mvn --version
@@ -232,6 +234,7 @@ if ! command -v gradle > /dev/null || ! gradle --version | awk 'NR==3' | grep -q
     mv $XDG_DATA_HOME/gradle* $XDG_DATA_HOME/gradle
     chmod +x $XDG_DATA_HOME/gradle/bin/gradle
     ln -sfv $XDG_DATA_HOME/gradle/bin/gradle $XDG_BINARY_HOME/gradle
+    wget https://raw.githubusercontent.com/gradle/gradle-completion/refs/heads/master/gradle-completion.bash -qO "$XDG_DATA_HOME/bash-completion/completions/gradle.bash"
 fi
 unset gradle_release
 gradle --version
@@ -242,6 +245,7 @@ if ! command -v composer > /dev/null || ! composer --version 2> /dev/null | awk 
         php php-curl php-dom php-xml
     wget --show-progress -qO $XDG_BINARY_HOME/composer "https://getcomposer.org/download/$composer_release/composer.phar"
     chmod +x $XDG_BINARY_HOME/composer
+    composer completion bash > "$XDG_DATA_HOME/bash-completion/completions/composer.bash"
 fi
 composer --version 2> /dev/null
 
