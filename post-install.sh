@@ -143,7 +143,7 @@ sudo mv -fv ./xmousepasteblock /usr/bin)
 
 lazydocker_release=$(wget --header 'Accept: application/json' -qO- https://github.com/jesseduffield/lazydocker/releases/latest | sed -e 's/.*"tag_name":"v\{0,1\}\([^"]*\)".*/\1/')
 if ! command -v lazydocker > /dev/null || ! lazydocker --version | head -1 2> /dev/null | grep -q "$lazydocker_release"; then
-    wget --show-progress -qO- "https://github.com/jesseduffield/lazydocker/releases/download/v${lazydocker_release}/lazydocker_${lazydocker_release}_Linux_x86_64.tar.gz" | tar -xzf - -C $XDG_BINARY_HOME lazydocker
+    wget --show-progress -qO- "https://github.com/jesseduffield/lazydocker/releases/download/v$lazydocker_release/lazydocker_${lazydocker_release}_Linux_x86_64.tar.gz" | tar -xzf - -C $XDG_BINARY_HOME lazydocker
 fi
 unset lazydocker_release
 lazydocker --version
@@ -243,7 +243,7 @@ spring_release=$(wget -qO- https://api.github.com/repos/spring-projects/spring-b
 if ! command -v spring > /dev/null || ! spring --version | grep -q "$spring_release"; then
     [ -d "$XDG_DATA_HOME/spring-boot-cli" ] && \rm -rfv $XDG_DATA_HOME/spring-boot-cli
     mkdir -pv $XDG_DATA_HOME/spring-boot-cli
-    wget --show-progress -qO- "https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-cli/${spring_release}/spring-boot-cli-${spring_release}-bin.tar.gz" | tar -xzf - -C $XDG_DATA_HOME/spring-boot-cli --strip-components=1
+    wget --show-progress -qO- "https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-cli/$spring_release/spring-boot-cli-$spring_release-bin.tar.gz" | tar -xzf - -C $XDG_DATA_HOME/spring-boot-cli --strip-components=1
     ln -sfv $XDG_DATA_HOME/spring-boot-cli/bin/spring $XDG_BINARY_HOME/spring
     ln -sfv $XDG_DATA_HOME/spring-boot-cli/shell-completion/bash/spring "$XDG_DATA_HOME/bash-completion/completions/spring.bash"
 fi
