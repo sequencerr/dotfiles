@@ -188,9 +188,10 @@ nvm exec 18 npm install -g pnpm
 ln -sfv "$(find "$NVM_DIR/versions/node" -maxdepth 1 -name "v18*" -print -quit)/bin/pnpm" $XDG_BINARY_HOME/pnpm
 pnpm --version
 
-if ! command -v bun > /dev/null || ! bun --version | grep -q "$(wget -qO- https://api.github.com/repos/oven-sh/bun/releases/latest | grep -Po '^\s*"tag_name":\s"[^v]+v\K[^"]+')"; then
+bun_release=$(wget -qO- https://api.github.com/repos/oven-sh/bun/releases/latest | grep -Po '"tag_name":\s*"\K[^"]+')
+if ! command -v bun > /dev/null || ! bun --version | grep -q "$(echo $bun_release | awk -F'[v]' '{print $NF}')"; then
     tmp_dir="$(mktemp -d)"; trap "\rm -rf \"$tmp_dir\"" EXIT INT TERM HUP
-    wget --show-progress -qO $tmp_dir/bun.zip https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip
+    wget --show-progress -qO $tmp_dir/bun.zip "https://github.com/oven-sh/bun/releases/download/$bun_release/bun-linux-x64.zip"
     busybox unzip -ojqd $BUN_INSTALL_BIN $tmp_dir/bun.zip
     chmod +x $BUN_INSTALL_BIN/bun
     SHELL=bash bun completions > "$XDG_DATA_HOME/bash-completion/completions/bun.bash"
