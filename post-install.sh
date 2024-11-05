@@ -239,6 +239,16 @@ fi
 unset gradle_release
 gradle --version
 
+spring_release=$(wget -qO- https://api.github.com/repos/spring-projects/spring-boot/releases/latest | grep -Po '"tag_name":\s*"v?\K[^"]+')
+if ! command -v spring > /dev/null || ! spring --version | grep -q "$spring_release"; then
+    [ -d "$XDG_DATA_HOME/spring-boot-cli" ] && \rm -rfv $XDG_DATA_HOME/spring-boot-cli
+    mkdir -pv $XDG_DATA_HOME/spring-boot-cli
+    wget --show-progress -qO- "https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-cli/${spring_release}/spring-boot-cli-${spring_release}-bin.tar.gz" | tar -xzf - -C $XDG_DATA_HOME/spring-boot-cli --strip-components=1
+    ln -sfv $XDG_DATA_HOME/spring-boot-cli/bin/spring $XDG_BINARY_HOME/spring
+    ln -sfv $XDG_DATA_HOME/spring-boot-cli/shell-completion/bash/spring "$XDG_DATA_HOME/bash-completion/completions/spring.bash"
+fi
+spring --version
+
 composer_release=$(wget -qO- https://api.github.com/repos/composer/composer/releases/latest | grep -Pom1 'name":\s*"\K[^"]+')
 if ! command -v composer > /dev/null || ! composer --version 2> /dev/null | awk '{ print $3 }' | grep -q "$composer_release"; then
     sudo apt install --yes --no-install-recommends \
