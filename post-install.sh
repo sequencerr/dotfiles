@@ -223,7 +223,7 @@ if ! command -v mvn > /dev/null || ! mvn --version | head -1 | grep -q "$maven_r
     wget --show-progress -qO- "https://dlcdn.apache.org/maven/maven-$(echo $maven_release | cut -c1)/$maven_release/binaries/apache-maven-$maven_release-bin.tar.gz" | tar xzf - -C $XDG_DATA_HOME/maven --strip-components=1
     ln -sfv $XDG_DATA_HOME/maven/bin/mvn $XDG_BINARY_HOME/mvn
     # https://maven.apache.org/guides/mini/guide-bash-m2-completion.html
-    wget https://raw.github.com/juven/maven-bash-completion/master/bash_completion.bash -qO "$XDG_DATA_HOME/bash-completion/completions/maven.bash"
+    wget https://raw.github.com/juven/maven-bash-completion/master/bash_completion.bash -qO "$XDG_DATA_HOME/bash-completion/completions/mvn"
 fi
 unset maven_release
 mvn --version
