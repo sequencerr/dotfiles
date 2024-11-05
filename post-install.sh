@@ -96,7 +96,7 @@ waterfox --version
 razergenie --version
 gh --version
 
-[ -d "$HOME/.local/share/fonts" ] || mkdir -p "$HOME/.local/share/fonts"
+[ -d "$XDG_DATA_HOME/fonts" ] || mkdir -p "$XDG_DATA_HOME/fonts"
 if ! fc-list | grep -q CascadiaCode; then
     wget --show-progress -qO- $(wget -qO- https://api.github.com/repos/microsoft/cascadia-code/releases/latest | grep -Po '^\s*"browser_download_url":\s*"\K[^"]+') | busybox unzip -oqd $XDG_DATA_HOME/fonts/CascadiaCode -
     \rm -rv $XDG_DATA_HOME/fonts/CascadiaCode/otf $XDG_DATA_HOME/fonts/CascadiaCode/**/static $XDG_DATA_HOME/fonts/CascadiaCode/**/*PL* $XDG_DATA_HOME/fonts/CascadiaCode/**/*NF*
@@ -218,7 +218,7 @@ jshell -q <<< 'System.out.println("\n\n" + System.getProperty("java.version"));'
 
 maven_release=$(wget -qO- https://api.github.com/repos/apache/maven/releases/latest | grep -Po '"name":\s*"(maven-)?\K[^"]+')
 if ! command -v mvn > /dev/null || ! mvn --version | head -1 | grep -q "$maven_release"; then
-    [ -d "$HOME/.local/share/maven" ] && \rm -rfv $XDG_DATA_HOME/maven
+    [ -d "$XDG_DATA_HOME/maven" ] && \rm -rfv $XDG_DATA_HOME/maven
     mkdir -pv $XDG_DATA_HOME/maven
     wget --show-progress -qO- "https://dlcdn.apache.org/maven/maven-$(echo $maven_release | cut -c1)/$maven_release/binaries/apache-maven-$maven_release-bin.tar.gz" | tar xzf - -C $XDG_DATA_HOME/maven --strip-components=1
     ln -sfv $XDG_DATA_HOME/maven/bin/mvn $XDG_BINARY_HOME/mvn
