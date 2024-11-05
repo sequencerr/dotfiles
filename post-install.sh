@@ -145,14 +145,12 @@ lazydocker_release=$(wget --header 'Accept: application/json' -qO- https://githu
 if ! command -v lazydocker > /dev/null || ! lazydocker --version | head -1 2> /dev/null | grep -q "$lazydocker_release"; then
     wget --show-progress -qO- "https://github.com/jesseduffield/lazydocker/releases/download/v$lazydocker_release/lazydocker_${lazydocker_release}_Linux_x86_64.tar.gz" | tar -xzf - -C $XDG_BINARY_HOME lazydocker
 fi
-unset lazydocker_release
 lazydocker --version
 
 glab_release=$(wget -qO- https://gitlab.com/api/v4/projects/gitlab-org%2Fcli/releases | grep -Po 'tag_name":\s*"v?\K[^"]+' | head -1)
 if ! command -v gl > /dev/null || ! gl --version 2> /dev/null | grep -q "$glab_release"; then
     wget --show-progress -qO- "https://gitlab.com/gitlab-org/cli/-/releases/v$glab_release/downloads/glab_${glab_release}_linux_amd64.tar.gz" | tar -xzf - -C $XDG_BINARY_HOME --strip-components=1 --transform s/glab/gl/
 fi
-unset glab_release
 gl --version
 
 zoxide_release=$(wget -qO- https://api.github.com/repos/ajeetdsouza/zoxide/releases/latest | grep -Po '^\s\s"name":\s"\K[^"]+')
@@ -160,7 +158,6 @@ if ! command -v zoxide > /dev/null || ! zoxide --version 2> /dev/null | grep -q 
     wget --show-progress -qO- "https://github.com/ajeetdsouza/zoxide/releases/latest/download/zoxide-$zoxide_release-x86_64-unknown-linux-musl.tar.gz" | tar xzf - -C $XDG_BINARY_HOME zoxide
     chmod +x $XDG_BINARY_HOME/zoxide
 fi
-unset zoxide_release
 zoxide --version
 
 if ! command -v yt > /dev/null || ! yt --version 2> /dev/null | grep -q "$(wget -qO- https://api.github.com/repos/yt-dlp/yt-dlp/releases/latest | grep -Po 'tag_name":\s*"\K[^"]+')"; then
@@ -185,7 +182,6 @@ if ! command -v yarn > /dev/null || ! echo $yarn_release | grep -q "$(yarn --ver
     wget --show-progress -qO $XDG_BINARY_HOME/yarn "https://raw.githubusercontent.com/yarnpkg/berry/refs/tags/$yarn_release/packages/yarnpkg-cli/bin/yarn.js"
     chmod +x $XDG_BINARY_HOME/yarn
 fi
-unset yarn_release
 yarn --version
 
 nvm exec 18 npm install -g pnpm
@@ -196,7 +192,6 @@ if ! command -v bun > /dev/null || ! bun --version | grep -q "$(wget -qO- https:
     tmp_dir="$(mktemp -d)"; trap "\rm -rf \"$tmp_dir\"" EXIT INT TERM HUP
     wget --show-progress -qO $tmp_dir/bun.zip https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip
     busybox unzip -ojqd $BUN_INSTALL_BIN $tmp_dir/bun.zip
-    unset tmp_dir
     chmod +x $BUN_INSTALL_BIN/bun
     SHELL=bash bun completions > "$XDG_DATA_HOME/bash-completion/completions/bun.bash"
 fi
@@ -225,7 +220,6 @@ if ! command -v mvn > /dev/null || ! mvn --version | head -1 | grep -q "$maven_r
     # https://maven.apache.org/guides/mini/guide-bash-m2-completion.html
     wget https://raw.github.com/juven/maven-bash-completion/master/bash_completion.bash -qO "$XDG_DATA_HOME/bash-completion/completions/mvn"
 fi
-unset maven_release
 mvn --version
 
 gradle_release=$(wget -qO- https://api.github.com/repos/gradle/gradle/releases/latest | grep -Po '"name":\s*"\K[^"]+')
@@ -236,7 +230,6 @@ if ! command -v gradle > /dev/null || ! gradle --version | awk 'NR==3' | grep -q
     ln -sfv $XDG_DATA_HOME/gradle/bin/gradle $XDG_BINARY_HOME/gradle
     wget https://raw.githubusercontent.com/gradle/gradle-completion/refs/heads/master/gradle-completion.bash -qO "$XDG_DATA_HOME/bash-completion/completions/gradle.bash"
 fi
-unset gradle_release
 gradle --version
 
 spring_release=$(wget -qO- https://api.github.com/repos/spring-projects/spring-boot/releases/latest | grep -Po '"tag_name":\s*"v?\K[^"]+')
