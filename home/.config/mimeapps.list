@@ -9,3 +9,7 @@ image/avif=xfce4-web-browser.desktop;
 image/png=org.xfce.ristretto.desktop;
 text/plain=org.xfce.mousepad.desktop
 application/octet-stream=org.xfce.mousepad.desktop
+
+[Added Associations]
+text/vnd.trolltech.linguist=org.xfce.mousepad.desktop;
+application/x-desktop=org.xfce.mousepad.desktop;
