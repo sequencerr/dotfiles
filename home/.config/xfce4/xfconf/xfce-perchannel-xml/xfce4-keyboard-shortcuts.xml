@@ -66,14 +66,15 @@
       <property name="XF86HomePage" type="string" value="exo-open --launch WebBrowser"/>
       <property name="override" type="bool" value="true"/>
       <property name="&lt;Super&gt;e" type="string" value="exo-open --launch FileManager"/>
-      <property name="&lt;Super&gt;l" type="string" value="xflock4"/>
       <property name="AudioPlay" type="string" value="sh -c &apos;quodlibet --status | grep -q paused &amp;&amp; quodlibet --play || quodlibet --pause&apos;"/>
       <property name="&lt;Super&gt;equal" type="string" value="sh -c &apos;magnus --refresh-interval=60 &amp; while ! xdotool search --onlyvisible --name &quot;Magnus&quot; &gt; /dev/null; do sleep 0.2; done; wmctrl -r &quot;Magnus&quot; -b add,above&apos;"/>
       <property name="&lt;Super&gt;minus" type="string" value="sh -c &apos;xdotool search --onlyvisible --name &quot;Magnus&quot; windowclose&apos;"/>
       <property name="&lt;Super&gt;q" type="string" value="synapse"/>
-      <property name="&lt;Primary&gt;&lt;Alt&gt;Delete" type="string" value="xfce4-session-logout -h"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;s" type="string" value="flameshot gui -s -c"/>
       <property name="&lt;Super&gt;t" type="string" value="exo-open --launch TerminalEmulator --maximize"/>
+      <property name="&lt;Primary&gt;&lt;Alt&gt;Delete" type="string" value="xfce4-session-logout -s"/>
+      <property name="&lt;Super&gt;l" type="string" value="xflock4"/>
+      <property name="Print" type="string" value="xfce4-screenshooter -fc"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">

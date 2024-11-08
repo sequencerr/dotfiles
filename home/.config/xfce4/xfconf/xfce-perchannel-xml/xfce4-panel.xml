@@ -14,6 +14,7 @@
         <value type="int" value="6"/>
         <value type="int" value="5"/>
         <value type="int" value="10"/>
+        <value type="int" value="1"/>
         <value type="int" value="11"/>
       </property>
       <property name="background-style" type="uint" value="1"/>
@@ -99,7 +100,7 @@
     </property>
     <property name="plugin-6" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="mpris-players" type="string" value="firefox.instance1365;firefox.instance1442;firefox.instance16293;firefox.instance3447;firefox.instance5742;firefox.instance6011;vlc"/>
+      <property name="mpris-players" type="string" value="vlc"/>
       <property name="known-players" type="string" value="firefox;telegram-desktop_telegram-desktop;vlc"/>
     </property>
     <property name="plugin-9" type="string" value="actions">
@@ -108,21 +109,29 @@
         <value type="string" value="-lock-screen"/>
         <value type="string" value="-switch-user"/>
         <value type="string" value="-separator"/>
-        <value type="string" value="-suspend"/>
+        <value type="string" value="+suspend"/>
         <value type="string" value="-hibernate"/>
-        <value type="string" value="+hybrid-sleep"/>
+        <value type="string" value="-hybrid-sleep"/>
         <value type="string" value="-separator"/>
         <value type="string" value="+shutdown"/>
         <value type="string" value="+restart"/>
-        <value type="string" value="+separator"/>
+        <value type="string" value="-separator"/>
         <value type="string" value="-logout"/>
         <value type="string" value="-logout-dialog"/>
       </property>
-      <property name="button-title" type="uint" value="0"/>
-      <property name="custom-title" type="string" value=""/>
+      <property name="button-title" type="uint" value="3"/>
+      <property name="custom-title" type="string" value="🎩️"/>
       <property name="ask-confirmation" type="bool" value="false"/>
     </property>
     <property name="plugin-5" type="string" value="power-manager-plugin"/>
+    <property name="plugin-1" type="string" value="xkb">
+      <property name="display-type" type="uint" value="1"/>
+      <property name="display-name" type="uint" value="0"/>
+      <property name="display-tooltip-icon" type="bool" value="false"/>
+      <property name="group-policy" type="uint" value="0"/>
+      <property name="show-notifications" type="bool" value="false"/>
+      <property name="display-scale" type="uint" value="100"/>
+    </property>
   </property>
   <property name="configver" type="int" value="2"/>
 </channel>
