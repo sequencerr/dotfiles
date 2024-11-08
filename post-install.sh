@@ -3,19 +3,12 @@ set -eu
 
 finish() { echo && read -p 'Do you want to reboot now? [Y/^C]: '; xfce4-session-logout -r; }
 
-[ -d "$HOME/dotfiles" ] || mkdir -v ~/dotfiles
-[ $(find ~/dotfiles -maxdepth 1 -not -path ~/dotfiles -printf . | wc -c) -eq 0 ] && wget --show-progress -qO- https://github.com/sequencerr/dotfiles/archive/refs/heads/main.tar.gz | tar xzf - -C ~/dotfiles --strip-components=1
-
 if ! groups | grep -q sudo; then
     su -c "sudo usermod -aG sudo $USER"
-    newgrp sudo <<< 'IS_SUDOED=1 bash ~/dotfiles/post-install.sh'
+    newgrp sudo <<< 'IS_SUDOED=1 bash <(wget -qO- https://raw.githubusercontent.com/sequencerr/dotfiles/main/post-install.sh)'
     finish
     exit
 fi
-
-[ "${XDG_BINARY_HOME:-}" ] || source ~/dotfiles/home/.bashrc
-[ -d "$XDG_BINARY_HOME"  ] || mkdir -p "$XDG_BINARY_HOME"
-[ -d "$XDG_DATA_HOME/bash-completion/completions" ] || mkdir -p "$XDG_DATA_HOME/bash-completion/completions"
 
 sudo wget -qO /etc/apt/keyrings/docker.asc https://download.docker.com/linux/debian/gpg &
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
@@ -62,17 +55,16 @@ sudo wget -qO /etc/apt/keyrings/githubcli.gpg https://cli.github.com/packages/gi
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli.gpg] https://cli.github.com/packages stable main" \
   | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
 
+sudo wget -qO /etc/apt/sources.list https://raw.githubusercontent.com/sequencerr/dotfiles/main/etc/apt/sources.list &
+
 echo "deb http://deb.debian.org/debian bookworm-backports main" \
   | sudo tee /etc/apt/sources.list.d/bookworm-backports.list > /dev/null
 
-cat ~/dotfiles/etc/apt/sources.list \
-  | sudo tee /etc/apt/sources.list > /dev/null
-
 wait
 
-sudo apt update
-sudo apt upgrade --yes --no-install-recommends
-sudo apt install --yes --no-install-recommends \
+sudo apt-get update
+sudo apt-get upgrade --yes --no-install-recommends
+sudo apt-get install --yes --no-install-recommends \
     linux-image-amd64/bookworm-backports linux-headers-amd64/bookworm-backports \
     docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
     virt-manager gir1.2-spiceclientgtk-3.0 qemu-system libvirt-clients libvirt-daemon-system \
@@ -86,44 +78,49 @@ sudo apt install --yes --no-install-recommends \
     gh \
     git
 
+code --version &
+codium --version &
+ngrok --version &
+dbeaver-ce --version &
+google-chrome-stable --version &
+waterfox --version &
+razergenie --version &
+gh --version &
+wait
 sudo docker run --user $RANDOM:$RANDOM hello-world
-code --version
-codium --version
-ngrok --version
-dbeaver-ce --version
-google-chrome-stable --version
-waterfox --version
-razergenie --version
-gh --version
 
+git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C ~/dotfiles pull
+git -C ~/dotfiles remote set-url --push origin git@github.com:sequencerr/dotfiles.git
+
+[ "${XDG_BINARY_HOME:-}" ] || source ~/dotfiles/home/.bashrc
+[ -d "$XDG_BINARY_HOME"  ] || mkdir -p "$XDG_BINARY_HOME"
+[ -d "$XDG_DATA_HOME/bash-completion/completions" ] || mkdir -p "$XDG_DATA_HOME/bash-completion/completions"
 [ -d "$XDG_DATA_HOME/fonts" ] || mkdir -p "$XDG_DATA_HOME/fonts"
+
 if ! fc-list | grep -q CascadiaCode; then
     wget --show-progress -qO- $(wget -qO- https://api.github.com/repos/microsoft/cascadia-code/releases/latest | grep -Po '^\s*"browser_download_url":\s*"\K[^"]+') | busybox unzip -oqd $XDG_DATA_HOME/fonts/CascadiaCode -
     \rm -rv $XDG_DATA_HOME/fonts/CascadiaCode/otf $XDG_DATA_HOME/fonts/CascadiaCode/**/static $XDG_DATA_HOME/fonts/CascadiaCode/**/*PL* $XDG_DATA_HOME/fonts/CascadiaCode/**/*NF*
 fi
 fc-cache -v
 
-[ -d "$HOME/dotfiles/.git" ] || \rm -r ~/dotfiles
-git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C ~/dotfiles pull
-git -C ~/dotfiles remote set-url --push origin git@github.com:sequencerr/dotfiles.git
-cp -rfv ~/dotfiles/home/.config/autostart ~/.config
-cp -rfv ~/dotfiles/home/.config/Code ~/.config
-cp -rfv ~/dotfiles/home/.config/dconf ~/.config
-cp -rfv ~/dotfiles/home/.config/flameshot ~/.config
-cp -rfv ~/dotfiles/home/.config/lazydocker ~/.config
-cp -rfv ~/dotfiles/home/.config/npm ~/.config
-cp -rfv ~/dotfiles/home/.config/procps ~/.config
-cp -rfv ~/dotfiles/home/.config/pulse/default.pa ~/.config/pulse/default.pa
-cp -rfv ~/dotfiles/home/.config/synapse ~/.config
-cp -rfv ~/dotfiles/home/.config/Thunar ~/.config
-cp -rfv ~/dotfiles/home/.config/xfce4 ~/.config
-cp -rfv ~/dotfiles/home/.config/mimeapps.list ~/.config/mimeapps.list
-cp -rfv ~/dotfiles/home/.config/git ~/.config/git
-cp -rfv ~/dotfiles/home/.gnupg ~
+cp -rfv ~/dotfiles/home/.config/autostart $XDG_CONFIG_HOME
+cp -rfv ~/dotfiles/home/.config/Code $XDG_CONFIG_HOME
+cp -rfv ~/dotfiles/home/.config/dconf $XDG_CONFIG_HOME
+cp -rfv ~/dotfiles/home/.config/flameshot $XDG_CONFIG_HOME
+cp -rfv ~/dotfiles/home/.config/lazydocker $XDG_CONFIG_HOME
+cp -rfv ~/dotfiles/home/.config/npm $XDG_CONFIG_HOME
+cp -rfv ~/dotfiles/home/.config/procps $XDG_CONFIG_HOME
+cp -rfv ~/dotfiles/home/.config/pulse/default.pa $XDG_CONFIG_HOME/pulse/default.pa
+cp -rfv ~/dotfiles/home/.config/synapse $XDG_CONFIG_HOME
+cp -rfv ~/dotfiles/home/.config/Thunar $XDG_CONFIG_HOME
+cp -rfv ~/dotfiles/home/.config/xfce4 $XDG_CONFIG_HOME
+cp -rfv ~/dotfiles/home/.config/mimeapps.list $XDG_CONFIG_HOME/mimeapps.list
+cp -rfv ~/dotfiles/home/.config/git $XDG_CONFIG_HOME/git
+cp -rfv ~/dotfiles/home/.mozilla/firefox/profile/user.js $HOME/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini) || :
 cp -rfv ~/dotfiles/home/.local/share/themes $XDG_DATA_HOME
-cp -rfv ~/dotfiles/home/.mozilla/firefox/profile/user.js ~/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini) || :
-cp -rfv ~/dotfiles/home/.vscode ~
-cp -rfv ~/dotfiles/home/.bashrc ~/.bashrc
+cp -rfv ~/dotfiles/home/.gnupg $HOME
+cp -rfv ~/dotfiles/home/.vscode $HOME
+cp -rfv ~/dotfiles/home/.bashrc $HOME/.bashrc
 
 sudo cp -rfv ~/dotfiles/etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf
 sudo cp -rfv ~/dotfiles/etc/systemd/logind.conf /etc/systemd/logind.conf
@@ -138,7 +135,7 @@ tmp_dir="$(mktemp -d)"; trap "\rm -rf \"$tmp_dir\"" EXIT INT TERM HUP
 git clone --depth 1 https://github.com/sequencerr/XMousePasteBlock.git $tmp_dir || :
 (cd $tmp_dir
 sudo docker build --progress=plain -t xmousepasteblock --target export --output type=local,dest=. .
-sudo apt install --yes libev-dev
+sudo apt-get install --yes libev-dev
 sudo mv -fv ./xmousepasteblock /usr/bin)
 
 lazydocker_release=$(wget --header 'Accept: application/json' -qO- https://github.com/jesseduffield/lazydocker/releases/latest | sed -e 's/.*"tag_name":"v\{0,1\}\([^"]*\)".*/\1/')
@@ -206,7 +203,7 @@ if ! command -v deno > /dev/null || ! deno --version | grep -q "$deno_release"; 
 fi
 deno eval 'console.log(Deno.version.deno)'
 
-sudo apt install --yes --no-install-recommends \
+sudo apt-get install --yes --no-install-recommends \
     openjdk-17-jdk java-21-amazon-corretto-jdk
 sudo update-java-alternatives --set java-21-amazon-corretto
 echo ${JAVA_HOME:-}
@@ -245,7 +242,7 @@ spring --version
 
 composer_release=$(wget -qO- https://api.github.com/repos/composer/composer/releases/latest | grep -Pom1 'name":\s*"\K[^"]+')
 if ! command -v composer > /dev/null || ! composer --version 2> /dev/null | awk '{ print $3 }' | grep -q "$composer_release"; then
-    sudo apt install --yes --no-install-recommends \
+    sudo apt-get install --yes --no-install-recommends \
         php php-curl php-dom php-xml
     wget --show-progress -qO $XDG_BINARY_HOME/composer "https://getcomposer.org/download/$composer_release/composer.phar"
     chmod +x $XDG_BINARY_HOME/composer
