@@ -142,7 +142,7 @@ lazydocker_release=$(wget --header 'Accept: application/json' -qO- https://githu
 if ! command -v lazydocker > /dev/null || ! lazydocker --version | head -1 2> /dev/null | grep -q "$lazydocker_release"; then
     wget --show-progress -qO- "https://github.com/jesseduffield/lazydocker/releases/download/v$lazydocker_release/lazydocker_${lazydocker_release}_Linux_x86_64.tar.gz" | tar -xzf - -C $XDG_BINARY_HOME lazydocker
 fi
-lazydocker --version
+lazydocker --version | head -1
 
 glab_release=$(wget -qO- https://gitlab.com/api/v4/projects/gitlab-org%2Fcli/releases | grep -Po 'tag_name":\s*"v?\K[^"]+' | head -1)
 if ! command -v gl > /dev/null || ! gl --version 2> /dev/null | grep -q "$glab_release"; then
