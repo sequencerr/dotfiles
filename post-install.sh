@@ -196,7 +196,7 @@ fi
 bun --eval 'console.log(Bun.version_with_sha)'
 
 deno_release=$(wget -qO- https://dl.deno.land/release-latest.txt)
-if ! command -v deno > /dev/null || ! deno --version | grep -q "$deno_release"; then
+if ! command -v deno > /dev/null || ! deno -V | grep -q "$(echo $deno_release | cut -c2-)"; then
     wget --show-progress -qO- "https://dl.deno.land/release/$deno_release/deno-x86_64-unknown-linux-gnu.zip" | busybox unzip -ojqd $XDG_BINARY_HOME -
     chmod +x "$XDG_BINARY_HOME/deno"
     deno completions bash > "$XDG_DATA_HOME/bash-completion/completions/deno.bash"
