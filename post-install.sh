@@ -117,7 +117,7 @@ cp -rfv ~/dotfiles/home/.config/xfce4 $XDG_CONFIG_HOME
 cp -rfv ~/dotfiles/home/.config/mimeapps.list $XDG_CONFIG_HOME/mimeapps.list
 cp -rfv ~/dotfiles/home/.config/git $XDG_CONFIG_HOME/git
 cp -rfv ~/dotfiles/home/.mozilla/firefox/profile/user.js $HOME/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini) || :
-cp -rfv ~/dotfiles/home/.local/share/themes $XDG_DATA_HOME
+cp -rf ~/dotfiles/home/.local/share/themes $XDG_DATA_HOME
 cp -rfv ~/dotfiles/home/.gnupg $HOME
 cp -rfv ~/dotfiles/home/.vscode $HOME
 cp -rfv ~/dotfiles/home/.bashrc $HOME/.bashrc
@@ -166,10 +166,10 @@ yt --version
 git clone --depth 1 https://github.com/nvm-sh/nvm.git "$NVM_DIR" || git -C "$NVM_DIR" pull
 . "$NVM_DIR/nvm.sh"
 # -b stands for binary, skip install via source code
-NODE_OPTIONS=--disable-warning=ExperimentalWarning nvm install -b --latest-npm stable
-nvm install -b --latest-npm --lts=iron               # 20.x
-nvm install -b --latest-npm --lts=hydrogen --default # 18.x
-nvm install -b --latest-npm --lts=gallium            # 16.x
+NODE_OPTIONS=--disable-warning=ExperimentalWarning nvm install -b --latest-npm stable 1>/dev/null
+nvm install -b --latest-npm --lts=iron 1>/dev/null               # 20.x
+nvm install -b --latest-npm --lts=hydrogen --default 1>/dev/null # 18.x
+nvm install -b --latest-npm --lts=gallium 1>/dev/null            # 16.x
 nvm use default
 nvm current && nvm -v && npm -v
 node --eval 'console.log(process.version, `(${process.release.lts})`)'
