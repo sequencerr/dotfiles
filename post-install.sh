@@ -76,7 +76,8 @@ sudo apt-get install --yes --no-install-recommends \
     waterfox-kde \
     razergenie \
     gh \
-    git
+    git \
+    stow
 
 code --version &
 codium --version &
@@ -103,32 +104,10 @@ if ! fc-list | grep -q CascadiaCode; then
 fi
 fc-cache -v
 
-cp -rfv ~/dotfiles/home/.config/autostart $XDG_CONFIG_HOME
-cp -rfv ~/dotfiles/home/.config/Code $XDG_CONFIG_HOME
-cp -rfv ~/dotfiles/home/.config/dconf $XDG_CONFIG_HOME
-cp -rfv ~/dotfiles/home/.config/flameshot $XDG_CONFIG_HOME
-cp -rfv ~/dotfiles/home/.config/lazydocker $XDG_CONFIG_HOME
-cp -rfv ~/dotfiles/home/.config/npm $XDG_CONFIG_HOME
-cp -rfv ~/dotfiles/home/.config/procps $XDG_CONFIG_HOME
-cp -rfv ~/dotfiles/home/.config/pulse/default.pa $XDG_CONFIG_HOME/pulse/default.pa
-cp -rfv ~/dotfiles/home/.config/synapse $XDG_CONFIG_HOME
-cp -rfv ~/dotfiles/home/.config/Thunar $XDG_CONFIG_HOME
-cp -rfv ~/dotfiles/home/.config/xfce4 $XDG_CONFIG_HOME
-cp -rfv ~/dotfiles/home/.config/mimeapps.list $XDG_CONFIG_HOME/mimeapps.list
-cp -rfv ~/dotfiles/home/.config/git $XDG_CONFIG_HOME
-cp -rfv ~/dotfiles/home/.mozilla/firefox/profile/user.js $HOME/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini) || :
-cp -rf ~/dotfiles/home/.local/share/themes $XDG_DATA_HOME
-cp -rfv ~/dotfiles/home/.gnupg $HOME
-cp -rfv ~/dotfiles/home/.vscode $HOME
-cp -rfv ~/dotfiles/home/.bashrc $HOME/.bashrc
-
-sudo cp -rfv ~/dotfiles/etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf
-sudo cp -rfv ~/dotfiles/etc/systemd/logind.conf /etc/systemd/logind.conf
-sudo cp -rfv ~/dotfiles/etc/UPower/UPower.conf /etc/UPower/UPower.conf
-sudo cp -rfv ~/dotfiles/etc/default/console-setup /etc/default/console-setup
+stow -t ~ -d ~/dotfiles --adopt home -vv |& grep -v theme
+ln -sfv ~/dotfiles/home/.mozilla/firefox/profile/user.js $HOME/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini) || :
+sudo stow -t /etc -d $HOME/dotfiles --adopt etc -vv
 sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure console-setup -u
-sudo cp -rfv ~/dotfiles/etc/grub.d/40_custom /etc/grub.d/40_custom
-sudo cp -rfv ~/dotfiles/etc/default/grub /etc/default/grub
 sudo update-grub
 
 tmp_dir="$(mktemp -d)"; trap "\rm -rf \"$tmp_dir\"" EXIT INT TERM HUP
