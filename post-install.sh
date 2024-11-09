@@ -115,7 +115,7 @@ cp -rfv ~/dotfiles/home/.config/synapse $XDG_CONFIG_HOME
 cp -rfv ~/dotfiles/home/.config/Thunar $XDG_CONFIG_HOME
 cp -rfv ~/dotfiles/home/.config/xfce4 $XDG_CONFIG_HOME
 cp -rfv ~/dotfiles/home/.config/mimeapps.list $XDG_CONFIG_HOME/mimeapps.list
-cp -rfv ~/dotfiles/home/.config/git $XDG_CONFIG_HOME/git
+cp -rfv ~/dotfiles/home/.config/git $XDG_CONFIG_HOME
 cp -rfv ~/dotfiles/home/.mozilla/firefox/profile/user.js $HOME/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini) || :
 cp -rf ~/dotfiles/home/.local/share/themes $XDG_DATA_HOME
 cp -rfv ~/dotfiles/home/.gnupg $HOME
