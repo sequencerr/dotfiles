@@ -143,15 +143,20 @@ if ! command -v yt > /dev/null || ! yt --version 2> /dev/null | grep -q "$(wget 
 fi
 yt --version
 
-git clone --depth 1 https://github.com/nvm-sh/nvm.git "$NVM_DIR" || git -C "$NVM_DIR" pull
-. "$NVM_DIR/nvm.sh"
-# -b stands for binary, skip install via source code
-NODE_OPTIONS=--disable-warning=ExperimentalWarning nvm install -b --latest-npm stable 1>/dev/null
-nvm install -b --latest-npm --lts=iron 1>/dev/null               # 20.x
-nvm install -b --latest-npm --lts=hydrogen --default 1>/dev/null # 18.x
-nvm install -b --latest-npm --lts=gallium 1>/dev/null            # 16.x
-nvm use default
-nvm current && nvm -v && npm -v
+fnm_release=$(wget -qO- https://api.github.com/repos/Schniz/fnm/releases/latest | grep -Po '"tag_name":\s*"\K[^"]+')
+if ! command -v fnm > /dev/null || ! fnm --version | grep -q "$(echo $fnm_release | sed 's/v//')"; then
+    tmp_dir="$(mktemp -d)"; trap "\rm -rf \"$tmp_dir\"" EXIT INT TERM HUP
+    wget --show-progress -qO "$tmp_dir/fnm.zip" "https://github.com/Schniz/fnm/releases/download/$fnm_release/fnm-linux.zip"
+    busybox unzip -ojqd $XDG_BINARY_HOME "$tmp_dir/fnm.zip"
+    chmod +x $XDG_BINARY_HOME/fnm
+    fnm completions --shell bash > "$XDG_DATA_HOME/bash-completion/completions/fnm.bash"
+fi
+fnm --version
+fnm install --latest
+fnm install --lts
+fnm install lts/iron     # 20.x
+fnm install lts/hydrogen # 18.x
+fnm install lts/gallium  # 16.x
 node --eval 'console.log(process.version, `(${process.release.lts})`)'
 
 yarn_release=$(wget -qO- https://api.github.com/repos/yarnpkg/berry/releases/latest | grep -Po 'tag_name":\s*"\K[^"]+')
@@ -161,7 +166,7 @@ if ! command -v yarn > /dev/null || ! echo $yarn_release | grep -q "$(yarn --ver
 fi
 yarn --version
 
-nvm exec 18 npm install -g pnpm
+fnm exec --using=18 npm install -g pnpm
 ln -sfv "$(find "$NVM_DIR/versions/node" -maxdepth 1 -name "v18*" -print -quit)/bin/pnpm" $XDG_BINARY_HOME/pnpm
 pnpm --version
 

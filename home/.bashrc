@@ -88,8 +88,6 @@ export DENO_NO_UPDATE_CHECK=1
 export YARN_CACHE_FOLDER="$XDG_CACHE_HOME/yarn"
 export YARN_ENABLE_GLOBAL_CACHE=false
 export YARN_ENABLE_MIRROR=false
-export NVM_DIR="$XDG_DATA_HOME/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 export DO_NOT_TRACK=1
 export NEXT_TELEMETRY_DISABLED=1
@@ -166,6 +164,9 @@ docker() {
   fi
 }
 
+if command -v fnm > /dev/null; then
+    eval "$(fnm env --use-on-cd --resolve-engines --shell bash)"
+fi
 if command -v zoxide > /dev/null; then
     cd='z'
     eval "$(zoxide init bash)"
