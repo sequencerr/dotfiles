@@ -109,6 +109,7 @@ ln -sfv ~/dotfiles/home/.mozilla/firefox/profile/user.js $HOME/.mozilla/firefox/
 sudo stow -t /etc -d $HOME/dotfiles --adopt etc -vv
 sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure console-setup -u
 sudo update-grub
+sudo lightdm --show-config
 
 tmp_dir="$(mktemp -d)"; trap "\rm -rf \"$tmp_dir\"" EXIT INT TERM HUP
 git clone --depth 1 https://github.com/sequencerr/XMousePasteBlock.git $tmp_dir || :
