@@ -12,5 +12,6 @@ My config is intended for Debian 12 x64 systems with my username on.
 - https://youtu.be/LslUKm1mqkw?t=413
 - https://stackoverflow.com/questions/1057564
 - https://stackoverflow.com/questions/1838873
+- https://stackoverflow.com/a/5188364/10941348
 - https://marketplace.visualstudio.com/items?itemName=ctf0.vscode-terminal-themes
 - https://whichjdk.com

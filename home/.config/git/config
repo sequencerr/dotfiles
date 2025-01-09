@@ -90,7 +90,11 @@
         else \
             git stash \"$@\"; \
         fi; }; f"
-    lg = log --graph --pretty=format:'%Cred%h%Creset %C(dim white)-%Creset%C(yellow)%d %C(dim white)%s%Creset %Cgreen%ad %C(bold blue)<%an>%Creset' --date=format:'%d %b %Y %H:%M' --abbrev-commit
+    # log current
+    lc = log --graph --pretty=format:'%Cred%h%Creset %C(dim white)-%Creset%C(yellow)%d %C(dim white)%s%Creset %Cgreen%ad %C(bold blue)<%an>%Creset' --date=format:'%d %b %Y %H:%M' --abbrev-commit
+    # log latest from all branches
+    ll = lc --branches
+    recentb = "!r() { refbranch=$1 count=$2; git for-each-ref --sort=-committerdate refs/heads --format='%(refname:short)|%(HEAD)%(color:yellow)%(refname:short)|%(color:bold green)%(committerdate:relative)|%(color:blue)%(subject)|%(color:magenta)%(authorname)%(color:reset)' --color=always --count=${count:-20} | while read line; do branch=$(echo \"$line\" | awk 'BEGIN { FS = \"|\" }; { print $1 }' | tr -d '*'); ahead=$(git rev-list --count \"${refbranch:-origin/master}..${branch}\" 2>/dev/null); behind=$(git rev-list --count \"${branch}..${refbranch:-origin/master}\" 2>/dev/null); colorline=$(echo \"$line\" | sed 's/^[^|]*|//'); echo \"$ahead|$behind|$colorline\" | awk -F'|' -vOFS='|' '{$5=substr($5,1,70)}1' ; done | ( echo \"ahead|behind|branch|lastcommit|message|author\n\" && cat) | column -ts'|';}; r"
 [status]
 	short = true
 	branch = true
