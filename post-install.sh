@@ -111,8 +111,10 @@ fi
 fc-cache -v
 
 stow -t ~ -d ~/dotfiles --adopt home -vv |& grep -v theme
+# todo: fix "Unable to store terminal preferences" and proably "Thunar/accels.scm" and perhaps some "xfconf/xfce-perchannel-xml/"
 ln -sfv ~/dotfiles/home/.mozilla/firefox/profile/user.js $HOME/.mozilla/firefox/$(grep -Pom1 'Default=\K[^1].+' ~/.mozilla/firefox/profiles.ini) || :
-sudo stow -t /etc -d $HOME/dotfiles --adopt etc -vv
+# todo: maybe add revese symlink (from system to this repo), but not mess with git.
+sudo cp -Rv --preserve=mode,ownership,timestamps $HOME/dotfiles/etc/* /etc
 sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure console-setup -u
 sudo update-grub
 sudo lightdm --show-config
