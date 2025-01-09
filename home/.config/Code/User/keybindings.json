@@ -260,12 +260,29 @@
 		"when": "explorerViewletFocus"
 	},
 	{
+		"key": "ctrl+shift+s",
+		"command": "-workbench.action.files.saveLocalFile",
+		"when": "remoteFileDialogVisible"
+	},
+	{
+		"key": "ctrl+shift+s",
+		"command": "-workbench.action.files.saveAs"
+	},
+	{
 		"key": "ctrl+shift+g",
+		"command": "-workbench.view.scm"
+	},
+	{
+		"key": "ctrl+shift+g",
+		"command": "-workbench.action.terminal.openDetectedLink"
+	},
+	{
+		"key": "ctrl+shift+s",
 		"command": "workbench.view.scm",
 		"when": "workbench.scm.active"
 	},
 	{
-		"key": "ctrl+shift+g",
+		"key": "ctrl+shift+s",
 		"command": "workbench.action.toggleSidebarVisibility",
 		"when": "activeViewlet == 'workbench.view.scm'"
 	},
@@ -493,14 +510,6 @@
 		"command": "-workbench.action.showAllSymbols"
 	},
 	{
-		"key": "ctrl+=",
-		"command": "-workbench.action.zoomIn"
-	},
-	{
-		"key": "ctrl+-",
-		"command": "-workbench.action.zoomOut"
-	},
-	{
 		"key": "alt+t",
 		"command": "workbench.action.createTerminalEditor"
 	},
@@ -511,5 +520,49 @@
 	{
 		"key": "ctrl+\\",
 		"command": "-workbench.action.splitEditor"
+	},
+	{
+		"key": "ctrl+numpad0",
+		"command": "-workbench.action.zoomReset"
+	},
+	{
+		"key": "ctrl+=",
+		"command": "-workbench.action.zoomIn"
+	},
+	{
+		"key": "ctrl+shift+=",
+		"command": "-workbench.action.zoomIn"
+	},
+	{
+		"key": "ctrl+-",
+		"command": "-workbench.action.zoomOut"
+	},
+	{
+		"key": "ctrl+numpad_add",
+		"command": "workbench.action.zoomIn"
+	},
+	{
+		"key": "ctrl+numpad_subtract",
+		"command": "workbench.action.zoomOut"
+	},
+	{
+		"key": "ctrl+.",
+		"command": "-editor.action.quickFix",
+		"when": "editorHasCodeActionsProvider && textInputFocus && !editorReadonly"
+	},
+	{
+		"key": "ctrl+.",
+		"command": "-notebook.cell.openFailureActions",
+		"when": "notebookCellFocused && notebookCellHasErrorDiagnostics && !notebookCellEditorFocused"
+	},
+	{
+		"key": "shift+alt+a",
+		"command": "editor.action.blockComment",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "ctrl+shift+a",
+		"command": "-editor.action.blockComment",
+		"when": "editorTextFocus && !editorReadonly"
 	}
 ]

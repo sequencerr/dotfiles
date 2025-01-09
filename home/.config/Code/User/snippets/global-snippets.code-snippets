@@ -1,4 +1,15 @@
 {
+	"CSS Media Query Bootstrap": {
+		"scope": "css,scss,sass,less",
+		"prefix": "mediaquery",
+		"body": [
+			//
+			"@media (min-width: ${1:768}px) {",
+			"  ${TM_SELECTED_TEXT:${2:$BLOCK_COMMENT_START ... $BLOCK_COMMENT_END}}",
+			"}"
+		],
+		"description": "Bootstrap a modern CSS media query (mobile-first approach)"
+	},
 	"con": {
 		"scope": "javascript,javascriptreact,typescript,typescriptreact",
 		"prefix": "con",
@@ -26,11 +37,11 @@
 			"})"
 		]
 	},
-	"stop": {
+	"stop/pause": {
 		"scope": "javascript,javascriptreact,typescript,typescriptreact",
 		"prefix": "ps",
-		"body": ["await new Promise(() => {});"]
-		// "body": ["while (1);"]
+		// "body": ["await new Promise(() => {});"]
+		"body": ["if (1) while (1);"]
 	},
 	"constant": {
 		"scope": "javascript,javascriptreact",
