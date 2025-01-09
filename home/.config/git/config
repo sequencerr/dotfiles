@@ -2,6 +2,8 @@
 	name = Sequencer
 	email = 45060278+sequencerr@users.noreply.github.com
 	signingkey = F39DB3DCC46F8F41
+[credential]
+	helper = store
 [core]
 	longpaths = true
 	editor = vi -u NONE
@@ -22,6 +24,8 @@
 	autoSetupRemote = true
 [pull]
 	ff = only
+[diff]
+	algorithm = minimal
 [advice]
 	addEmbeddedRepo = false
 	addEmptyPathspec = false
