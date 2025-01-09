@@ -27,6 +27,11 @@ sudo wget -qO /etc/apt/keyrings/ngrok.asc https://ngrok-agent.s3.amazonaws.com/n
 echo "deb [signed-by=/etc/apt/keyrings/ngrok.asc] https://ngrok-agent.s3.amazonaws.com buster main" \
   | sudo tee /etc/apt/sources.list.d/ngrok.list > /dev/null
 
+# https://pkg.cloudflare.com/index.html#debian-bookworm
+sudo wget -qO /etc/apt/keyrings/cloudflare.asc https://pkg.cloudflare.com/cloudflare-main.gpg
+echo 'deb [signed-by=/etc/apt/keyrings/cloudflare.gpg] https://pkg.cloudflare.com/cloudflared bookworm main' \
+  | sudo tee /etc/apt/sources.list.d/cloudflared.list > /dev/null
+
 sudo wget -qO /etc/apt/keyrings/dbeaver.asc https://dbeaver.io/debs/dbeaver.gpg.key &
 echo "deb [signed-by=/etc/apt/keyrings/dbeaver.asc] https://dbeaver.io/debs/dbeaver-ce /" \
   | sudo tee /etc/apt/sources.list.d/dbeaver.list > /dev/null
@@ -71,6 +76,7 @@ sudo apt-get install --yes --no-install-recommends \
     code \
     codium \
     ngrok \
+    cloudflared \
     dbeaver-ce \
     google-chrome-stable \
     waterfox-kde \
