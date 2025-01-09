@@ -1,0 +1,11 @@
+{
+	"css": {
+		"snippets": {
+			"fd": "flex-direction:column|column-reverse|row|row-reverse",
+			"br": "border-radius",
+			"of": "object-fit:cover|contain|fill|none|scale-down",
+			"op": "object-position:top|bottom|left|right|center",
+			"o": "opacity"
+		}
+	}
+}

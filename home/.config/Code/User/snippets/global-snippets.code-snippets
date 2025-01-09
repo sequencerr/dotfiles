@@ -10,6 +10,23 @@
 		],
 		"description": "Bootstrap a modern CSS media query (mobile-first approach)"
 	},
+	// react
+	"componetnt'sState": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "st",
+		"body": ["const [$1, set${1/(.*)/${1:/capitalize}/}] = useState($2);"]
+	},
+	// next.js bs
+	"use client": {
+		"scope": "javascript,javascriptreact,typescript,typescriptreact",
+		"prefix": "uc",
+		"body": ["'use client';", "", ""]
+	},
+	// "componetnt'sProps": {
+	// 	"scope": "javascriptreact,typescriptreact",
+	// 	"prefix": "cp",
+	// 	"body": ["const { $1 } = this.props;"]
+	// },
 	"con": {
 		"scope": "javascript,javascriptreact,typescript,typescriptreact",
 		"prefix": "con",
@@ -92,16 +109,6 @@
 		"scope": "javascript,javascriptreact,typescript,typescriptreact",
 		"prefix": "tpof",
 		"body": "typeof ${1:${CLIPBOARD}} == '$2'"
-	},
-	// "componetnt'sProps": {
-	// 	"scope": "javascriptreact,typescriptreact",
-	// 	"prefix": "cp",
-	// 	"body": ["const { $1 } = this.props;"]
-	// },
-	"componetnt'sState": {
-		"scope": "javascript,javascriptreact,typescript,typescriptreact",
-		"prefix": "st",
-		"body": ["const [$1, set${1/(.*)/${1:/capitalize}/}] = useState($2);"]
 	},
 	"deb": {
 		"scope": "javascript,javascriptreact,typescript,typescriptreact",

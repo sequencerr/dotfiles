@@ -646,6 +646,8 @@
 	"typescript.experimental.aiCodeActions": {},
 	"typescript.tsserver.experimental.enableProjectDiagnostics": true,
 	"typescript.check.npmIsInstalled": false,
+	"typescript.workspaceSymbols.scope": "currentProject",
+	"typescript.workspaceSymbols.excludeLibrarySymbols": true,
 	//
 	"typescript.inlayHints.enumMemberValues.enabled": true,
 	"javascript.inlayHints.enumMemberValues.enabled": true,
@@ -669,7 +671,25 @@
 	"[markdown]": { "editor.defaultFormatter": "yzhang.markdown-all-in-one" },
 	"[java]": { "editor.defaultFormatter": "redhat.java" },
 	"twig-language-2.hover": false,
+	"emmet.extensionsPath": ["~/.vscode"],
 	"emmet.includeLanguages": { "twig": "html" },
+	"emmet.syntaxProfiles": {
+		"html": {},
+		"jsx": {
+			"attr_quotes": "double",
+			"self_closing_tag": true,
+			"markup.attributes": {
+				"class*": "className"
+			},
+			"markup.valuePrefix": {
+				"class*": "s"
+			}
+		}
+	},
+	"emmet.preferences": {
+		"output.selfClosingStyle": "xml",
+		"sass.propertyEnd": ";"
+	},
 	"[powershell]": { "editor.defaultFormatter": "ms-vscode.powershell" },
 	"powershell.integratedConsole.startInBackground": true,
 	"powershell.integratedConsole.suppressStartupBanner": true,
