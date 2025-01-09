@@ -162,10 +162,12 @@ fi
 fnm --version
 fnm install --latest
 fnm install --lts
+fnm install lts/jod      # 22.x
 fnm install lts/iron     # 20.x
 fnm install lts/hydrogen # 18.x
 fnm install lts/gallium  # 16.x
 node --completion-bash > "$XDG_DATA_HOME/bash-completion/completions/node.bash"
+fnm default 18
 node --eval 'console.log(process.version, `(${process.release.lts})`)'
 
 yarn_release=$(wget -qO- https://api.github.com/repos/yarnpkg/berry/releases/latest | grep -Po 'tag_name":\s*"\K[^"]+')
