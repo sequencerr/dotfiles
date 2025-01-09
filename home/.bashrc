@@ -122,6 +122,7 @@ alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 psk() { psg "$@" | tee >(tail -n+2 | awk '{print $2}' | xargs -r kill -9) | tee >(tail -n+2 | awk '{print $2}' | xargs -r echo -e "\nKilled PIDs:"); }
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias src='time source ~/.bashrc'
+alias upd='apt upgrade --yes; apt update --yes; flatpak update --assumeyes'
 
 keygen() { ssh-keygen -t ed25519 -C "$(git config user.email)" -P '' -f "$HOME/.ssh/$1" && echo -e "\n~/.ssh/$1.pub:" && cat "$HOME/.ssh/$1.pub"; }
 
