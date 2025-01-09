@@ -176,7 +176,7 @@ fi
 yarn --version
 
 fnm exec --using=18 npm install -g pnpm
-ln -sfv "$(find "$NVM_DIR/versions/node" -maxdepth 1 -name "v18*" -print -quit)/bin/pnpm" $XDG_BINARY_HOME/pnpm
+ln -sfv "$(find "$FNM_DIR/node-versions" -maxdepth 1 -name "v18*" -print -quit)/installation/bin/pnpm" $XDG_BINARY_HOME/pnpm
 pnpm --version
 
 bun_release=$(wget -qO- https://api.github.com/repos/oven-sh/bun/releases/latest | grep -Po '"tag_name":\s*"\K[^"]+')
