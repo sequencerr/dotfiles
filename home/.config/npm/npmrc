@@ -3,3 +3,4 @@ init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
 logs-dir=${XDG_STATE_HOME}/npm/logs
 fund=false
 audit=false
+update-notifier=false
