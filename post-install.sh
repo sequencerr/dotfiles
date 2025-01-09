@@ -20,16 +20,16 @@ echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/microsoft.asc] htt
   | sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
 
 sudo wget -qO /etc/apt/keyrings/vscodium.asc https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg &
-echo 'deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/vscodium.asc] https://download.vscodium.com/debs vscodium main' \
+echo 'deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/vscodium.asc] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main' \
   | sudo tee /etc/apt/sources.list.d/vscodium.list > /dev/null
 
 sudo wget -qO /etc/apt/keyrings/ngrok.asc https://ngrok-agent.s3.amazonaws.com/ngrok.asc &
 echo "deb [signed-by=/etc/apt/keyrings/ngrok.asc] https://ngrok-agent.s3.amazonaws.com buster main" \
   | sudo tee /etc/apt/sources.list.d/ngrok.list > /dev/null
 
-# https://pkg.cloudflare.com/index.html#debian-bookworm
-sudo wget -qO /etc/apt/keyrings/cloudflare.asc https://pkg.cloudflare.com/cloudflare-main.gpg
-echo 'deb [signed-by=/etc/apt/keyrings/cloudflare.gpg] https://pkg.cloudflare.com/cloudflared bookworm main' \
+# # https://pkg.cloudflare.com/index.html#debian-bookworm
+wget -qO- https://pkg.cloudflare.com/cloudflare-main.gpg | gpg --armor --export Cloudflare | sudo tee /etc/apt/keyrings/cloudflare.asc > /dev/null
+echo 'deb [signed-by=/etc/apt/keyrings/cloudflare.asc] https://pkg.cloudflare.com/cloudflared bookworm main' \
   | sudo tee /etc/apt/sources.list.d/cloudflared.list > /dev/null
 
 sudo wget -qO /etc/apt/keyrings/dbeaver.asc https://dbeaver.io/debs/dbeaver.gpg.key &
