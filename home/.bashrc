@@ -17,7 +17,7 @@ esac
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
     git_info() {
         git rev-parse --is-inside-work-tree &>/dev/null || return
-        branch=$(git rev-parse --abbrev-ref HEAD)
+        branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
         upstream=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
         status=""
         if [ $upstream ]; then
