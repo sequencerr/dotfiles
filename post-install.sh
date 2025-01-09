@@ -151,6 +151,12 @@ if ! command -v yt > /dev/null || ! yt --version 2> /dev/null | grep -q "$(wget 
 fi
 yt --version
 
+if ! command -v jq > /dev/null || ! jq --version 2> /dev/null | grep -q "$(wget -qO- https://api.github.com/repos/jqlang/jq/releases/latest | grep -Po 'tag_name":\s*"\K[^"]+')"; then
+    wget --show-progress -qO $XDG_BINARY_HOME/jq "https://github.com/jqlang/jq/releases/latest/download/jq-linux-$(dpkg --print-architecture)"
+    chmod +x $XDG_BINARY_HOME/jq
+fi
+jq --version
+
 fnm_release=$(wget -qO- https://api.github.com/repos/Schniz/fnm/releases/latest | grep -Po '"tag_name":\s*"\K[^"]+')
 if ! command -v fnm > /dev/null || ! fnm --version | grep -q "$(echo $fnm_release | sed 's/v//')"; then
     tmp_dir="$(mktemp -d)"; trap "\rm -rf \"$tmp_dir\"" EXIT INT TERM HUP
