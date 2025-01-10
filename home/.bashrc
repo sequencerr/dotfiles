@@ -72,6 +72,7 @@ export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
 export XDG_BINARY_HOME=$HOME/.local/bin
+export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME/java"
 export MAVEN_OPTS=-Dmaven.repo.local="$XDG_CACHE_HOME/maven/repository"
 export MAVEN_USER_HOME="$XDG_CACHE_HOME/maven"
