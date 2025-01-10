@@ -23,15 +23,6 @@ sudo wget -qO /etc/apt/keyrings/vscodium.asc https://gitlab.com/paulcarroty/vsco
 echo 'deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/vscodium.asc] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main' \
   | sudo tee /etc/apt/sources.list.d/vscodium.list > /dev/null
 
-sudo wget -qO /etc/apt/keyrings/ngrok.asc https://ngrok-agent.s3.amazonaws.com/ngrok.asc &
-echo "deb [signed-by=/etc/apt/keyrings/ngrok.asc] https://ngrok-agent.s3.amazonaws.com buster main" \
-  | sudo tee /etc/apt/sources.list.d/ngrok.list > /dev/null
-
-# # https://pkg.cloudflare.com/index.html#debian-bookworm
-wget -qO- https://pkg.cloudflare.com/cloudflare-main.gpg | gpg --armor --export 254B391D8CACCBF8 | sudo tee /etc/apt/keyrings/cloudflare.asc > /dev/null
-echo 'deb [signed-by=/etc/apt/keyrings/cloudflare.asc] https://pkg.cloudflare.com/cloudflared bookworm main' \
-  | sudo tee /etc/apt/sources.list.d/cloudflared.list > /dev/null
-
 sudo wget -qO /etc/apt/keyrings/google.asc https://dl.google.com/linux/linux_signing_key.pub &
 echo "deb [signed-by=/etc/apt/keyrings/google.asc] http://dl.google.com/linux/chrome/deb stable main" \
   | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
@@ -63,8 +54,6 @@ sudo apt-get install --yes --no-install-recommends \
     qemu-system libvirt-daemon-system \
     code \
     codium \
-    ngrok \
-    cloudflared \
     google-chrome-stable \
     gh \
     git \
@@ -72,7 +61,6 @@ sudo apt-get install --yes --no-install-recommends \
 
 code --version &
 codium --version &
-ngrok --version &
 google-chrome-stable --version &
 gh --version &
 wait

@@ -125,6 +125,46 @@ psk() { psg "$@" | tee >(tail -n+2 | awk '{print $2}' | xargs -r kill -9) | tee 
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias src='time source ~/.bashrc'
 alias upd='apt upgrade --yes; apt update --yes; flatpak update --assumeyes'
+alias ngrok='docker run -it --rm --net host ngrok/ngrok:alpine http 3000'
+
+cf() {
+    docker run -it --rm --net host \
+        -v "$XDG_DATA_HOME"/cloudflared:/home/cloudflared \
+        -e TUNNEL_ORIGIN_CERT=/home/cloudflared/cert.pem \
+        cloudflare/cloudflared:latest "$@"
+}
+cl() {
+    # https://dash.cloudflare.com/argotunnel
+    # https://developers.cloudflare.com/ssl/origin-configuration/origin-ca/#api-calls
+    # https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/tunnel-useful-terms/#default-cloudflared-directory
+    # https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/create-local-tunnel/#2-authenticate-cloudflared
+    tunnel_name=webapp
+
+    mkdir -vp "$XDG_DATA_HOME"/cloudflared > /dev/null 2>&1
+    if [ "$(stat -c '%u' "$XDG_DATA_HOME"/cloudflared)" != "65532" ]; then
+        sudo chown -R 65532:65532 "$XDG_DATA_HOME"/cloudflared
+    fi
+
+    # https://github.com/quic-go/quic-go/wiki/UDP-Buffer-Sizes
+    default=$(sudo sysctl -a -p -r net.core.wmem_max | awk '{ print $3 }')
+    sudo sysctl -w net.core.rmem_max=7500000
+    sudo sysctl -w net.core.wmem_max=7500000
+
+    if [ -z "$(find "$XDG_DATA_HOME"/cloudflared -maxdepth 1 -name "cert.pem" -print -quit)" ]; then
+        cf login
+    fi
+    if [ -z "$(find "$XDG_DATA_HOME"/cloudflared -maxdepth 1 -name "*.json" -print -quit)" ]; then
+        # failed to create tunnel: Create Tunnel API call failed: tunnel with name already exists
+        cf tunnel delete $tunnel_name
+        cf tunnel create $tunnel_name
+    fi
+    # there should be "run" subcommand of "tunnel" command after [tunnel command options], but, I guess messed up with docker.
+    cf tunnel --no-autoupdate --loglevel debug --transport-loglevel debug --metrics 127.0.0.1:60123 \
+        --post-quantum --compression-quality 100 --url http://localhost:3000 --name $tunnel_name --overwrite-dns --hostname $1;
+
+    sudo sysctl -w net.core.rmem_max=$default
+    sudo sysctl -w net.core.wmem_max=$default
+}
 
 keygen() { ssh-keygen -t ed25519 -C "$(git config user.email)" -P '' -f "$HOME/.ssh/$1" && echo -e "\n~/.ssh/$1.pub:" && cat "$HOME/.ssh/$1.pub"; }
 
