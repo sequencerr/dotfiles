@@ -80,8 +80,6 @@ codium --version &
 ngrok --version &
 dbeaver-ce --version &
 google-chrome-stable --version &
-waterfox --version &
-razergenie --version &
 gh --version &
 wait
 sudo docker run --user $RANDOM:$RANDOM hello-world
