@@ -28,7 +28,7 @@ echo "deb [signed-by=/etc/apt/keyrings/ngrok.asc] https://ngrok-agent.s3.amazona
   | sudo tee /etc/apt/sources.list.d/ngrok.list > /dev/null
 
 # # https://pkg.cloudflare.com/index.html#debian-bookworm
-wget -qO- https://pkg.cloudflare.com/cloudflare-main.gpg | gpg --armor --export Cloudflare | sudo tee /etc/apt/keyrings/cloudflare.asc > /dev/null
+wget -qO- https://pkg.cloudflare.com/cloudflare-main.gpg | gpg --armor --export 254B391D8CACCBF8 | sudo tee /etc/apt/keyrings/cloudflare.asc > /dev/null
 echo 'deb [signed-by=/etc/apt/keyrings/cloudflare.asc] https://pkg.cloudflare.com/cloudflared bookworm main' \
   | sudo tee /etc/apt/sources.list.d/cloudflared.list > /dev/null
 
