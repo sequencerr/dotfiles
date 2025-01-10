@@ -32,10 +32,6 @@ wget -qO- https://pkg.cloudflare.com/cloudflare-main.gpg | gpg --armor --export 
 echo 'deb [signed-by=/etc/apt/keyrings/cloudflare.asc] https://pkg.cloudflare.com/cloudflared bookworm main' \
   | sudo tee /etc/apt/sources.list.d/cloudflared.list > /dev/null
 
-sudo wget -qO /etc/apt/keyrings/dbeaver.asc https://dbeaver.io/debs/dbeaver.gpg.key &
-echo "deb [signed-by=/etc/apt/keyrings/dbeaver.asc] https://dbeaver.io/debs/dbeaver-ce /" \
-  | sudo tee /etc/apt/sources.list.d/dbeaver.list > /dev/null
-
 sudo wget -qO /etc/apt/keyrings/google.asc https://dl.google.com/linux/linux_signing_key.pub &
 echo "deb [signed-by=/etc/apt/keyrings/google.asc] http://dl.google.com/linux/chrome/deb stable main" \
   | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
@@ -69,7 +65,6 @@ sudo apt-get install --yes --no-install-recommends \
     codium \
     ngrok \
     cloudflared \
-    dbeaver-ce \
     google-chrome-stable \
     gh \
     git \
@@ -78,7 +73,6 @@ sudo apt-get install --yes --no-install-recommends \
 code --version &
 codium --version &
 ngrok --version &
-dbeaver-ce --version &
 google-chrome-stable --version &
 gh --version &
 wait
