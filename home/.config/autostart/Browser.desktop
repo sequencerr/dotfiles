@@ -2,14 +2,14 @@
 Encoding=UTF-8
 Version=0.9.4
 Type=Application
-Name=Telegram
+Name=Browser
 Comment=
-Exec=flatpak run org.telegram.desktop
+Exec=exo-open --launch WebBrowser %u
 OnlyShowIn=XFCE;
 RunHook=0
 StartupNotify=false
 Terminal=false
-Hidden=false
-
-Icon=org.telegram.desktop
+Hidden=true
+Icon=org.xfce.webbrowser
 Path=
+

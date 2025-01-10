@@ -2,14 +2,12 @@
 Encoding=UTF-8
 Version=0.9.4
 Type=Application
-Name=Telegram
+Name=Task Manager GUI
 Comment=
-Exec=flatpak run org.telegram.desktop
+Exec=flatpak run io.missioncenter.MissionCenter
 OnlyShowIn=XFCE;
 RunHook=0
 StartupNotify=false
 Terminal=false
 Hidden=false
-
-Icon=org.telegram.desktop
-Path=
+Icon=io.missioncenter.MissionCenter

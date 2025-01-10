@@ -10,4 +10,5 @@ RunHook=0
 StartupNotify=false
 Terminal=false
 Hidden=false
+Icon=vscode
 
