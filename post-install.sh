@@ -12,7 +12,7 @@ fi
 
 sudo wget -qO /etc/apt/keyrings/docker.asc https://download.docker.com/linux/debian/gpg &
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
-  $(lsb_release -cs 2>/dev/null) stable" \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
   | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 sudo wget -qO /etc/apt/keyrings/microsoft.asc https://packages.microsoft.com/keys/microsoft.asc &
@@ -30,10 +30,6 @@ echo "deb [signed-by=/etc/apt/keyrings/google.asc] http://dl.google.com/linux/ch
 sudo wget -qO /etc/apt/keyrings/mozilla.asc https://packages.mozilla.org/apt/repo-signing-key.gpg
 echo "deb [signed-by=/etc/apt/keyrings/mozilla.asc] https://packages.mozilla.org/apt mozilla main" \
     | sudo tee /etc/apt/sources.list.d/mozilla.list > /dev/null
-
-sudo wget -qO /etc/apt/keyrings/cloudflare-warp.asc https://pkg.cloudflareclient.com/pubkey.gpg
-echo "deb [signed-by=/etc/apt/keyrings/cloudflare-warp.asc] https://pkg.cloudflareclient.com/ $(lsb_release -cs 2>/dev/null) main" \
-    | sudo tee /etc/apt/sources.list.d/cloudflare-client.list > /dev/null
 
 sudo wget -qO /etc/apt/keyrings/corretto.asc https://apt.corretto.aws/corretto.key &
 echo "deb [signed-by=/etc/apt/keyrings/corretto.asc] https://apt.corretto.aws stable main" \
@@ -59,7 +55,6 @@ sudo apt-get install --yes --no-install-recommends \
     code \
     codium \
     google-chrome-stable \
-    cloudflare-warp \
     gh \
     git \
     stow
@@ -70,10 +65,6 @@ google-chrome-stable --version &
 gh --version &
 wait
 sudo docker run --user $RANDOM:$RANDOM hello-world
-
-yes | warp-cli registration new
-warp-cli connect
-warp-cli dns families off
 
 git clone --depth=1 https://github.com/sequencerr/dotfiles ~/dotfiles || git -C ~/dotfiles pull
 git -C ~/dotfiles remote set-url --push origin git@github.com:sequencerr/dotfiles.git
