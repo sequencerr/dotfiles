@@ -128,9 +128,14 @@ alias upd='apt upgrade --yes; apt update --yes; flatpak update --assumeyes'
 alias ngrok='docker run -it --rm --net host ngrok/ngrok:alpine http 3000'
 
 cf() {
+    mkdir -vp "$XDG_DATA_HOME"/cloudflared 2> /dev/null
+    if [ "$(stat -c '%u' "$XDG_DATA_HOME"/cloudflared)" != "65532" ]; then
+        sudo chown -R 65532:65532 "$XDG_DATA_HOME"/cloudflared
+    fi
+
     docker run -it --rm --net host \
-        -v "$XDG_DATA_HOME"/cloudflared:/home/cloudflared \
-        -e TUNNEL_ORIGIN_CERT=/home/cloudflared/cert.pem \
+        -v "$XDG_DATA_HOME"/cloudflared:/home/nonroot/.cloudflared \
+        -e TUNNEL_ORIGIN_CERT=/home/nonroot/.cloudflared/cert.pem \
         cloudflare/cloudflared:latest "$@"
 }
 cl() {
@@ -139,11 +144,6 @@ cl() {
     # https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/tunnel-useful-terms/#default-cloudflared-directory
     # https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/create-local-tunnel/#2-authenticate-cloudflared
     tunnel_name=webapp
-
-    mkdir -vp "$XDG_DATA_HOME"/cloudflared > /dev/null 2>&1
-    if [ "$(stat -c '%u' "$XDG_DATA_HOME"/cloudflared)" != "65532" ]; then
-        sudo chown -R 65532:65532 "$XDG_DATA_HOME"/cloudflared
-    fi
 
     # https://github.com/quic-go/quic-go/wiki/UDP-Buffer-Sizes
     default=$(sudo sysctl -a -p -r net.core.wmem_max | awk '{ print $3 }')
