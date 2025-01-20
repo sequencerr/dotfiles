@@ -207,7 +207,7 @@ docker() {
   elif [[ $1 == "monitor" ]]; then
     sudo -E $XDG_BINARY_HOME/lazydocker "${@:2}"
   else
-    sudo docker "$@"
+    sudo -E docker "$@"
   fi
 }
 
