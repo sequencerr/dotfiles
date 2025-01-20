@@ -21,3 +21,7 @@ user_pref('services.sync.prefs.sync.dom.webnotifications.enabled', true);
 user_pref('services.sync.prefs.sync.dom.webnotifications.serviceworker.enabled', true);
 user_pref('services.sync.prefs.sync.dom.pushconnection.enabled', true);
 user_pref('services.sync.prefs.sync.dom.push.enabled', true);
+user_pref(
+	'general.useragent.override',
+	'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0'
+);

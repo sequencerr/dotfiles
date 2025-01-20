@@ -88,11 +88,15 @@ sudo update-grub
 sudo lightdm --show-config
 
 tmp_dir="$(mktemp -d)"; trap "\rm -rf \"$tmp_dir\"" EXIT INT TERM HUP
-git clone --depth 1 https://github.com/sequencerr/XMousePasteBlock.git $tmp_dir || :
+git clone --depth 1 https://github.com/sequencerr/XMousePasteBlock $tmp_dir || :
 (cd $tmp_dir
 sudo docker build --progress=plain -t xmousepasteblock --target export --output type=local,dest=. .
 sudo apt-get install --yes libev-dev
 sudo mv -fv ./xmousepasteblock /usr/bin)
+
+git clone --depth 1 https://github.com/sequencerr/figma-linux-font-helper "$XDG_DATA_HOME/figma-fonthelper" || :
+(cd "$XDG_DATA_HOME/figma-fonthelper"
+docker compose --progress=plain up -d --build)
 
 lazydocker_release=$(wget --header 'Accept: application/json' -qO- https://github.com/jesseduffield/lazydocker/releases/latest | sed -e 's/.*"tag_name":"v\{0,1\}\([^"]*\)".*/\1/')
 if ! command -v lazydocker > /dev/null || ! lazydocker --version | head -1 2> /dev/null | grep -q "$lazydocker_release"; then
